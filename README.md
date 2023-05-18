@@ -23,6 +23,7 @@ and [`cached_network_image`](https://pub.dev/packages/cached_network_image).
 Consider using our [Playx Package](https://pub.dev/packages/playx):
 Which comes prepackaged with this package and more features and is easy to use.
 
+
 ## Installation
 
 in `pubspec.yaml` add these lines to `dependencies`
