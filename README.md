@@ -9,15 +9,15 @@ PlayX widget package for playx eco system that provide custom utility widgets to
 and [`cached_network_image`](https://pub.dev/packages/cached_network_image).
 
 ## Widgets
-- [AppVersion] : Widget to display current App Version.
-- [CenterLoading] : Widget that displays a simple circle loading indicator like in ios.
-- [OptimizedScrollView] : This is an optimized scroll view widget that make it's child scrollable.  
-  It will automatically size itself to fill the space between the bottom of the last widget and the bottom of the viewport.
-- [ImageViewer] : Easily show an image from assets, network, cached network, or svg images.
-- [KeepAliveWrapper]: Wrapper for widgets to keep them alive and not destroy them.
-- [IconViewer]: Widget that shows an icon from icon data, svg, image or text.
--  [AutoAnimatedList] : Widget that automatically animates list of items when inserting or deleting any item.
--  [OptimizedCard] : Widget which provides better shadow effect for the card to look more like native card.
+- `AppVersion` : Widget to display current App Version.
+- `CenterLoading` : Widget that displays a simple circle loading indicator like in ios.
+- `OptimizedScrollView` : This is an optimized scroll view widget that make it's child scrollable.  
+         It will automatically size itself to fill the space between the bottom of the last widget and the bottom of the viewport.
+- `ImageViewer` : Easily show an image from assets, network, cached network, or svg images.
+- `KeepAliveWrapper`: Wrapper for widgets to keep them alive and not destroy them.
+- `IconViewer`: Widget that shows an icon from icon data, svg, image or text.
+-  `AutoAnimatedList` : Widget that automatically animates list of items when inserting or deleting any item.
+-  `OptimizedCard` : Widget which provides better shadow effect for the card to look more like native card.
 
 
 ## Playx:
