@@ -1,0 +1,16 @@
+name: Publish to pub.dev
+
+# on:
+#   push:
+#     tags:
+#     - 'v[0-9]+.[0-9]+.[0-9]+*' # for tags like: 'v1.2.3'
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  publish:
+    if: github.event.review.state == 'approved'
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with:
+      environment: pub.dev
