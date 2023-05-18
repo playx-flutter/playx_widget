@@ -27,6 +27,8 @@ jobs:
       - name: Run tests
         run: flutter test --coverage
 
+  publish:
+    if: github.event.pull_request.merged == true
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
       environment: pub.dev
