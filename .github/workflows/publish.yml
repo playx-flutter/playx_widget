@@ -6,13 +6,38 @@ name: Publish to pub.dev
 #     - 'v[0-9]+.[0-9]+.[0-9]+*' # for tags like: 'v1.2.3'
 on:
   pull_request_review:
-    types: [submitted]
     branches: [ "main" ]
+    types: [ submitted ]
 
 
 jobs:
+  test:
+    #The type of machine to run the job on. [windows,macos, ubuntu , self-hosted]
+    defaults:
+      run:
+        working-directory: ./
+    runs-on: ubuntu-latest
+    #sequence of tasks called
+
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: subosito/flutter-action@v1.5.3
+
+      - name: Install Dependencies
+        run: flutter packages get
+
+      - name: Format
+        run: flutter format --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze lib test example
+
+      - name: Run tests
+        run: flutter test --coverage
+
   publish:
     if: github.event.review.state == 'approved'
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
       environment: pub.dev
+
