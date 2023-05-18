@@ -3,7 +3,7 @@
 PlayX widget package for playx eco system that provide custom utility widgets to make development faster.
 
 ## Features
-- Common widgets that are needed in each project
+-  Common widgets that are needed in each project.
 -  Exports :  packages like [`package_info_plus`](https://pub.dev/packages/package_info_plus) , 
 [`flutter_svg`](https://pub.dev/packages/flutter_svg) , [`Lottie`](https://pub.dev/packages/lottie) 
 and [`cached_network_image`](https://pub.dev/packages/cached_network_image).
