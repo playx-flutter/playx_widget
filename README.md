@@ -19,10 +19,10 @@ and [`cached_network_image`](https://pub.dev/packages/cached_network_image).
 -  `AutoAnimatedList` : Widget that automatically animates list of items when inserting or deleting any item.
 -  `OptimizedCard` : Widget which provides better shadow effect for the card to look more like native card.
 
-
 ## Playx:
 Consider using our [Playx Package](https://pub.dev/packages/playx):
 Which comes prepackaged with this package and more features and is easy to use.
+
 
 ## Installation
 
