@@ -13,7 +13,6 @@ dependencies:
   package_info_plus: ^4.0.0
   flutter_svg: ^2.0.5
   lottie: ^2.3.2
-
   flutter:
     sdk: flutter
 
