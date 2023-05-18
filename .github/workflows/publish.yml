@@ -1,24 +1,16 @@
 name: Publish to pub.dev
 
-# on:
-#   push:
-#     tags:
-#     - 'v[0-9]+.[0-9]+.[0-9]+*' # for tags like: 'v1.2.3'
 on:
-  pull_request_review:
-    branches: [ "main" ]
-    types: [ submitted ]
-
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'main'
 
 jobs:
-  test:
-    #The type of machine to run the job on. [windows,macos, ubuntu , self-hosted]
-    defaults:
-      run:
-        working-directory: ./
+  if_merged:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    #sequence of tasks called
-
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: subosito/flutter-action@v1.5.3
@@ -35,9 +27,8 @@ jobs:
       - name: Run tests
         run: flutter test --coverage
 
-  publish:
-    if: github.event.review.state == 'approved'
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
       environment: pub.dev
+
 
