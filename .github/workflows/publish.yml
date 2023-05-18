@@ -7,6 +7,8 @@ name: Publish to pub.dev
 on:
   pull_request_review:
     types: [submitted]
+    branches: [ "main" ]
+
 
 jobs:
   publish:
