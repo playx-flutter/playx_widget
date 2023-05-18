@@ -8,25 +8,6 @@ on:
       - 'main'
 
 jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: subosito/flutter-action@v1.5.3
-
-      - name: Install Dependencies
-        run: flutter packages get
-
-      - name: Format
-        run: dart format --set-exit-if-changed .
-
-      - name: Analyze
-        run: flutter analyze lib test example
-
-      - name: Run tests
-        run: flutter test --coverage
-
   publish:
     if: github.event.pull_request.merged == true
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
