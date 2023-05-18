@@ -10,6 +10,9 @@ on:
 jobs:
   publish:
     if: github.event.pull_request.merged == true
+    permissions:
+      id-token: write
+      contents: read
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
       environment: pub.dev
