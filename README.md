@@ -8,6 +8,7 @@ PlayX widget package for playx eco system that provide custom utility widgets to
 [`flutter_svg`](https://pub.dev/packages/flutter_svg) , [`Lottie`](https://pub.dev/packages/lottie) 
 and [`cached_network_image`](https://pub.dev/packages/cached_network_image).
 
+
 ## Widgets
 - `AppVersion` : Widget to display current App Version.
 - `CenterLoading` : Widget that displays a simple circle loading indicator like in ios.
