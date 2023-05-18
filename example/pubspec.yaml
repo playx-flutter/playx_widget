@@ -1,18 +1,16 @@
-name: example
-description: A new Flutter project.
+name: playx_widget_example
+description: Example of playx widget package.
 
 publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: ">=2.17.3 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.5
   playx_widget:
     path: ../
 
