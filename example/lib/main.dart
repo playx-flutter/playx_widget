@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:playx_widget/widgets/app_version.dart';
-import 'package:playx_widget/widgets/auto_animated_list.dart';
-import 'package:playx_widget/widgets/center_loading.dart';
-import 'package:playx_widget/widgets/image_viewer.dart';
-import 'package:playx_widget/widgets/keep_alive_wrapper.dart';
-import 'package:playx_widget/widgets/optimized_card.dart';
-import 'package:playx_widget/widgets/optimized_scroll_view.dart';
+import 'package:playx_widget/playx_widget.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -61,7 +55,7 @@ class MyApp extends StatelessWidget {
                       width: double.infinity,
                       height: 100,
                       padding: const EdgeInsets.all(8),
-                      child: Text('Ahmed Mohamed')),
+                      child: const Text('Ahmed Mohamed')),
                 )
               ],
             ),
