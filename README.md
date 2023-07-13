@@ -13,12 +13,22 @@ and [`cached_network_image`](https://pub.dev/packages/cached_network_image).
 - `AppVersion` : Widget to display current App Version.
 - `CenterLoading` : Widget that displays a simple circle loading indicator like in ios.
 - `OptimizedScrollView` : This is an optimized scroll view widget that make it's child scrollable.  
-         It will automatically size itself to fill the space between the bottom of the last widget and the bottom of the viewport.
+  It will automatically size itself to fill the space between the bottom of the last widget and the
+  bottom of the viewport.
 - `ImageViewer` : Easily show an image from assets, network, cached network, or svg images.
 - `KeepAliveWrapper`: Wrapper for widgets to keep them alive and not destroy them.
 - `IconViewer`: Widget that shows an icon from icon data, svg, image or text.
--  `AutoAnimatedList` : Widget that automatically animates list of items when inserting or deleting any item.
--  `OptimizedCard` : Widget which provides better shadow effect for the card to look more like native card.
+- `AutoAnimatedList` : Widget that automatically animates list of items when inserting or deleting
+  any item.
+- `OptimizedCard` : Widget which provides better shadow effect for the card to look more like native
+  card.
+- `OptimizedTextField` :  OptimizedTextField is a customized text field with features like auto
+  validation with the ability to be customized.
+- `OptimizedButton` : Widget that can be used to display any type of button.
+- `AnimatedVisibility` : Widget that animates the visibility of child widget by updating widget
+  opacity and hide the old widget.
+  It's different than `AnimatedOpacity` as it doesn't take any space when the widget is invisible.
+- `TimerRefreshWidget` : Widget that refreshes it's child on periodic time.
 
 ## Playx:
 Consider using our [Playx Package](https://pub.dev/packages/playx):
@@ -30,7 +40,7 @@ Which comes prepackaged with this package and more features and is easy to use.
 in `pubspec.yaml` add these lines to `dependencies`
 
 ```yaml  
-playx_widget: ^0.0.4
+playx_widget: ^0.0.5
 ```  
 
 ## See Also:
