@@ -50,6 +50,10 @@ class MyApp extends StatelessWidget {
                     },
                   ),
                 ),
+                OptimizedButton.elevated(
+                  child: Text('Confirm'),
+                  onPressed: () {},
+                ),
                 OptimizedCard(
                   child: Container(
                       width: double.infinity,

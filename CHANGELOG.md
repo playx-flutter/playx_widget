@@ -1,3 +1,11 @@
+## 0.0.5
+
+- Upgrade Packages.
+- Add new widgets `AnimatedVisibility`, `OptimizedButton`, `OptimizedTextField`
+  , `TimerRefreshWidget` .
+- Add new Confirmation dialog that can be used to confirm any operation.
+- update `OptimizedCard` to enhance card shadows.
+
 ## 0.0.4
 
 - Upgrade Packages.

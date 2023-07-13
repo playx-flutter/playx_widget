@@ -12,3 +12,8 @@ export 'package:playx_widget/src/widgets/image_viewer.dart';
 export 'package:playx_widget/src/widgets/keep_alive_wrapper.dart';
 export 'package:playx_widget/src/widgets/optimized_card.dart';
 export 'package:playx_widget/src/widgets/optimized_scroll_view.dart';
+export 'package:playx_widget/src/widgets/animated_visibility.dart';
+export 'package:playx_widget/src/widgets/optimized_button.dart';
+export 'package:playx_widget/src/widgets/optimized_text_field.dart';
+export 'package:playx_widget/src/widgets/timer_refresh_widget.dart';
+export 'package:playx_widget/src/alerts/confirmation_dialog.dart';

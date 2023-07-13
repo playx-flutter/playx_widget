@@ -90,10 +90,19 @@ class OptimizedCard extends StatefulWidget {
   /// Blur radius of the custom shadow.
   final double shadowRadius;
 
+  /// spread radius of the custom shadow.
+  final double spreadRadius;
+
   /// offset of the custom shadow.
   final Offset shadowOffset;
 
-  /// Detremines whether the custom shadow should be applied to the card or not.
+  /// Determines the border radius of the shadow.
+  final BorderRadius shadowBorderRadius;
+
+  /// Determines the blur style of the shadow.
+  final BlurStyle shadowBlurStyle;
+
+  /// Determines whether the custom shadow should be applied to the card or not.
   final bool shouldShowCustomShadow;
 
   /// The widget below this widget in the tree.
@@ -116,10 +125,13 @@ class OptimizedCard extends StatefulWidget {
       this.semanticContainer = true,
       this.customShadowColor,
       this.shadowOffset = const Offset(
-        5.0, // Move to right 10  horizontally
-        5.0, // Move to bottom 10 Vertically
+        0.0,
+        1.0,
       ),
-      this.shadowRadius = 18.0,
+      this.shadowRadius = 5.0,
+      this.spreadRadius = 1.0,
+      this.shadowBorderRadius = const BorderRadius.all(Radius.circular(4)),
+      this.shadowBlurStyle = BlurStyle.normal,
       this.shouldShowCustomShadow = true,
       this.child});
 
@@ -132,11 +144,16 @@ class _OptimizedCardState extends State<OptimizedCard> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        borderRadius: widget.shadowBorderRadius,
         boxShadow: [
           BoxShadow(
-              color: widget.customShadowColor ?? Colors.grey.withOpacity(.5),
-              blurRadius: widget.shadowRadius, // soften the shadow
-              offset: widget.shadowOffset)
+            color: widget.customShadowColor ?? Colors.grey.withOpacity(.2),
+            blurRadius: widget.shadowRadius,
+            spreadRadius: widget.spreadRadius,
+            // soften the shadow
+            offset: widget.shadowOffset,
+            blurStyle: widget.shadowBlurStyle,
+          )
         ],
       ),
       child: Card(
