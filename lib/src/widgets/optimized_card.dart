@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Optimized Card Widget which provides better shadow effect for the card.
 /// To look more like native card.
 class OptimizedCard extends StatefulWidget {
+  //Width of the card.
+  final double? width;
+
+  //Height of the card.
+  final double? height;
+
+  //Padding of the card.
+  final EdgeInsetsGeometry? padding;
+
   /// The card's background color.
   ///
   /// Defines the card's [Material.color].
@@ -70,6 +80,11 @@ class OptimizedCard extends StatefulWidget {
   /// logical pixels on all sides: `EdgeInsets.all(4.0)`.
   final EdgeInsetsGeometry? margin;
 
+  /// The empty space that surrounds the card shadow.
+  ///
+  /// Defines the card  shadow margin [Container.margin].
+  final EdgeInsetsGeometry? innerCardShadowMargin;
+
   /// Whether this widget represents a single semantic container, or if false
   /// a collection of individual semantic nodes.
   ///
@@ -97,7 +112,7 @@ class OptimizedCard extends StatefulWidget {
   final Offset shadowOffset;
 
   /// Determines the border radius of the shadow.
-  final BorderRadius shadowBorderRadius;
+  final BorderRadius? shadowBorderRadius;
 
   /// Determines the blur style of the shadow.
   final BlurStyle shadowBlurStyle;
@@ -112,16 +127,18 @@ class OptimizedCard extends StatefulWidget {
 
   const OptimizedCard(
       {super.key,
+      this.width,
+      this.height,
+      this.padding,
       this.color,
       this.shadowColor = Colors.transparent,
       this.surfaceTintColor,
       this.elevation = 3,
-      this.shape = const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
+      this.shape,
       this.borderOnForeground = true,
       this.clipBehavior = Clip.hardEdge,
-      this.margin = const EdgeInsets.all(8),
+      this.margin,
+      this.innerCardShadowMargin,
       this.semanticContainer = true,
       this.customShadowColor,
       this.shadowOffset = const Offset(
@@ -130,7 +147,7 @@ class OptimizedCard extends StatefulWidget {
       ),
       this.shadowRadius = 5.0,
       this.spreadRadius = 1.0,
-      this.shadowBorderRadius = const BorderRadius.all(Radius.circular(4)),
+      this.shadowBorderRadius,
       this.shadowBlurStyle = BlurStyle.normal,
       this.shouldShowCustomShadow = true,
       this.child});
@@ -142,30 +159,68 @@ class OptimizedCard extends StatefulWidget {
 class _OptimizedCardState extends State<OptimizedCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: widget.shadowBorderRadius,
-        boxShadow: [
-          BoxShadow(
-            color: widget.customShadowColor ?? Colors.grey.withOpacity(.2),
-            blurRadius: widget.shadowRadius,
-            spreadRadius: widget.spreadRadius,
-            // soften the shadow
-            offset: widget.shadowOffset,
-            blurStyle: widget.shadowBlurStyle,
-          )
-        ],
+    if (!widget.shouldShowCustomShadow) {
+      return SizedBox(
+        width: widget.width,
+        height: widget.height,
+        child: Card(
+            elevation: widget.elevation,
+            shadowColor: widget.shadowColor,
+            surfaceTintColor: widget.surfaceTintColor,
+            borderOnForeground: widget.borderOnForeground,
+            shape: widget.shape ??
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                ),
+            color: widget.color,
+            margin: widget.margin ??
+                EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+            clipBehavior: Clip.hardEdge,
+            child: Padding(
+              padding: widget.padding ?? EdgeInsets.zero,
+              child: widget.child,
+            )),
+      );
+    }
+
+    return SizedBox(
+      width: widget.width,
+      height: widget.height,
+      child: Container(
+        margin: widget.margin ??
+            EdgeInsets.symmetric(vertical: 6.h, horizontal: 6.w),
+        decoration: BoxDecoration(
+          borderRadius: widget.shadowBorderRadius ??
+              BorderRadius.all(Radius.circular(10.r)),
+          boxShadow: [
+            BoxShadow(
+              color: widget.customShadowColor ?? Colors.grey.withOpacity(.3),
+              blurRadius: widget.shadowRadius,
+              spreadRadius: widget.spreadRadius,
+              // soften the shadow
+              offset: widget.shadowOffset,
+              blurStyle: widget.shadowBlurStyle,
+            )
+          ],
+        ),
+        child: Card(
+            elevation: widget.elevation,
+            shadowColor: widget.shadowColor,
+            surfaceTintColor: widget.surfaceTintColor,
+            borderOnForeground: widget.borderOnForeground,
+            shape: widget.shape ??
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
+                ),
+            color: widget.color,
+            margin: widget.innerCardShadowMargin ??
+                EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
+            clipBehavior: Clip.hardEdge,
+            child: Padding(
+              padding: widget.padding ?? EdgeInsets.zero,
+              child: widget.child,
+            )),
       ),
-      child: Card(
-          elevation: widget.elevation,
-          shadowColor: widget.shadowColor,
-          surfaceTintColor: widget.surfaceTintColor,
-          borderOnForeground: widget.borderOnForeground,
-          shape: widget.shape,
-          color: widget.color,
-          margin: widget.margin,
-          clipBehavior: Clip.hardEdge,
-          child: widget.child),
     );
   }
 }

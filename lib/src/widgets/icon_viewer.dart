@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// Widget that shows an icon from icon data, svg, image or text.
@@ -13,9 +14,9 @@ class IconViewer extends StatelessWidget {
   final Color? selectedIconColor;
   final Color? selectedIconBackgroundColor;
   final BoxFit fit;
-  final double width;
-  final double height;
-  final Size iconSize;
+  final double? width;
+  final double? height;
+  final double? iconSize;
 
   const IconViewer({
     this.icon,
@@ -29,18 +30,21 @@ class IconViewer extends StatelessWidget {
     super.key,
     this.isSelected = false,
     this.fit = BoxFit.scaleDown,
-    this.width = 40,
-    this.height = 40,
-    this.iconSize = const Size.square(24),
+    this.width,
+    this.height,
+    this.iconSize,
   });
 
   @override
   Widget build(BuildContext context) {
+    final iconWidth = width ?? 30.w;
+    final iconHeight = height ?? 30.h;
+    final size = Size.fromRadius(iconSize ?? 20.r);
     if (icon != null) {
       return isSelected
           ? Container(
-              width: width,
-              height: height,
+              width: iconWidth,
+              height: iconHeight,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: selectedIconBackgroundColor,
@@ -53,8 +57,8 @@ class IconViewer extends StatelessWidget {
               ),
             )
           : Container(
-              width: width,
-              height: height,
+              width: iconWidth,
+              height: iconHeight,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: iconBackgroundColor,
@@ -68,17 +72,17 @@ class IconViewer extends StatelessWidget {
     } else if (svgIcon != null) {
       return isSelected
           ? Container(
-              width: fit == BoxFit.cover ? null : width,
-              height: fit == BoxFit.cover ? null : height,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: selectedIconBackgroundColor,
-                //  color: Color(0xFFF0F3F8),
-              ),
-              child: SvgPicture.asset(
-                svgIcon!,
-                width: fit == BoxFit.cover ? null : iconSize.width,
-                height: fit == BoxFit.cover ? null : iconSize.height,
+        width: fit == BoxFit.cover ? null : width,
+        height: fit == BoxFit.cover ? null : height,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: selectedIconBackgroundColor,
+          //  color: Color(0xFFF0F3F8),
+        ),
+        child: SvgPicture.asset(
+          svgIcon!,
+                width: fit == BoxFit.cover ? null : size.width,
+                height: fit == BoxFit.cover ? null : size.height,
                 colorFilter: selectedIconColor == null
                     ? null
                     : ColorFilter.mode(
@@ -88,18 +92,18 @@ class IconViewer extends StatelessWidget {
                 fit: fit,
                 key: key,
               ),
-            )
+      )
           : Container(
-              width: fit == BoxFit.cover ? null : width,
-              height: fit == BoxFit.cover ? null : height,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: iconBackgroundColor,
-              ),
-              child: SvgPicture.asset(
-                svgIcon!,
-                width: fit == BoxFit.cover ? null : iconSize.width,
-                height: fit == BoxFit.cover ? null : iconSize.height,
+        width: fit == BoxFit.cover ? null : width,
+        height: fit == BoxFit.cover ? null : height,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: iconBackgroundColor,
+        ),
+        child: SvgPicture.asset(
+          svgIcon!,
+                width: fit == BoxFit.cover ? null : size.width,
+                height: fit == BoxFit.cover ? null : size.height,
                 colorFilter: iconColor == null
                     ? null
                     : ColorFilter.mode(
@@ -109,12 +113,12 @@ class IconViewer extends StatelessWidget {
                 fit: fit,
                 key: key,
               ),
-            );
+      );
     } else if (iconImage != null) {
       return isSelected
           ? Container(
-              width: width,
-              height: height,
+              width: iconWidth,
+              height: iconHeight,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: selectedIconBackgroundColor,
@@ -126,42 +130,42 @@ class IconViewer extends StatelessWidget {
               ),
             )
           : Image.asset(
-              iconImage!,
-              color: iconColor,
-              key: key,
-            );
+        iconImage!,
+        color: iconColor,
+        key: key,
+      );
     } else if (text != null) {
       return isSelected
           ? Container(
-              width: width,
-              height: height,
+              width: iconWidth,
+              height: iconHeight,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: selectedIconBackgroundColor,
               ),
               alignment: Alignment.center,
-              padding: const EdgeInsets.all(2),
+              padding: EdgeInsets.all(2.r),
               child: Text(
                 text ?? '',
                 style: TextStyle(
-                  fontSize: 8,
+                  fontSize: 8.sp,
                   color: selectedIconColor,
                 ),
               ),
             )
           : Container(
-              width: width,
-              height: height,
+              width: iconWidth,
+              height: iconHeight,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: iconBackgroundColor,
               ),
               alignment: Alignment.center,
-              padding: const EdgeInsets.all(2),
+              padding: EdgeInsets.all(2.r),
               child: Text(
                 text ?? '',
                 style: TextStyle(
-                  fontSize: 8,
+                  fontSize: 8.sp,
                   color: iconColor,
                 ),
               ),

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:playx_widget/playx_widget.dart';
 
 /// Widget to display current App Version.
 class AppVersion extends StatelessWidget {
   /// Version text style.
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// text to be added before app version.
   final String prefix;
@@ -13,10 +13,7 @@ class AppVersion extends StatelessWidget {
   final String postfix;
 
   const AppVersion(
-      {super.key,
-      this.textStyle = const TextStyle(),
-      this.prefix = 'V',
-      this.postfix = ''});
+      {super.key, this.textStyle, this.prefix = 'V', this.postfix = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +23,7 @@ class AppVersion extends StatelessWidget {
         final versionName = snapshot.data ?? '';
         return Text(
           versionName,
-          style: textStyle,
+          style: textStyle ?? TextStyle(fontSize: 12.sp),
           textAlign: TextAlign.center,
         );
       },

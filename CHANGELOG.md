@@ -1,3 +1,12 @@
+## 0.0.6
+
+- Upgrade Packages.
+- integrate `flutter_screenutil` package into the package to make widgets more responsive.
+- Add new widget `OptimizedListTile` which is a widget that is enhanced version of list tile that
+  can display a card with title, subtitle, leading and trailing widgets.
+- update `OptimizedCard` to enhance card shadows.
+- add `radius` to `CenterLoading` widget.
+
 ## 0.0.5
 
 - Upgrade Packages.
@@ -27,5 +36,4 @@
 - Add lottie package.
 
 ## 0.0.1
-
 - initial release

@@ -40,7 +40,9 @@ Future<bool> showConfirmDialog({
                 child: Container(
                   height: lottieAnimationHeight,
                   padding: lottieAnimationPadding,
-                  child: Lottie.asset(lottie, width: double.infinity),
+                  child: lottie.isEmpty
+                      ? Container()
+                      : Lottie.asset(lottie, width: double.infinity),
                 ),
               ),
               const SizedBox(
