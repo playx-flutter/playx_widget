@@ -17,3 +17,5 @@ export 'package:playx_widget/src/widgets/optimized_button.dart';
 export 'package:playx_widget/src/widgets/optimized_text_field.dart';
 export 'package:playx_widget/src/widgets/timer_refresh_widget.dart';
 export 'package:playx_widget/src/alerts/confirmation_dialog.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:playx_widget/src/widgets/optimized_list_tile.dart';

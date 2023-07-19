@@ -4,9 +4,11 @@ PlayX widget package for playx eco system that provide custom utility widgets to
 
 ## Features
 -  Common widgets that are needed in each project.
--  Exports :  packages like [`package_info_plus`](https://pub.dev/packages/package_info_plus) , 
-[`flutter_svg`](https://pub.dev/packages/flutter_svg) , [`Lottie`](https://pub.dev/packages/lottie) 
-and [`cached_network_image`](https://pub.dev/packages/cached_network_image).
+- Exports :  packages like [`package_info_plus`](https://pub.dev/packages/package_info_plus) ,
+  [`flutter_svg`](https://pub.dev/packages/flutter_svg)
+  , [`Lottie`](https://pub.dev/packages/lottie)
+  , [`cached_network_image`](https://pub.dev/packages/cached_network_image)
+  and [`flutter_screenutil `](https://pub.dev/packages/flutter_screenutil).
 
 
 ## Widgets
@@ -25,6 +27,8 @@ and [`cached_network_image`](https://pub.dev/packages/cached_network_image).
 - `OptimizedTextField` :  OptimizedTextField is a customized text field with features like auto
   validation with the ability to be customized.
 - `OptimizedButton` : Widget that can be used to display any type of button.
+- `OptimizedListTile` : Widget that is enhanced version of list tile that can display a card with
+  title, subtitle, leading and trailing widgets.
 - `AnimatedVisibility` : Widget that animates the visibility of child widget by updating widget
   opacity and hide the old widget.
   It's different than `AnimatedOpacity` as it doesn't take any space when the widget is invisible.
@@ -40,7 +44,7 @@ Which comes prepackaged with this package and more features and is easy to use.
 in `pubspec.yaml` add these lines to `dependencies`
 
 ```yaml  
-playx_widget: ^0.0.5
+playx_widget: ^0.0.6
 ```  
 
 ## See Also:

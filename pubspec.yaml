@@ -1,6 +1,6 @@
 name: playx_widget
-description: Playx Package that contains utility widgets. As it contains common widgets that are needed in each project and exports packages like package_info_plus , flutter_svg , Lottie and cached_network_image.
-version: 0.0.5
+description: Playx Package that contains utility widgets as it contains common widgets and utilities that are needed in each project .
+version: 0.0.6
 homepage: https://sourcya.com/
 repository: https://github.com/playx-flutter/playx_widget
 
@@ -12,7 +12,8 @@ dependencies:
   cached_network_image: ^3.2.3
   package_info_plus: ^4.0.2
   flutter_svg: ^2.0.7
-  lottie: ^2.4.0
+  lottie: ^2.5.0
+  flutter_screenutil: ^5.8.4
   flutter:
     sdk: flutter
 
