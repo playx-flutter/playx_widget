@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// Widget that shows an icon from icon data, svg, image or text.
+// ignore: must_be_immutable
 class IconViewer extends StatelessWidget {
-  final IconData? icon;
-  final String? svgIcon;
-  final String? iconImage;
-  final String? text;
+  IconData? icon;
+
+  String? svgIcon;
+  String? iconImage;
+  String? text;
   final bool isSelected;
   final Color? iconColor;
   final Color? iconBackgroundColor;
@@ -18,11 +20,50 @@ class IconViewer extends StatelessWidget {
   final double? height;
   final double? iconSize;
 
-  const IconViewer({
-    this.icon,
-    this.svgIcon,
-    this.iconImage,
-    this.text,
+  IconViewer({
+    required IconData this.icon,
+    this.iconColor = Colors.white,
+    this.iconBackgroundColor = Colors.transparent,
+    this.selectedIconColor,
+    this.selectedIconBackgroundColor,
+    super.key,
+    this.isSelected = false,
+    this.fit = BoxFit.scaleDown,
+    this.width,
+    this.height,
+    this.iconSize,
+  });
+
+  IconViewer.svg({
+    required String this.svgIcon,
+    this.iconColor = Colors.white,
+    this.iconBackgroundColor = Colors.transparent,
+    this.selectedIconColor,
+    this.selectedIconBackgroundColor,
+    super.key,
+    this.isSelected = false,
+    this.fit = BoxFit.scaleDown,
+    this.width,
+    this.height,
+    this.iconSize,
+  });
+
+  IconViewer.assetImage({
+    required String this.iconImage,
+    this.iconColor = Colors.white,
+    this.iconBackgroundColor = Colors.transparent,
+    this.selectedIconColor,
+    this.selectedIconBackgroundColor,
+    super.key,
+    this.isSelected = false,
+    this.fit = BoxFit.scaleDown,
+    this.width,
+    this.height,
+    this.iconSize,
+  });
+
+  IconViewer.text({
+    required String this.text,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
     this.selectedIconColor,
@@ -54,6 +95,7 @@ class IconViewer extends StatelessWidget {
                 icon,
                 color: selectedIconColor,
                 key: key,
+                size: iconSize,
               ),
             )
           : Container(
@@ -67,20 +109,21 @@ class IconViewer extends StatelessWidget {
                 icon,
                 color: iconColor,
                 key: key,
+                size: iconSize,
               ),
             );
     } else if (svgIcon != null) {
       return isSelected
           ? Container(
-        width: fit == BoxFit.cover ? null : width,
-        height: fit == BoxFit.cover ? null : height,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: selectedIconBackgroundColor,
-          //  color: Color(0xFFF0F3F8),
-        ),
-        child: SvgPicture.asset(
-          svgIcon!,
+              width: fit == BoxFit.cover ? null : width,
+              height: fit == BoxFit.cover ? null : height,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: selectedIconBackgroundColor,
+                //  color: Color(0xFFF0F3F8),
+              ),
+              child: SvgPicture.asset(
+                svgIcon!,
                 width: fit == BoxFit.cover ? null : size.width,
                 height: fit == BoxFit.cover ? null : size.height,
                 colorFilter: selectedIconColor == null
@@ -94,14 +137,14 @@ class IconViewer extends StatelessWidget {
               ),
       )
           : Container(
-        width: fit == BoxFit.cover ? null : width,
-        height: fit == BoxFit.cover ? null : height,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: iconBackgroundColor,
-        ),
-        child: SvgPicture.asset(
-          svgIcon!,
+              width: fit == BoxFit.cover ? null : width,
+              height: fit == BoxFit.cover ? null : height,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: iconBackgroundColor,
+              ),
+              child: SvgPicture.asset(
+                svgIcon!,
                 width: fit == BoxFit.cover ? null : size.width,
                 height: fit == BoxFit.cover ? null : size.height,
                 colorFilter: iconColor == null
@@ -113,7 +156,7 @@ class IconViewer extends StatelessWidget {
                 fit: fit,
                 key: key,
               ),
-      );
+            );
     } else if (iconImage != null) {
       return isSelected
           ? Container(
@@ -130,10 +173,10 @@ class IconViewer extends StatelessWidget {
               ),
             )
           : Image.asset(
-        iconImage!,
-        color: iconColor,
-        key: key,
-      );
+              iconImage!,
+              color: iconColor,
+              key: key,
+            );
     } else if (text != null) {
       return isSelected
           ? Container(

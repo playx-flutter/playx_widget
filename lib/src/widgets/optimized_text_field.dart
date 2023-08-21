@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// OptimizedTextField is a customized text field with features like auto validation with the ability to be customized.
 class OptimizedTextField extends StatefulWidget {
@@ -44,9 +45,11 @@ class OptimizedTextField extends StatefulWidget {
   final TextStyle? style;
   final TextStyle? labelStyle;
   final EdgeInsetsGeometry contentPadding;
+  final EdgeInsets? scrollPadding;
 
   final void Function(bool isValid)? onValidationChanged;
   final TextInputAction textInputAction;
+  final Iterable<String>? autoFillHints;
 
   const OptimizedTextField({
     super.key,
@@ -86,12 +89,14 @@ class OptimizedTextField extends StatefulWidget {
     this.textInputAction = TextInputAction.done,
     this.contentPadding =
         const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+    this.scrollPadding,
     this.border,
     this.focusedBorder,
     this.errorBorder,
     this.enabledBorder,
     this.style,
     this.labelStyle,
+    this.autoFillHints,
   });
 
   @override
@@ -131,10 +136,12 @@ class _CustomFieldState extends State<OptimizedTextField> {
             minLines: widget.minLines,
             obscureText: widget.obscureText,
             keyboardType: widget.type,
+            autofillHints: widget.autoFillHints,
+            scrollPadding:
+                widget.scrollPadding ?? EdgeInsets.symmetric(vertical: 20.h),
             onChanged: (String input) {
               // ignore: prefer_null_aware_method_calls
               widget.onChanged?.call(input);
-
               if (widget.shouldAutoValidate) {
                 if (formKey != null) {
                   final formState = formKey!.currentState;
@@ -189,7 +196,6 @@ class _CustomFieldState extends State<OptimizedTextField> {
                     borderSide: BorderSide(
                       color: widget.focusedBorderColor ??
                           Theme.of(context).colorScheme.primary,
-                      // color: Colors.grey.withOpacity(0.5),
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(8),

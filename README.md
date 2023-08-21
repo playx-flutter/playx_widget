@@ -26,6 +26,9 @@ PlayX widget package for playx eco system that provide custom utility widgets to
   card.
 - `OptimizedTextField` :  OptimizedTextField is a customized text field with features like auto
   validation with the ability to be customized.
+- `Marquee` widget :Marquee widget to make any widget scroll horizontally automatically.
+- `AnimSearchBar` widget :Widget that allows displaying a search bar with nice animation when
+  expanded/ collapsed state.
 - `OptimizedButton` : Widget that can be used to display any type of button.
 - `OptimizedListTile` : Widget that is enhanced version of list tile that can display a card with
   title, subtitle, leading and trailing widgets.
@@ -33,6 +36,8 @@ PlayX widget package for playx eco system that provide custom utility widgets to
   opacity and hide the old widget.
   It's different than `AnimatedOpacity` as it doesn't take any space when the widget is invisible.
 - `TimerRefreshWidget` : Widget that refreshes it's child on periodic time.
+- `ReadMore` widget :Widget that allows Expanding and collapsing text based on it's characters
+  count.
 
 ## Playx:
 Consider using our [Playx Package](https://pub.dev/packages/playx):
@@ -44,7 +49,7 @@ Which comes prepackaged with this package and more features and is easy to use.
 in `pubspec.yaml` add these lines to `dependencies`
 
 ```yaml  
-playx_widget: ^0.0.6
+playx_widget: ^0.0.7
 ```  
 
 ## See Also:
