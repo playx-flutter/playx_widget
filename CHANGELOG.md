@@ -1,3 +1,13 @@
+## 0.0.7
+
+- Upgrade Packages.
+- add `Marquee` widget :Marquee widget to make any widget scroll horizontally automatically.
+- add `AnimSearchBar` widget :Widget that allows displaying a search bar with nice animation when
+  expanded/ collapsed state.
+- add `ReadMore` widget :Widget that allows Expanding and collapsing text based on it's characters
+  count.
+- add `scrollPadding` and `autoFillHints` to `OptimizedTextField` widget.
+
 ## 0.0.6
 
 - Upgrade Packages.

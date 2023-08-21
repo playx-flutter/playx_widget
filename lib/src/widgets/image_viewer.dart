@@ -371,11 +371,7 @@ class ImageViewer extends StatefulWidget {
   /// Defaults to [Clip.hardEdge], and must not be null.
   Clip? clipBehavior;
 
-  /// The color filter, if any, to apply to this widget.
-  ColorFilter? colorFilter;
 
-  /// The theme used when parsing SVG elements.
-  SvgTheme? theme;
 
   /// The placeholder to use while fetching, decoding, and parsing the SVG data.
   WidgetBuilder? placeholderBuilder;
@@ -609,8 +605,6 @@ class ImageViewer extends StatefulWidget {
     this.placeholderBuilder,
     this.semanticsLabel,
     this.clipBehavior = Clip.hardEdge,
-    this.theme = const SvgTheme(),
-    this.colorFilter,
   }) {
     _type = _ImageType.svgAssetImage;
   }
@@ -629,8 +623,6 @@ class ImageViewer extends StatefulWidget {
     this.placeholderBuilder,
     this.semanticsLabel,
     this.clipBehavior = Clip.hardEdge,
-    this.theme = const SvgTheme(),
-    this.colorFilter,
   }) {
     _type = _ImageType.svgNetworkImage;
   }
@@ -648,8 +640,6 @@ class ImageViewer extends StatefulWidget {
     this.placeholderBuilder,
     this.semanticsLabel,
     this.clipBehavior = Clip.hardEdge,
-    this.theme = const SvgTheme(),
-    this.colorFilter,
   }) {
     _type = _ImageType.svgMemoryImage;
   }
@@ -795,11 +785,12 @@ class _ImageViewerState extends State<ImageViewer> {
           alignment: widget.alignment,
           matchTextDirection: widget.matchTextDirection,
           placeholderBuilder: widget.placeholderBuilder,
-          colorFilter: widget.colorFilter,
+          colorFilter: widget.color != null
+              ? ColorFilter.mode(widget.color!, BlendMode.srcIn)
+              : null,
           allowDrawingOutsideViewBox: widget.allowDrawingOutsideViewBox,
           semanticsLabel: widget.semanticsLabel,
           clipBehavior: widget.clipBehavior ?? Clip.hardEdge,
-          theme: widget.theme ?? const SvgTheme(),
         );
       case _ImageType.svgNetworkImage:
         return SvgPicture.network(
@@ -812,11 +803,12 @@ class _ImageViewerState extends State<ImageViewer> {
           alignment: widget.alignment,
           matchTextDirection: widget.matchTextDirection,
           placeholderBuilder: widget.placeholderBuilder,
-          colorFilter: widget.colorFilter,
+          colorFilter: widget.color != null
+              ? ColorFilter.mode(widget.color!, BlendMode.srcIn)
+              : null,
           allowDrawingOutsideViewBox: widget.allowDrawingOutsideViewBox,
           semanticsLabel: widget.semanticsLabel,
           clipBehavior: widget.clipBehavior ?? Clip.hardEdge,
-          theme: widget.theme ?? const SvgTheme(),
         );
       case _ImageType.svgMemoryImage:
         return SvgPicture.memory(
@@ -828,11 +820,12 @@ class _ImageViewerState extends State<ImageViewer> {
           alignment: widget.alignment,
           matchTextDirection: widget.matchTextDirection,
           placeholderBuilder: widget.placeholderBuilder,
-          colorFilter: widget.colorFilter,
+          colorFilter: widget.color != null
+              ? ColorFilter.mode(widget.color!, BlendMode.srcIn)
+              : null,
           allowDrawingOutsideViewBox: widget.allowDrawingOutsideViewBox,
           semanticsLabel: widget.semanticsLabel,
           clipBehavior: widget.clipBehavior ?? Clip.hardEdge,
-          theme: widget.theme ?? const SvgTheme(),
         );
       default:
         return Container();
