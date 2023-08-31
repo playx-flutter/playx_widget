@@ -21,7 +21,24 @@ class IconViewer extends StatelessWidget {
   final double? iconSize;
 
   IconViewer({
-    required IconData this.icon,
+    this.icon,
+    this.svgIcon,
+    this.iconImage,
+    this.text,
+    this.iconColor = Colors.white,
+    this.iconBackgroundColor = Colors.transparent,
+    this.selectedIconColor,
+    this.selectedIconBackgroundColor,
+    super.key,
+    this.isSelected = false,
+    this.fit = BoxFit.scaleDown,
+    this.width,
+    this.height,
+    this.iconSize,
+  });
+
+  IconViewer.icon({
+    this.icon,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
     this.selectedIconColor,
@@ -35,7 +52,7 @@ class IconViewer extends StatelessWidget {
   });
 
   IconViewer.svg({
-    required String this.svgIcon,
+    this.svgIcon,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
     this.selectedIconColor,
@@ -49,7 +66,7 @@ class IconViewer extends StatelessWidget {
   });
 
   IconViewer.assetImage({
-    required String this.iconImage,
+    this.iconImage,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
     this.selectedIconColor,
@@ -63,7 +80,7 @@ class IconViewer extends StatelessWidget {
   });
 
   IconViewer.text({
-    required String this.text,
+    this.text,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
     this.selectedIconColor,

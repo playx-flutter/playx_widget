@@ -1,3 +1,8 @@
+## 0.0.8
+
+- Upgrade Packages.
+- Enahancements to `IconViewer` and `ImageViewer` widgets.
+
 ## 0.0.7
 
 - Upgrade Packages.
