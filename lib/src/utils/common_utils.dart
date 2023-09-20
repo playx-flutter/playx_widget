@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -50,7 +51,7 @@ Future<Uint8List> getImageFromSvgAsset(String assetName,
 /// 1. Spinning up an element and render tree;
 /// 2. Waiting for the given [delay];
 /// 3. Creating an image via a [RepaintBoundary].
-Future<Uint8List> getImagefromWidget(
+Future<Uint8List> getImageFromWidget(
   Widget widget, {
   Duration delay = const Duration(milliseconds: 100),
   BuildContext? context,
@@ -111,3 +112,5 @@ ui.FlutterView? _getFlutterView({BuildContext? context}) {
   }
   return null;
 }
+
+bool get isIos => Platform.isIOS;

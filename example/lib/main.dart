@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             OptimizedButton.elevated(
-              child: Text('Confirm'),
+              child: const Text('Confirm'),
               onPressed: () {
                 showConfirmDialog(
                     title: 'Are you sure',
