@@ -1,4 +1,4 @@
-## 0.0.9
+## 0.1.0-beta.1
 
 - include `flutter_platform_widgets` into the package to include platform specific widgets.
 - fix errorMaxLines on `OptimizedTextField` not working correctly.
