@@ -77,7 +77,7 @@ class OptimizedTextField extends StatefulWidget {
     this.shouldAutoValidate = false,
     this.padding = const EdgeInsets.symmetric(vertical: 8),
     this.margin,
-    this.errorMaxLines = 1,
+    this.errorMaxLines = 2,
     this.textColor,
     this.hintColor,
     this.labelColor,
@@ -214,6 +214,7 @@ class _CustomFieldState extends State<OptimizedTextField> {
                   ),
               errorStyle:
                   TextStyle(color: widget.errorBorderColor ?? Colors.red),
+              errorMaxLines: widget.errorMaxLines,
               border: widget.border ??
                   OutlineInputBorder(
                     borderSide: BorderSide(

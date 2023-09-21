@@ -22,3 +22,4 @@ export 'src/widgets/optimized_list_tile.dart';
 export 'src/widgets/read_more_text.dart';
 export 'src/widgets/anim_search_bar.dart';
 export 'src/widgets/marquee_widget.dart';
+export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
