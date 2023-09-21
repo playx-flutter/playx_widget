@@ -1,7 +1,12 @@
+## 0.0.9
+
+- include `flutter_platform_widgets` into the package to include platform specific widgets.
+- fix errorMaxLines on `OptimizedTextField` not working correctly.
+
 ## 0.0.8
 
 - Upgrade Packages.
-- Enahancements to `IconViewer` and `ImageViewer` widgets.
+- Enhancements to `IconViewer` and `ImageViewer` widgets.
 
 ## 0.0.7
 
