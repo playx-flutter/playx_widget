@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -8,8 +9,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 Future<Uint8List> getImageFromSvgAsset(String assetName,
     {Size size = const Size(48, 48),
-    BuildContext? context,
-    ColorMapper? colorMapper}) async {
+      BuildContext? context,
+      ColorMapper? colorMapper}) async {
   final pictureInfo = await vg.loadPicture(
     SvgAssetLoader(
       assetName,
@@ -50,8 +51,7 @@ Future<Uint8List> getImageFromSvgAsset(String assetName,
 /// 1. Spinning up an element and render tree;
 /// 2. Waiting for the given [delay];
 /// 3. Creating an image via a [RepaintBoundary].
-Future<Uint8List> getImagefromWidget(
-  Widget widget, {
+Future<Uint8List> getImagefromWidget(Widget widget, {
   Duration delay = const Duration(milliseconds: 100),
   BuildContext? context,
 }) async {
@@ -111,3 +111,5 @@ ui.FlutterView? _getFlutterView({BuildContext? context}) {
   }
   return null;
 }
+
+bool get isCupertino => Platform.isIOS || Platform.isMacOS;

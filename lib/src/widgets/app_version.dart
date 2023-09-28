@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:playx_widget/playx_widget.dart';
 
 /// Widget to display current App Version.

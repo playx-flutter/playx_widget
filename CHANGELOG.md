@@ -1,3 +1,10 @@
+## 0.1.0-beta.2
+
+- Upgrade Packages.
+- Add .adaptive constructor that creates a platform specific widget for centerLoading and
+  optimizedTextField widgets.
+- Enahncement to other widgets and remove OptimizedButton widget.
+
 ## 0.1.0-beta.1
 
 - include `flutter_platform_widgets` into the package to include platform specific widgets.

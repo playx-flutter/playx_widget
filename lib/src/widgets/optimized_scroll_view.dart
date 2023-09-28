@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// This is an optimized scroll view widget that make it's child scrollable.
 /// It will automatically size itself to fill the space

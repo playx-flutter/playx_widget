@@ -5,11 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// Widget that shows an icon from icon data, svg, image or text.
 // ignore: must_be_immutable
 class IconViewer extends StatelessWidget {
-  IconData? icon;
+  final IconData? icon;
 
-  String? svgIcon;
-  String? iconImage;
-  String? text;
+  final String? svgIcon;
+  final String? iconImage;
+  final String? text;
   final bool isSelected;
   final Color? iconColor;
   final Color? iconBackgroundColor;
@@ -20,7 +20,7 @@ class IconViewer extends StatelessWidget {
   final double? height;
   final double? iconSize;
 
-  IconViewer({
+  const IconViewer({
     this.icon,
     this.svgIcon,
     this.iconImage,
@@ -37,7 +37,7 @@ class IconViewer extends StatelessWidget {
     this.iconSize,
   });
 
-  IconViewer.icon({
+  const IconViewer.icon({
     this.icon,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
@@ -49,9 +49,11 @@ class IconViewer extends StatelessWidget {
     this.width,
     this.height,
     this.iconSize,
-  });
+  })  : svgIcon = null,
+        text = null,
+        iconImage = null;
 
-  IconViewer.svg({
+  const IconViewer.svg({
     this.svgIcon,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
@@ -63,9 +65,11 @@ class IconViewer extends StatelessWidget {
     this.width,
     this.height,
     this.iconSize,
-  });
+  })  : icon = null,
+        text = null,
+        iconImage = null;
 
-  IconViewer.assetImage({
+  const IconViewer.assetImage({
     this.iconImage,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
@@ -77,9 +81,11 @@ class IconViewer extends StatelessWidget {
     this.width,
     this.height,
     this.iconSize,
-  });
+  })  : icon = null,
+        svgIcon = null,
+        text = null;
 
-  IconViewer.text({
+  const IconViewer.text({
     this.text,
     this.iconColor = Colors.white,
     this.iconBackgroundColor = Colors.transparent,
@@ -91,7 +97,9 @@ class IconViewer extends StatelessWidget {
     this.width,
     this.height,
     this.iconSize,
-  });
+  })  : icon = null,
+        svgIcon = null,
+        iconImage = null;
 
   @override
   Widget build(BuildContext context) {
