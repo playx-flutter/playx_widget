@@ -13,7 +13,6 @@ export 'src/widgets/keep_alive_wrapper.dart';
 export 'src/widgets/optimized_card.dart';
 export 'src/widgets/optimized_scroll_view.dart';
 export 'src/widgets/animated_visibility.dart';
-export 'src/widgets/optimized_button.dart';
 export 'src/widgets/optimized_text_field.dart';
 export 'src/widgets/timer_refresh_widget.dart';
 export 'src/alerts/confirmation_dialog.dart';

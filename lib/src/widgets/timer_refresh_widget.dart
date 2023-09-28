@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 ///Widget that refreshes it's child on periodic time.
 class TimerRefreshWidget extends StatefulWidget {

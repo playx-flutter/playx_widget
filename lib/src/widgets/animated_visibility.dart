@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// Widget that animates the visibility of child widget by updating widget opacity and hide the old widget.
 class AnimatedVisibility extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:playx_widget/src/widgets/optimized_card.dart';
 
-class OptimizedListTile extends StatefulWidget {
+class OptimizedListTile extends StatelessWidget {
   final Widget title;
   final Widget? subtitle;
   final Widget? leading;
@@ -11,6 +11,7 @@ class OptimizedListTile extends StatefulWidget {
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
   final double? horizontalSpace;
+  final bool shouldShowCardShadow;
 
   const OptimizedListTile(
       {super.key,
@@ -21,52 +22,49 @@ class OptimizedListTile extends StatefulWidget {
       this.contentPadding,
       this.margin,
       this.padding,
-      this.horizontalSpace});
+      this.horizontalSpace,
+      this.shouldShowCardShadow = true});
 
-  @override
-  State<OptimizedListTile> createState() => _OptimizedListTileState();
-}
-
-class _OptimizedListTileState extends State<OptimizedListTile> {
   @override
   Widget build(BuildContext context) {
     return OptimizedCard(
-      padding: widget.padding ??
-          EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 16.h),
-      margin: widget.margin,
+      padding:
+          padding ?? EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 16.h),
+      margin: margin,
+      shouldShowCustomShadow: shouldShowCardShadow,
       child: Row(
         children: [
-          if (widget.leading != null)
+          if (leading != null)
             Container(
-              padding: widget.contentPadding,
-              child: widget.leading,
+              padding: contentPadding,
+              child: leading,
             ),
           SizedBox(
-            width: widget.horizontalSpace ?? 6.w,
+            width: horizontalSpace ?? 6.w,
           ),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding: widget.contentPadding,
-                  child: widget.title,
+                  padding: contentPadding,
+                  child: title,
                 ),
-                if (widget.subtitle != null)
+                if (subtitle != null)
                   Container(
-                    padding: widget.contentPadding,
-                    child: widget.subtitle,
+                    padding: contentPadding,
+                    child: subtitle,
                   ),
               ],
             ),
           ),
           SizedBox(
-            width: widget.horizontalSpace ?? 6.w,
+            width: horizontalSpace ?? 6.w,
           ),
-          if (widget.trailing != null)
+          if (trailing != null)
             Container(
-              padding: widget.contentPadding,
-              child: widget.trailing,
+              padding: contentPadding,
+              child: trailing,
             ),
         ],
       ),

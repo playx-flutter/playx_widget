@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// Signature used by [Image.errorBuilder] to create a replacement widget to
@@ -30,10 +30,10 @@ enum _ImageType {
 /// Easily show an image from assets, network, cached network, or svg images.
 // ignore: must_be_immutable
 class ImageViewer extends StatefulWidget {
-  _ImageType? _type;
-  late String path;
-  Uint8List? bytes;
-  File? file;
+  final _ImageType? _type;
+  final String? path;
+  final Uint8List? bytes;
+  final File? file;
 
   /// If non-null, require the image to have this width.
   ///
@@ -46,7 +46,7 @@ class ImageViewer extends StatefulWidget {
   /// Consider using [fit] to adapt the image's rendering to fit the given width
   /// and height if the exact image dimensions are not known in advance.
   ///
-  double? width;
+  final double? width;
 
   /// If non-null, require the image to have this height.
   ///
@@ -58,16 +58,16 @@ class ImageViewer extends StatefulWidget {
   /// layout constraints, so that the image does not change size as it loads.
   /// Consider using [fit] to adapt the image's rendering to fit the given width
   /// and height if the exact image dimensions are not known in advance.
-  double? height;
+  final double? height;
 
   /// How to inscribe the image into the space allocated during layout.
   ///
   /// The default varies based on the other fields. See the discussion at
   /// [paintImage].
-  BoxFit? fit;
+  final BoxFit? fit;
 
   /// If non-null, this color is blended with each image pixel using [colorBlendMode].
-  Color? color;
+  final Color? color;
 
   /// Used to combine [color] with this image.
   ///
@@ -77,7 +77,7 @@ class ImageViewer extends StatefulWidget {
   /// See also:
   ///
   ///  * [BlendMode], which includes an illustration of the effect of each blend mode.
-  BlendMode? colorBlendMode;
+  final BlendMode? colorBlendMode;
 
   /// How to align the image within its bounds.
   ///
@@ -104,7 +104,7 @@ class ImageViewer extends StatefulWidget {
   ///    specify an [AlignmentGeometry].
   ///  * [AlignmentDirectional], like [Alignment] for specifying alignments
   ///    relative to text direction.
-  AlignmentGeometry alignment;
+  final AlignmentGeometry alignment;
 
   /// The content will be clipped (or not) according to this option.
   ///
@@ -112,7 +112,7 @@ class ImageViewer extends StatefulWidget {
   /// use cases.
   ///
   /// Defaults to [Clip.hardEdge], and must not be null.
-  Clip? clipBehavior;
+  final Clip? clipBehavior;
 
   /// A builder function that is called if an error occurs during image loading.
   ///
@@ -126,13 +126,13 @@ class ImageViewer extends StatefulWidget {
   ///
   /// ** See code in examples/api/lib/widgets/image/image.error_builder.0.dart **
   /// {@end-tool}
-  ErrorBuilder? errorBuilder;
+  final ErrorBuilder? errorBuilder;
 
   /// Widget displayed while the target is loading.
-  PlaceholderBuilder? placeholderBuilder;
+  final PlaceholderBuilder? placeholderBuilder;
 
-  ImageViewer.asset(
-    this.path, {
+  const ImageViewer.asset(
+    String this.path, {
     super.key,
     this.errorBuilder,
     this.width,
@@ -141,11 +141,13 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
-  }) {
-    _type = _ImageType.assetImage;
-  }
+  })  : _type = _ImageType.assetImage,
+        bytes = null,
+        file = null,
+        clipBehavior = null,
+        placeholderBuilder = null;
 
-  ImageViewer.network(
+  const ImageViewer.network(
     String src, {
     super.key,
     this.errorBuilder,
@@ -156,12 +158,13 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
-  }) {
-    path = src;
-    _type = _ImageType.networkImage;
-  }
+  })  : _type = _ImageType.networkImage,
+        bytes = null,
+        file = null,
+        path = src,
+        clipBehavior = null;
 
-  ImageViewer.file(
+  const ImageViewer.file(
     File this.file, {
     super.key,
     this.errorBuilder,
@@ -171,11 +174,13 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
-  }) {
-    _type = _ImageType.fileImage;
-  }
+  })  : _type = _ImageType.fileImage,
+        bytes = null,
+        clipBehavior = null,
+        path = null,
+        placeholderBuilder = null;
 
-  ImageViewer.memory(
+  const ImageViewer.memory(
     Uint8List this.bytes, {
     super.key,
     this.errorBuilder,
@@ -185,11 +190,13 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
-  }) {
-    _type = _ImageType.memoryImage;
-  }
+  })  : _type = _ImageType.memoryImage,
+        file = null,
+        clipBehavior = null,
+        path = null,
+        placeholderBuilder = null;
 
-  ImageViewer.cachedNetwork(
+  const ImageViewer.cachedNetwork(
     String src, {
     super.key,
     this.width,
@@ -200,13 +207,14 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.errorBuilder,
     this.placeholderBuilder,
-  }) {
-    path = src;
-    _type = _ImageType.cachedNetworkImage;
-  }
+  })  : _type = _ImageType.cachedNetworkImage,
+        bytes = null,
+        file = null,
+        clipBehavior = null,
+        path = src;
 
-  ImageViewer.svgAsset(
-    this.path, {
+  const ImageViewer.svgAsset(
+    String this.path, {
     super.key,
     this.width,
     this.height,
@@ -216,12 +224,13 @@ class ImageViewer extends StatefulWidget {
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
-  }) {
-    _type = _ImageType.svgAssetImage;
-  }
+  })  : _type = _ImageType.svgAssetImage,
+        bytes = null,
+        file = null,
+        errorBuilder = null;
 
-  ImageViewer.svgNetwork(
-    this.path, {
+  const ImageViewer.svgNetwork(
+    String src, {
     super.key,
     this.width,
     this.height,
@@ -231,11 +240,13 @@ class ImageViewer extends StatefulWidget {
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
-  }) {
-    _type = _ImageType.svgNetworkImage;
-  }
+  })  : _type = _ImageType.svgNetworkImage,
+        bytes = null,
+        file = null,
+        path = src,
+        errorBuilder = null;
 
-  ImageViewer.svgMemory(
+  const ImageViewer.svgMemory(
     Uint8List this.bytes, {
     super.key,
     this.width,
@@ -246,9 +257,10 @@ class ImageViewer extends StatefulWidget {
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
-  }) {
-    _type = _ImageType.svgMemoryImage;
-  }
+  })  : _type = _ImageType.svgMemoryImage,
+        file = null,
+        errorBuilder = null,
+        path = null;
 
   @override
   State<ImageViewer> createState() => _ImageViewerState();
@@ -260,7 +272,7 @@ class _ImageViewerState extends State<ImageViewer> {
     switch (widget._type) {
       case _ImageType.assetImage:
         return Image.asset(
-          widget.path,
+          widget.path!,
           width: widget.width,
           height: widget.height,
           errorBuilder: (ctx, err, _) {
@@ -274,7 +286,7 @@ class _ImageViewerState extends State<ImageViewer> {
         );
       case _ImageType.networkImage:
         return Image.network(
-          widget.path,
+          widget.path!,
           width: widget.width,
           height: widget.height,
           errorBuilder: (ctx, err, _) {
@@ -322,7 +334,7 @@ class _ImageViewerState extends State<ImageViewer> {
         );
       case _ImageType.cachedNetworkImage:
         return CachedNetworkImage(
-          imageUrl: widget.path,
+          imageUrl: widget.path!,
           width: widget.width,
           height: widget.height,
           color: widget.color,
@@ -336,11 +348,11 @@ class _ImageViewerState extends State<ImageViewer> {
             return widget.errorBuilder?.call(ctx, err) ??
                 const SizedBox.shrink();
           },
-          alignment: widget.alignment = Alignment.center,
+          alignment: widget.alignment.resolve(TextDirection.ltr),
         );
       case _ImageType.svgAssetImage:
         return SvgPicture.asset(
-          widget.path,
+          widget.path!,
           width: widget.width,
           height: widget.height,
           fit: widget.fit ?? BoxFit.contain,
@@ -354,7 +366,7 @@ class _ImageViewerState extends State<ImageViewer> {
         );
       case _ImageType.svgNetworkImage:
         return SvgPicture.network(
-          widget.path,
+          widget.path!,
           width: widget.width,
           height: widget.height,
           fit: widget.fit ?? BoxFit.contain,

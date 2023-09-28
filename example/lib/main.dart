@@ -38,6 +38,12 @@ class MyApp extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
+            const SizedBox(
+              height: 100,
+              child: OptimizedTextField.cupertino(
+                hint: 'Search',
+              ),
+            ),
             const OptimizedCard(
               margin: EdgeInsets.all(16),
               innerCardShadowMargin: EdgeInsets.all(4),
@@ -67,7 +73,7 @@ class MyApp extends StatelessWidget {
                   EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
               horizontalSpace: 8.w,
             ),
-            ImageViewer.cachedNetwork(
+            const ImageViewer.cachedNetwork(
               'https://avatars.githubusercontent.com/u/35397170?s=200&v=4',
               height: 100,
             ),
@@ -80,18 +86,6 @@ class MyApp extends StatelessWidget {
                   return Text(item);
                 },
               ),
-            ),
-            OptimizedButton.elevated(
-              child: Text('Confirm'),
-              onPressed: () {
-                showConfirmDialog(
-                    title: 'Are you sure',
-                    message: 'Are you sure you want to exit ?',
-                    lottie: '',
-                    onConfirmed: () {},
-                    context: context,
-                    lottieAnimationHeight: 200);
-              },
             ),
           ],
         ),
