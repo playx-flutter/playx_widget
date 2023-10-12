@@ -21,4 +21,8 @@ export 'src/widgets/optimized_list_tile.dart';
 export 'src/widgets/read_more_text.dart';
 export 'src/widgets/anim_search_bar.dart';
 export 'src/widgets/marquee_widget.dart';
+export 'src/widgets/dashed_line.dart';
+export 'src/widgets/favorite_button.dart';
+export 'src/widgets/fade_indexed_stack.dart';
+
 export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';

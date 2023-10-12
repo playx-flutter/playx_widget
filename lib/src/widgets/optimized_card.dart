@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Optimized Card Widget which provides better shadow effect for the card.
@@ -58,6 +59,9 @@ class OptimizedCard extends StatefulWidget {
   /// is used. If that's null then the shape will be a [RoundedRectangleBorder]
   /// with a circular corner radius of 4.0.
   final ShapeBorder? shape;
+
+  /// The Border Radius of the default card's rounded rectangular shape.
+  final BorderRadius? borderRadius;
 
   /// Whether to paint the [shape] border in front of the [child].
   ///
@@ -125,13 +129,16 @@ class OptimizedCard extends StatefulWidget {
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget? child;
 
+  //Callback on tapping on the card.
+  final VoidCallback? onPressed;
+
   const OptimizedCard(
       {super.key,
       this.width,
       this.height,
       this.padding,
       this.color,
-      this.shadowColor = Colors.transparent,
+      this.shadowColor,
       this.surfaceTintColor,
       this.elevation = 3,
       this.shape,
@@ -150,7 +157,9 @@ class OptimizedCard extends StatefulWidget {
       this.shadowBorderRadius,
       this.shadowBlurStyle = BlurStyle.normal,
       this.shouldShowCustomShadow = true,
-      this.child});
+      this.child,
+      this.borderRadius,
+      this.onPressed});
 
   @override
   State<OptimizedCard> createState() => _OptimizedCardState();
@@ -163,23 +172,28 @@ class _OptimizedCardState extends State<OptimizedCard> {
       return SizedBox(
         width: widget.width,
         height: widget.height,
-        child: Card(
-            elevation: widget.elevation,
-            shadowColor: widget.shadowColor,
-            surfaceTintColor: widget.surfaceTintColor,
-            borderOnForeground: widget.borderOnForeground,
-            shape: widget.shape ??
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                ),
-            color: widget.color,
-            margin: widget.margin ??
-                EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
-            clipBehavior: Clip.hardEdge,
-            child: Padding(
-              padding: widget.padding ?? EdgeInsets.zero,
-              child: widget.child,
-            )),
+        child: InkWell(
+          onTap: widget.onPressed,
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(8.r),
+          child: Card(
+              elevation: widget.elevation,
+              shadowColor: widget.shadowColor,
+              surfaceTintColor: widget.surfaceTintColor,
+              borderOnForeground: widget.borderOnForeground,
+              shape: widget.shape ??
+                  RoundedRectangleBorder(
+                    borderRadius: widget.borderRadius ??
+                        BorderRadius.all(Radius.circular(8.r)),
+                  ),
+              color: widget.color,
+              margin: widget.margin ??
+                  EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              clipBehavior: Clip.hardEdge,
+              child: Padding(
+                padding: widget.padding ?? EdgeInsets.zero,
+                child: widget.child,
+              )),
+        ),
       );
     }
 
@@ -191,7 +205,7 @@ class _OptimizedCardState extends State<OptimizedCard> {
             EdgeInsets.symmetric(vertical: 6.h, horizontal: 6.w),
         decoration: BoxDecoration(
           borderRadius: widget.shadowBorderRadius ??
-              BorderRadius.all(Radius.circular(10.r)),
+              BorderRadius.all(Radius.circular(8.r)),
           boxShadow: [
             BoxShadow(
               color: widget.customShadowColor ?? Colors.grey.withOpacity(.3),
@@ -203,23 +217,29 @@ class _OptimizedCardState extends State<OptimizedCard> {
             )
           ],
         ),
-        child: Card(
-            elevation: widget.elevation,
-            shadowColor: widget.shadowColor,
-            surfaceTintColor: widget.surfaceTintColor,
-            borderOnForeground: widget.borderOnForeground,
-            shape: widget.shape ??
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                ),
-            color: widget.color,
-            margin: widget.innerCardShadowMargin ??
-                EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
-            clipBehavior: Clip.hardEdge,
-            child: Padding(
-              padding: widget.padding ?? EdgeInsets.zero,
-              child: widget.child,
-            )),
+        child: InkWell(
+          onTap: widget.onPressed,
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(8.r),
+          child: Card(
+              elevation: widget.elevation,
+              shadowColor: widget.shadowColor ??
+                  (isMaterial(context) ? Colors.transparent : null),
+              surfaceTintColor: widget.surfaceTintColor,
+              borderOnForeground: widget.borderOnForeground,
+              shape: widget.shape ??
+                  RoundedRectangleBorder(
+                    borderRadius: widget.borderRadius ??
+                        BorderRadius.all(Radius.circular(10.r)),
+                  ),
+              color: widget.color,
+              margin: widget.innerCardShadowMargin ??
+                  EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
+              clipBehavior: Clip.hardEdge,
+              child: Padding(
+                padding: widget.padding ?? EdgeInsets.zero,
+                child: widget.child,
+              )),
+        ),
       ),
     );
   }

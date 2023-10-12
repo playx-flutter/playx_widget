@@ -1,3 +1,33 @@
+## 0.1.0-beta.3
+
+### New Widgets
+
+#### DashedLine
+
+- Creates a dashed line widget.
+
+#### FadeIndexedStack
+
+- Creates an indexed Stack widget that paints a single child with fade animation.
+
+#### FavoriteButton
+
+- Creates a button that shows favorite state.
+
+### Bug fixes and Enhancements
+
+#### OptimizedCard
+
+- Update OptimizedCard default shadowColor to not be transparent on Ios.
+- Add the onPressed callback for the card to listen to any tapping events.
+- Add borderRadius which can be used to set the border radius of the default card's rounded
+  rectangular shape.
+
+#### OptimizedTextField
+
+- Add hintStyle to the text field to customize the hint text style.
+- Enhancement to the text field in Ios when using `.adaptive` constructor.
+
 ## 0.1.0-beta.2
 
 - Upgrade Packages.
