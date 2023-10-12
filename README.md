@@ -38,18 +38,22 @@ PlayX widget package for playx eco system that provide custom utility widgets to
 - `TimerRefreshWidget` : Widget that refreshes it's child on periodic time.
 - `ReadMore` widget :Widget that allows Expanding and collapsing text based on it's characters
   count.
+- `DashedLine` : Creates a dashed line widget.
+- `FadeIndexedStack` :Creates an indexed Stack widget that paints a single child with fade
+  animation.
+- `FavoriteButton` : Creates a button that shows favorite state.
 
 ## Playx:
+
 Consider using our [Playx Package](https://pub.dev/packages/playx):
 Which comes prepackaged with this package and more features and is easy to use.
-
 
 ## Installation
 
 in `pubspec.yaml` add these lines to `dependencies`
 
 ```yaml  
-playx_widget: ^0.0.9
+playx_widget: ^0.0.8
 ```  
 
 ## See Also:

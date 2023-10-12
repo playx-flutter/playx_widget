@@ -53,6 +53,7 @@ class OptimizedTextField extends StatefulWidget {
   final InputBorder? enabledBorder;
   final TextStyle? style;
   final TextStyle? labelStyle;
+  final TextStyle? hintStyle;
   final EdgeInsetsGeometry contentPadding;
   final EdgeInsets? scrollPadding;
 
@@ -108,6 +109,7 @@ class OptimizedTextField extends StatefulWidget {
     this.style,
     this.labelStyle,
     this.autoFillHints,
+    this.hintStyle,
   })  : _textFieldType = TextFieldType.material,
         boxDecoration = null;
 
@@ -158,6 +160,7 @@ class OptimizedTextField extends StatefulWidget {
     this.labelStyle,
     this.autoFillHints,
     this.boxDecoration,
+    this.hintStyle,
   }) : _textFieldType = TextFieldType.adaptive;
 
   const OptimizedTextField.cupertino({
@@ -207,6 +210,7 @@ class OptimizedTextField extends StatefulWidget {
     this.labelStyle,
     this.autoFillHints,
     this.boxDecoration,
+    this.hintStyle,
   }) : _textFieldType = TextFieldType.cupertino;
 
   @override
@@ -311,7 +315,7 @@ class _CustomFieldState extends State<OptimizedTextField> {
             contentPadding: widget.contentPadding,
             icon: widget.icon,
             suffixIcon: widget.suffix,
-            hintStyle: TextStyle(color: widget.hintColor),
+            hintStyle: widget.hintStyle ?? TextStyle(color: widget.hintColor),
             enabledBorder: widget.enabledBorder ??
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
@@ -390,6 +394,12 @@ class _CustomFieldState extends State<OptimizedTextField> {
               }
             }
           },
+          placeholder: widget.hint,
+          placeholderStyle: widget.hintStyle ??
+              TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: widget.hintColor ?? CupertinoColors.placeholderText),
+          prefix: widget.prefix,
           autofocus: widget.autofocus,
           textInputAction: widget.textInputAction,
           onFieldSubmitted: (v) {
@@ -402,6 +412,7 @@ class _CustomFieldState extends State<OptimizedTextField> {
                 fontSize: 16,
                 color: widget.textColor,
               ),
+          padding: widget.contentPadding,
           decoration: widget.boxDecoration ??
               BoxDecoration(
                 borderRadius: BorderRadius.circular(8),

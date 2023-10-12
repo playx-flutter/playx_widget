@@ -44,9 +44,9 @@ class MyApp extends StatelessWidget {
                 hint: 'Search',
               ),
             ),
+            const FavoriteButton(),
             const OptimizedCard(
               margin: EdgeInsets.all(16),
-              innerCardShadowMargin: EdgeInsets.all(4),
               width: double.infinity,
               height: 200,
               padding: EdgeInsets.all(12),
