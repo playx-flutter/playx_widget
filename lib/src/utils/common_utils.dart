@@ -113,4 +113,7 @@ ui.FlutterView? _getFlutterView({BuildContext? context}) {
   return null;
 }
 
-bool get isCupertino => !kIsWeb && Platform.isIOS || Platform.isMacOS;
+bool get isCupertino {
+  if (kIsWeb) return false;
+  return Platform.isIOS || Platform.isMacOS;
+}

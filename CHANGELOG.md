@@ -1,3 +1,7 @@
+## 0.1.0-beta.5
+
+- fix: bug causing `isCupertino` not working correctly on web.
+
 ## 0.1.0-beta.4
 
 - Upgrade Packages.
