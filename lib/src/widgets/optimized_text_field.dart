@@ -18,6 +18,7 @@ class OptimizedTextField extends StatefulWidget {
   final String? label;
   final TextInputType? type;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final VoidCallback? onTap;
@@ -110,6 +111,7 @@ class OptimizedTextField extends StatefulWidget {
     this.labelStyle,
     this.autoFillHints,
     this.hintStyle,
+    this.onSubmitted,
   })  : _textFieldType = TextFieldType.material,
         boxDecoration = null;
 
@@ -161,6 +163,7 @@ class OptimizedTextField extends StatefulWidget {
     this.autoFillHints,
     this.boxDecoration,
     this.hintStyle,
+    this.onSubmitted,
   }) : _textFieldType = TextFieldType.adaptive;
 
   const OptimizedTextField.cupertino({
@@ -211,6 +214,7 @@ class OptimizedTextField extends StatefulWidget {
     this.autoFillHints,
     this.boxDecoration,
     this.hintStyle,
+    this.onSubmitted,
   }) : _textFieldType = TextFieldType.cupertino;
 
   @override
@@ -292,9 +296,8 @@ class _CustomFieldState extends State<OptimizedTextField> {
           autofocus: widget.autofocus,
           textInputAction: widget.textInputAction,
           onFieldSubmitted: (v) {
-            if (widget.nextFocus != null) {
-              FocusScope.of(context).requestFocus(widget.nextFocus);
-            }
+            widget.nextFocus?.requestFocus();
+            widget.onSubmitted?.call(v);
           },
           style: widget.style ??
               TextStyle(
@@ -403,9 +406,8 @@ class _CustomFieldState extends State<OptimizedTextField> {
           autofocus: widget.autofocus,
           textInputAction: widget.textInputAction,
           onFieldSubmitted: (v) {
-            if (widget.nextFocus != null) {
-              FocusScope.of(context).requestFocus(widget.nextFocus);
-            }
+            widget.nextFocus?.requestFocus();
+            widget.onSubmitted?.call(v);
           },
           style: widget.style ??
               TextStyle(

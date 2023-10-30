@@ -1,3 +1,12 @@
+## 0.1.0-beta.4
+
+- Upgrade Packages.
+- Add `AdaptiveLayout` : Widget which can be used to create adaptive layout for mobile and tablet
+  devices.
+- Add `OrientationWidget` : Widget that can be used to build different widgets for different
+  orientations.
+- Add onSubmitted callback to `OptimizedTextField` widget.
+
 ## 0.1.0-beta.3
 
 ### New Widgets

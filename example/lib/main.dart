@@ -11,6 +11,9 @@ void main() async {
       }));
 }
 
+final focusNode = FocusNode();
+final focusNode2 = FocusNode();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -38,10 +41,19 @@ class MyApp extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
-            const SizedBox(
+            SizedBox(
+              height: 100,
+              child: OptimizedTextField(
+                hint: 'Search',
+                focus: focusNode,
+                nextFocus: focusNode2,
+              ),
+            ),
+            SizedBox(
               height: 100,
               child: OptimizedTextField.cupertino(
                 hint: 'Search',
+                focus: focusNode2,
               ),
             ),
             const FavoriteButton(),

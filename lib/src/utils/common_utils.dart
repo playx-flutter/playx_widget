@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -9,8 +10,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 Future<Uint8List> getImageFromSvgAsset(String assetName,
     {Size size = const Size(48, 48),
-      BuildContext? context,
-      ColorMapper? colorMapper}) async {
+    BuildContext? context,
+    ColorMapper? colorMapper}) async {
   final pictureInfo = await vg.loadPicture(
     SvgAssetLoader(
       assetName,
@@ -112,4 +113,4 @@ ui.FlutterView? _getFlutterView({BuildContext? context}) {
   return null;
 }
 
-bool get isCupertino => Platform.isIOS || Platform.isMacOS;
+bool get isCupertino => !kIsWeb && Platform.isIOS || Platform.isMacOS;
