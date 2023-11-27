@@ -24,5 +24,6 @@ export 'src/widgets/marquee_widget.dart';
 export 'src/widgets/dashed_line.dart';
 export 'src/widgets/favorite_button.dart';
 export 'src/widgets/fade_indexed_stack.dart';
+export 'src/widgets/dashed_vertical_line.dart' hide DashedLinePainter;
 
 export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';

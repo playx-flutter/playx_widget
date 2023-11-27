@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-///Creates a dashed horizontal line widget.
-class DashedLine extends StatefulWidget {
+///Creates a dashed vertical line widget.
+class DashedVerticalLine extends StatefulWidget {
   //Width of the line
   final double? width;
 
@@ -9,7 +9,7 @@ class DashedLine extends StatefulWidget {
   final double? height;
 
   //Width of the each dash line.
-  final double dashWidth;
+  final double dashHeight;
 
   //Space between each dash line.
   final double dashSpace;
@@ -20,34 +20,32 @@ class DashedLine extends StatefulWidget {
   //Stroke width for each dash line.
   final double strokeWidth;
 
-  const DashedLine({
+  const DashedVerticalLine({
     super.key,
     this.width,
     this.height,
-    this.dashWidth = 9,
+    this.dashHeight = 9,
     this.dashSpace = 5,
     this.strokeWidth = 1,
     this.color = Colors.grey,
   });
 
   @override
-  State<DashedLine> createState() => _DashedLineState();
+  State<DashedVerticalLine> createState() => _DashedVerticalLineState();
 }
 
-class _DashedLineState extends State<DashedLine> {
+class _DashedVerticalLineState extends State<DashedVerticalLine> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
       height: widget.height,
-      child: ClipRect(
-        child: CustomPaint(
-          painter: DashedLinePainter(
-            dashWidth: widget.dashWidth,
-            dashSpace: widget.dashSpace,
-            color: widget.color,
-            strokeWidth: widget.strokeWidth,
-          ),
+      child: CustomPaint(
+        painter: DashedLinePainter(
+          dashHeight: widget.dashHeight,
+          dashSpace: widget.dashSpace,
+          color: widget.color,
+          strokeWidth: widget.strokeWidth,
         ),
       ),
     );
@@ -55,16 +53,16 @@ class _DashedLineState extends State<DashedLine> {
 }
 
 class DashedLinePainter extends CustomPainter {
-  final double dashWidth;
+  final double dashHeight;
   final double dashSpace;
   final Color color;
   final double strokeWidth;
-  double startX = 0;
+  double startY = 0;
   final Paint painter;
 
   DashedLinePainter({
-    this.dashWidth = 9,
-    this.dashSpace = 5,
+    this.dashHeight = 8,
+    this.dashSpace = 4,
     this.strokeWidth = 1,
     this.color = Colors.grey,
   }) : painter = Paint()
@@ -73,10 +71,13 @@ class DashedLinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    while (startX < size.width) {
-      canvas.drawLine(Offset(startX, size.height / 2),
-          Offset(startX + dashWidth, size.height / 2), painter);
-      startX += dashWidth + dashSpace;
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth;
+    while (startY < size.height) {
+      canvas.drawLine(Offset(size.width / 2, startY),
+          Offset(size.width / 2, startY + dashHeight), paint);
+      startY += dashHeight + dashSpace;
     }
   }
 
@@ -84,7 +85,7 @@ class DashedLinePainter extends CustomPainter {
   bool shouldRepaint(DashedLinePainter oldDelegate) {
     final bool shouldRepaint = oldDelegate.color != color ||
         oldDelegate.strokeWidth != strokeWidth ||
-        oldDelegate.dashWidth != dashWidth ||
+        oldDelegate.dashHeight != dashHeight ||
         oldDelegate.dashSpace != dashSpace;
     return shouldRepaint;
   }

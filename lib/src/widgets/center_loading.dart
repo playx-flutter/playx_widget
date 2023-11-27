@@ -10,6 +10,7 @@ class CenterLoading extends StatelessWidget {
   final Color? color;
   final bool isAnimating;
   final double? radius;
+  final double? strokeWidth;
   final Color? backgroundColor;
   final CenterLoadingType _type;
 
@@ -19,13 +20,15 @@ class CenterLoading extends StatelessWidget {
     this.isAnimating = true,
     this.radius = 10,
   })  : _type = CenterLoadingType.cupertino,
-        backgroundColor = null;
+        backgroundColor = null,
+        strokeWidth = null;
 
   const CenterLoading.adaptive({
     super.key,
     this.color,
     this.isAnimating = true,
     this.radius,
+    this.strokeWidth,
     this.backgroundColor,
   }) : _type = CenterLoadingType.adaptive;
 
@@ -33,9 +36,10 @@ class CenterLoading extends StatelessWidget {
     super.key,
     this.color,
     this.isAnimating = true,
-    this.radius = 4,
+    this.strokeWidth = 4,
     this.backgroundColor,
-  }) : _type = CenterLoadingType.material;
+  })  : _type = CenterLoadingType.material,
+        radius = null;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +72,7 @@ class CenterLoading extends StatelessWidget {
     return CircularProgressIndicator(
       color: color,
       value: isAnimating ? null : 1,
-      strokeWidth: radius ?? 4,
+      strokeWidth: strokeWidth ?? 4,
       backgroundColor: backgroundColor,
     );
   }
