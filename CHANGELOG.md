@@ -1,3 +1,12 @@
+## 0.1.1
+
+- update packages
+- Update to flutter 3.16.0
+- Bump minimum Dart version to 3.2.0
+- Add `DashedVerticalLine` widget : Creates a dashed vertical line widget.
+- Add `strokeWidth` to `CenterLoading` widget to customize the stroke width of the material loading
+  indicator.
+
 ## 0.1.0-beta.5
 
 - fix: bug causing `isCupertino` not working correctly on web.
