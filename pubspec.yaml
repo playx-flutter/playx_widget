@@ -1,6 +1,6 @@
 name: playx_widget
 description: Playx Package that contains utility widgets as it contains common widgets and utilities that are needed in each project .
-version: 0.1.1
+version: 0.1.2
 homepage: https://sourcya.com/
 repository: https://github.com/playx-flutter/playx_widget
 issue_tracker: https://github.com/playx-flutter/playx_widget/issues
@@ -15,12 +15,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cached_network_image: ^3.3.0
+  cached_network_image: ^3.3.1
   package_info_plus: ^5.0.1
   flutter_svg: ^2.0.9
-  lottie: ^2.7.0
+  lottie: ^3.0.0
   flutter_screenutil: ^5.9.0
-  flutter_platform_widgets: ^6.0.2
+  flutter_platform_widgets: ^6.1.0
 
 dev_dependencies:
   flutter_test:
