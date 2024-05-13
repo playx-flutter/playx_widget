@@ -40,8 +40,12 @@ class _DashedLineState extends State<DashedLine> {
     return SizedBox(
       width: widget.width,
       height: widget.height,
-      child: ClipRect(
+      child: RepaintBoundary(
         child: CustomPaint(
+          size: Size(
+            widget.width ?? double.infinity,
+            widget.height ?? 2,
+          ),
           painter: DashedLinePainter(
             dashWidth: widget.dashWidth,
             dashSpace: widget.dashSpace,
