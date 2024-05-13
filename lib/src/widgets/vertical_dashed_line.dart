@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 ///Creates a dashed vertical line widget.
-class DashedVerticalLine extends StatefulWidget {
+class VerticalDashedLine extends StatefulWidget {
   //Width of the line
   final double? width;
 
@@ -20,7 +20,7 @@ class DashedVerticalLine extends StatefulWidget {
   //Stroke width for each dash line.
   final double strokeWidth;
 
-  const DashedVerticalLine({
+  const VerticalDashedLine({
     super.key,
     this.width,
     this.height,
@@ -31,28 +31,34 @@ class DashedVerticalLine extends StatefulWidget {
   });
 
   @override
-  State<DashedVerticalLine> createState() => _DashedVerticalLineState();
+  State<VerticalDashedLine> createState() => _VerticalDashedLineState();
 }
 
-class _DashedVerticalLineState extends State<DashedVerticalLine> {
+class _VerticalDashedLineState extends State<VerticalDashedLine> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: widget.width,
       height: widget.height,
-      child: CustomPaint(
-        painter: DashedLinePainter(
-          dashHeight: widget.dashHeight,
-          dashSpace: widget.dashSpace,
-          color: widget.color,
-          strokeWidth: widget.strokeWidth,
+      child: RepaintBoundary(
+        child: CustomPaint(
+          size: Size(
+            widget.width ?? 2,
+            widget.height ?? double.infinity,
+          ),
+          painter: DashedVerticalLinePainter(
+            dashHeight: widget.dashHeight,
+            dashSpace: widget.dashSpace,
+            color: widget.color,
+            strokeWidth: widget.strokeWidth,
+          ),
         ),
       ),
     );
   }
 }
 
-class DashedLinePainter extends CustomPainter {
+class DashedVerticalLinePainter extends CustomPainter {
   final double dashHeight;
   final double dashSpace;
   final Color color;
@@ -60,7 +66,7 @@ class DashedLinePainter extends CustomPainter {
   double startY = 0;
   final Paint painter;
 
-  DashedLinePainter({
+  DashedVerticalLinePainter({
     this.dashHeight = 8,
     this.dashSpace = 4,
     this.strokeWidth = 1,
@@ -82,7 +88,7 @@ class DashedLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(DashedLinePainter oldDelegate) {
+  bool shouldRepaint(DashedVerticalLinePainter oldDelegate) {
     final bool shouldRepaint = oldDelegate.color != color ||
         oldDelegate.strokeWidth != strokeWidth ||
         oldDelegate.dashHeight != dashHeight ||

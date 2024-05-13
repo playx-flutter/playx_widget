@@ -1,3 +1,12 @@
+## 0.1.3
+
+- Update packages.
+- Add new `flutter_keyboard_visibility`, `sliver_tools`, `dotted_border` and `wolt_modal_sheet`
+  packages.
+- Add new `SvgProvider` class to provide svg images.
+- Rename `DashedVerticalLine` widget to `VerticalDashedLine`.
+- Enhance `DashedLine` and `VerticalDashedLine` to work better in scrolling list.
+
 ## 0.1.2
 
 - update packages

@@ -64,31 +64,63 @@ class MyApp extends StatelessWidget {
               padding: EdgeInsets.all(12),
               child: Center(child: Text('Ahmed Mohamed')),
             ),
-            OptimizedListTile(
-              leading: const Icon(Icons.speed),
-              title: SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'Speed',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(fontSize: 14.sp),
-                  )),
-              subtitle: SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    '30 km/h',
-                    style: TextStyle(fontSize: 12.sp),
-                    textAlign: TextAlign.start,
-                  )),
-              trailing: const Icon(Icons.car_repair),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
-              horizontalSpace: 8.w,
+            Row(
+              children: [
+                Expanded(
+                  child: OptimizedListTile(
+                    leading: const Icon(Icons.speed),
+                    title: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          'Speed',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(fontSize: 14.sp),
+                        )),
+                    subtitle: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          '30 km/h',
+                          style: TextStyle(fontSize: 12.sp),
+                          textAlign: TextAlign.start,
+                        )),
+                    trailing: const Icon(Icons.car_repair),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+                    horizontalSpace: 8.w,
+                  ),
+                ),
+                const VerticalDashedLine(
+                  height: 100,
+                ),
+                Expanded(
+                  child: OptimizedListTile(
+                    leading: const Icon(Icons.timer),
+                    title: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          'Time',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(fontSize: 14.sp),
+                        )),
+                    subtitle: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          '22:00 PM',
+                          style: TextStyle(fontSize: 12.sp),
+                          textAlign: TextAlign.start,
+                        )),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+                    horizontalSpace: 8.w,
+                  ),
+                ),
+              ],
             ),
             const ImageViewer.cachedNetwork(
               'https://avatars.githubusercontent.com/u/35397170?s=200&v=4',
               height: 100,
             ),
+            const DashedLine(),
             SizedBox(
               height: 100,
               width: double.infinity,
