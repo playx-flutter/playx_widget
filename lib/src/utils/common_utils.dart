@@ -1,9 +1,9 @@
 import 'dart:io' show Platform;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -47,27 +47,32 @@ Future<Uint8List> getImageFromSvgAsset(String assetName,
   return bytes.buffer.asUint8List();
 }
 
-// https://github.com/flutter/flutter/issues/40064
 /// Creates an image from the given [widget] by
 /// 1. Spinning up an element and render tree;
 /// 2. Waiting for the given [delay];
 /// 3. Creating an image via a [RepaintBoundary].
-Future<Uint8List> getImagefromWidget(Widget widget, {
+// https://github.com/flutter/flutter/issues/40064
+Future<Uint8List> getImageFromWidget(Widget widget, {
   Duration delay = const Duration(milliseconds: 100),
   BuildContext? context,
+  Size logicalSize = const Size(800, 600),
 }) async {
   final view = _getFlutterView(context: context);
   if (view == null) throw Exception('Could not find flutter view');
 
   final devicePixelRatio = view.devicePixelRatio;
   final repaintBoundary = RenderRepaintBoundary();
+
   final renderView = RenderView(
-    child: RenderPositionedBox(child: repaintBoundary),
-    configuration: ViewConfiguration(
-      size: const Size.square(300.0),
-      devicePixelRatio: devicePixelRatio,
-    ),
     view: view,
+    child: RenderPositionedBox(
+        alignment: Alignment.center, child: repaintBoundary),
+    configuration: ViewConfiguration(
+      physicalConstraints:
+      BoxConstraints.tight(logicalSize) * view.devicePixelRatio,
+      logicalConstraints: BoxConstraints.tight(logicalSize),
+      devicePixelRatio: view.devicePixelRatio,
+    ),
   );
 
   final pipelineOwner = PipelineOwner()..rootNode = renderView;

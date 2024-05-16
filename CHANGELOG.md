@@ -1,3 +1,8 @@
+## 0.1.4
+
+- Updated packages.
+- fix breaking change with `getImageFromWidget` function.
+
 ## 0.1.3
 
 - Update packages.
