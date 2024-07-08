@@ -324,7 +324,7 @@ class _CustomFieldState extends State<OptimizedTextField> {
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
                     color: widget.borderColor ??
-                        Theme.of(context).colorScheme.onBackground,
+                        Theme.of(context).colorScheme.onSurface,
                     width: 2,
                   ),
                 ),
@@ -355,7 +355,7 @@ class _CustomFieldState extends State<OptimizedTextField> {
                 OutlineInputBorder(
                   borderSide: BorderSide(
                       color: widget.borderColor ??
-                          Theme.of(context).colorScheme.onBackground),
+                          Theme.of(context).colorScheme.onSurface),
                   borderRadius: BorderRadius.circular(8),
                 ),
           ),
@@ -420,7 +420,7 @@ class _CustomFieldState extends State<OptimizedTextField> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: widget.borderColor ??
-                      Theme.of(context).colorScheme.onBackground,
+                      Theme.of(context).colorScheme.onSurface,
                   width: 2,
                 ),
               )),
