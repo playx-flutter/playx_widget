@@ -218,10 +218,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_screenutil
-      sha256: b372c35a772a1dc84142a3b9c5ee89a390834bd258e5e6a450d9b975b985d1c9
+      sha256: "8239210dd68bee6b0577aa4a090890342d04a136ce1c81f98ee513fc0ce891de"
       url: "https://pub.dev"
     source: hosted
-    version: "5.9.1"
+    version: "5.9.3"
   flutter_svg:
     dependency: transitive
     description:
@@ -308,10 +308,10 @@ packages:
     dependency: transitive
     description:
       name: lottie
-      sha256: "46def1e76c4fbfd4643e823980112cfe94a2ba1d9152fe54701c0bf30be4f4cd"
+      sha256: "6a24ade5d3d918c306bb1c21a6b9a04aab0489d51a2582522eea820b4093b62b"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.2"
   matcher:
     dependency: transitive
     description:
@@ -454,7 +454,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.4"
+    version: "0.1.5"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -648,10 +648,10 @@ packages:
     dependency: transitive
     description:
       name: wolt_modal_sheet
-      sha256: e5f08db4927bd97ec57fdf6f995d4bd6f17459c5511cbb07f4c94c82c6a2cfcd
+      sha256: c8c468314779413e0cf59dbded6a6635589c23ad01ee8bf9b1e9eaa55b64b59e
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.0"
+    version: "0.7.1"
   xdg_directories:
     dependency: transitive
     description:
