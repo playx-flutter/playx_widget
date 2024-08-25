@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.1.6
+
+- Updated packages.
+- Add new `IconInfo` class and new `ImageViewer.icon` method to create an image viewer with an icon.
+
 # 0.1.5
 
 - Updated packages.
