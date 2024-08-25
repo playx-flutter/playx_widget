@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../utils/icon_info.dart';
+
 /// Signature used by [Image.errorBuilder] to create a replacement widget to
 /// render instead of the image.
 typedef ErrorBuilder = Widget Function(
@@ -25,6 +27,7 @@ enum _ImageType {
   svgAssetImage,
   svgNetworkImage,
   svgMemoryImage,
+  icon,
 }
 
 /// Easily show an image from assets, network, cached network, or svg images.
@@ -131,6 +134,11 @@ class ImageViewer extends StatefulWidget {
   /// Widget displayed while the target is loading.
   final PlaceholderBuilder? placeholderBuilder;
 
+  /// Icon info to be displayed.
+  final IconInfo? iconInfo;
+
+  final TextDirection? iconDirection;
+
   const ImageViewer.asset(
     String this.path, {
     super.key,
@@ -145,6 +153,8 @@ class ImageViewer extends StatefulWidget {
         bytes = null,
         file = null,
         clipBehavior = null,
+        iconInfo = null,
+        iconDirection = null,
         placeholderBuilder = null;
 
   const ImageViewer.network(
@@ -162,6 +172,8 @@ class ImageViewer extends StatefulWidget {
         bytes = null,
         file = null,
         path = src,
+        iconInfo = null,
+        iconDirection = null,
         clipBehavior = null;
 
   const ImageViewer.file(
@@ -178,6 +190,8 @@ class ImageViewer extends StatefulWidget {
         bytes = null,
         clipBehavior = null,
         path = null,
+        iconInfo = null,
+        iconDirection = null,
         placeholderBuilder = null;
 
   const ImageViewer.memory(
@@ -194,6 +208,8 @@ class ImageViewer extends StatefulWidget {
         file = null,
         clipBehavior = null,
         path = null,
+        iconInfo = null,
+        iconDirection = null,
         placeholderBuilder = null;
 
   const ImageViewer.cachedNetwork(
@@ -202,15 +218,17 @@ class ImageViewer extends StatefulWidget {
     this.width,
     this.height,
     this.fit = BoxFit.cover,
-    this.alignment = Alignment.center,
     this.color,
-    this.colorBlendMode,
-    this.errorBuilder,
-    this.placeholderBuilder,
   })  : _type = _ImageType.cachedNetworkImage,
         bytes = null,
         file = null,
         clipBehavior = null,
+        iconInfo = null,
+        colorBlendMode = null,
+        errorBuilder = null,
+        placeholderBuilder = null,
+        iconDirection = null,
+        alignment = Alignment.center,
         path = src;
 
   const ImageViewer.svgAsset(
@@ -227,6 +245,8 @@ class ImageViewer extends StatefulWidget {
   })  : _type = _ImageType.svgAssetImage,
         bytes = null,
         file = null,
+        iconInfo = null,
+        iconDirection = null,
         errorBuilder = null;
 
   const ImageViewer.svgNetwork(
@@ -244,6 +264,8 @@ class ImageViewer extends StatefulWidget {
         bytes = null,
         file = null,
         path = src,
+        iconInfo = null,
+        iconDirection = null,
         errorBuilder = null;
 
   const ImageViewer.svgMemory(
@@ -260,7 +282,27 @@ class ImageViewer extends StatefulWidget {
   })  : _type = _ImageType.svgMemoryImage,
         file = null,
         errorBuilder = null,
+        iconInfo = null,
+        iconDirection = null,
         path = null;
+
+  const ImageViewer.icon(
+    IconInfo this.iconInfo, {
+    super.key,
+    this.width,
+    this.height,
+    this.fit = BoxFit.contain,
+    this.alignment = Alignment.center,
+    this.color,
+    this.iconDirection,
+  })  : _type = null,
+        bytes = null,
+        file = null,
+        path = null,
+        colorBlendMode = null,
+        placeholderBuilder = null,
+        errorBuilder = null,
+        clipBehavior = null;
 
   @override
   State<ImageViewer> createState() => _ImageViewerState();
@@ -392,8 +434,56 @@ class _ImageViewerState extends State<ImageViewer> {
               : null,
           clipBehavior: widget.clipBehavior ?? Clip.hardEdge,
         );
+      case _ImageType.icon:
+        final color = widget.color ?? widget.iconInfo!.color;
+
+        if (widget.iconInfo!.icon != null) {
+          return Icon(
+            widget.iconInfo!.icon,
+            color: color,
+            size: widget.iconInfo!.size ?? widget.width,
+            textDirection: widget.iconDirection,
+          );
+        } else if (widget.iconInfo!.svgIcon != null) {
+          return Transform.flip(
+            flipX: widget.iconDirection == TextDirection.rtl,
+            child: SvgPicture.asset(
+              widget.iconInfo!.svgIcon!,
+              colorFilter: color != null
+                  ? ColorFilter.mode(
+                      color, widget.colorBlendMode ?? BlendMode.srcIn)
+                  : null,
+              width: widget.iconInfo!.size ?? widget.width,
+              height: widget.iconInfo!.size ?? widget.height,
+            ),
+          );
+        } else if (widget.iconInfo!.assetIcon != null) {
+          return Transform.flip(
+            flipX: widget.iconDirection == TextDirection.rtl,
+            child: Image.asset(
+              widget.iconInfo!.assetIcon!,
+              color: color,
+              width: widget.iconInfo!.size ?? widget.width,
+              height: widget.iconInfo!.size ?? widget.height,
+              fit: widget.fit ?? BoxFit.contain,
+            ),
+          );
+        } else if (widget.iconInfo!.url != null) {
+          return Transform.flip(
+            flipX: widget.iconDirection == TextDirection.rtl,
+            child: CachedNetworkImage(
+              imageUrl: widget.iconInfo!.url!,
+              color: color,
+              width: widget.iconInfo!.size ?? widget.width,
+              height: widget.iconInfo!.size ?? widget.height,
+              fit: widget.fit ?? BoxFit.contain,
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
       default:
-        return Container();
+        return const SizedBox.shrink();
     }
   }
 }
