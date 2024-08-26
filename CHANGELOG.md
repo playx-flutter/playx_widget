@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.1.7
+
+- Update `ImageViewer.cachedNetwork` to accept `errorBuilder` parameter.
+
 # 0.1.6
 
 - Updated packages.

@@ -218,17 +218,17 @@ class ImageViewer extends StatefulWidget {
     this.width,
     this.height,
     this.fit = BoxFit.cover,
+    this.alignment = Alignment.center,
     this.color,
+    this.colorBlendMode,
+    this.errorBuilder,
+    this.placeholderBuilder,
   })  : _type = _ImageType.cachedNetworkImage,
         bytes = null,
         file = null,
         clipBehavior = null,
         iconInfo = null,
-        colorBlendMode = null,
-        errorBuilder = null,
-        placeholderBuilder = null,
         iconDirection = null,
-        alignment = Alignment.center,
         path = src;
 
   const ImageViewer.svgAsset(
