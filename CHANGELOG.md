@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.1.8
+
+- Update packages.
+- export `cupertino_icons` and `font_awesome_flutter` icon packages.
+
 # 0.1.7
 
 - Update `ImageViewer.cachedNetwork` to accept `errorBuilder` parameter.

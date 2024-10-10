@@ -36,7 +36,6 @@ class IconInfo {
 
   IconInfo copyWith({
     IconData? icon,
-    CupertinoIcons? cupertinoIcon,
     String? svgIcon,
     String? url,
     Color? color,

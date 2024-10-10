@@ -1,12 +1,14 @@
-library playx_widget;
+library;
 
 export 'package:cached_network_image/cached_network_image.dart';
+export 'package:cupertino_icons/cupertino_icons.dart';
 export 'package:dotted_border/dotted_border.dart';
 export 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_svg/svg.dart';
 export 'package:flutter_svg_provider/flutter_svg_provider.dart' hide Svg;
+export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'package:lottie/lottie.dart' hide Marker;
 export 'package:package_info_plus/package_info_plus.dart';
 export 'package:sliver_tools/sliver_tools.dart';
