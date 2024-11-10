@@ -160,7 +160,7 @@ class IconViewer extends StatelessWidget {
                 fit: fit,
                 key: key,
               ),
-      )
+            )
           : Container(
               width: fit == BoxFit.cover ? null : width,
               height: fit == BoxFit.cover ? null : height,

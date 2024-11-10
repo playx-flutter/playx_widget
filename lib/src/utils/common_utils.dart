@@ -52,7 +52,8 @@ Future<Uint8List> getImageFromSvgAsset(String assetName,
 /// 2. Waiting for the given [delay];
 /// 3. Creating an image via a [RepaintBoundary].
 // https://github.com/flutter/flutter/issues/40064
-Future<Uint8List> getImageFromWidget(Widget widget, {
+Future<Uint8List> getImageFromWidget(
+  Widget widget, {
   Duration delay = const Duration(milliseconds: 100),
   BuildContext? context,
   Size logicalSize = const Size(800, 600),
@@ -69,7 +70,7 @@ Future<Uint8List> getImageFromWidget(Widget widget, {
         alignment: Alignment.center, child: repaintBoundary),
     configuration: ViewConfiguration(
       physicalConstraints:
-      BoxConstraints.tight(logicalSize) * view.devicePixelRatio,
+          BoxConstraints.tight(logicalSize) * view.devicePixelRatio,
       logicalConstraints: BoxConstraints.tight(logicalSize),
       devicePixelRatio: view.devicePixelRatio,
     ),
