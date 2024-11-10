@@ -1,5 +1,11 @@
 # Changelog
 
+# 0.1.9
+
+- Update packages.
+- feat: Add date time picker utility class to show date/time picker based on platform.
+- refactor: Update app version widget to allow showing version code.
+
 # 0.1.8
 
 - Update packages.

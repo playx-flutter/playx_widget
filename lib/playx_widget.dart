@@ -15,6 +15,7 @@ export 'package:sliver_tools/sliver_tools.dart';
 export 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 export 'src/alerts/confirmation_dialog.dart';
+export 'src/date/date_picker.dart';
 export 'src/provider/svg_provider.dart';
 export 'src/widgets/anim_search_bar.dart';
 export 'src/widgets/animated_visibility.dart';
