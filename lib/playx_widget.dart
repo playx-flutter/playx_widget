@@ -3,7 +3,7 @@ library;
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:cupertino_icons/cupertino_icons.dart';
 export 'package:dotted_border/dotted_border.dart';
-export 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+export 'package:flutter_keyboard_visibility_temp_fork/flutter_keyboard_visibility_temp_fork.dart';
 export 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_svg/svg.dart';
