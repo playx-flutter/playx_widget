@@ -33,6 +33,7 @@ export 'src/widgets/optimized_card.dart';
 export 'src/widgets/optimized_list_tile.dart';
 export 'src/widgets/optimized_scroll_view.dart';
 export 'src/widgets/optimized_text_field.dart';
+export 'src/widgets/orientation_widget.dart';
 export 'src/widgets/read_more_text.dart';
 export 'src/widgets/timer_refresh_widget.dart';
 export 'src/widgets/vertical_dashed_line.dart';
