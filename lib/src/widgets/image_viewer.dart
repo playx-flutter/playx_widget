@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -140,6 +141,9 @@ class ImageViewer extends StatefulWidget {
 
   final TextDirection? iconDirection;
 
+  /// Render options for images on the web platform for [ImageViewer.cachedNetwork].
+  final ImageRenderMethodForWeb imageRenderMethodForWeb;
+
   const ImageViewer.asset(
     String this.path, {
     super.key,
@@ -156,7 +160,8 @@ class ImageViewer extends StatefulWidget {
         clipBehavior = null,
         iconInfo = null,
         iconDirection = null,
-        placeholderBuilder = null;
+        placeholderBuilder = null,
+        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.network(
     String src, {
@@ -175,7 +180,8 @@ class ImageViewer extends StatefulWidget {
         path = src,
         iconInfo = null,
         iconDirection = null,
-        clipBehavior = null;
+        clipBehavior = null,
+        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.file(
     File this.file, {
@@ -193,7 +199,8 @@ class ImageViewer extends StatefulWidget {
         path = null,
         iconInfo = null,
         iconDirection = null,
-        placeholderBuilder = null;
+        placeholderBuilder = null,
+        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.memory(
     Uint8List this.bytes, {
@@ -211,7 +218,8 @@ class ImageViewer extends StatefulWidget {
         path = null,
         iconInfo = null,
         iconDirection = null,
-        placeholderBuilder = null;
+        placeholderBuilder = null,
+        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.cachedNetwork(
     String src, {
@@ -224,6 +232,7 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.errorBuilder,
     this.placeholderBuilder,
+    this.imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet,
   })  : _type = _ImageType.cachedNetworkImage,
         bytes = null,
         file = null,
@@ -248,7 +257,8 @@ class ImageViewer extends StatefulWidget {
         file = null,
         iconInfo = null,
         iconDirection = null,
-        errorBuilder = null;
+        errorBuilder = null,
+        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.svgNetwork(
     String src, {
@@ -267,7 +277,8 @@ class ImageViewer extends StatefulWidget {
         path = src,
         iconInfo = null,
         iconDirection = null,
-        errorBuilder = null;
+        errorBuilder = null,
+        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.svgMemory(
     Uint8List this.bytes, {
@@ -285,7 +296,8 @@ class ImageViewer extends StatefulWidget {
         errorBuilder = null,
         iconInfo = null,
         iconDirection = null,
-        path = null;
+        path = null,
+        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.icon(
     IconInfo this.iconInfo, {
@@ -296,6 +308,7 @@ class ImageViewer extends StatefulWidget {
     this.alignment = Alignment.center,
     this.color,
     this.iconDirection,
+    this.imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet,
   })  : _type = null,
         bytes = null,
         file = null,
@@ -391,6 +404,7 @@ class _ImageViewerState extends State<ImageViewer> {
             return widget.errorBuilder?.call(ctx, err) ??
                 const SizedBox.shrink();
           },
+          imageRenderMethodForWeb: widget.imageRenderMethodForWeb,
           alignment: widget.alignment.resolve(TextDirection.ltr),
         );
       case _ImageType.svgAssetImage:
@@ -478,6 +492,7 @@ class _ImageViewerState extends State<ImageViewer> {
               width: widget.iconInfo!.size ?? widget.width,
               height: widget.iconInfo!.size ?? widget.height,
               fit: widget.fit ?? BoxFit.contain,
+              imageRenderMethodForWeb: widget.imageRenderMethodForWeb,
             ),
           );
         } else {

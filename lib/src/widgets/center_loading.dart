@@ -53,7 +53,9 @@ class CenterLoading extends StatelessWidget {
         child = _buildCupertinoWidget();
         break;
       case CenterLoadingType.adaptive:
-        child = isCupertino ? _buildCupertinoWidget() : _buildMaterialWidget();
+        child = CommonImageUtils.isCupertino
+            ? _buildCupertinoWidget()
+            : _buildMaterialWidget();
         break;
     }
 

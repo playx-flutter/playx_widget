@@ -1,30 +1,69 @@
 # Changelog
 
-# 0.1.9
+## 0.2.0
+
+### New Features
+
+#### OptimizedTextField
+
+- **`enableSuggestions`**: Added to toggle text suggestions in the text field.
+- **`autocorrect`**: Added to enable or disable autocorrection.
+- **`autoValidateMode`**: Added to specify the auto-validation mode (e.g., on user input or form
+  submission).
+- **`debounceDuration`**: Added to support debouncing for text field input and validation.
+- **`debounceValidation`**: Added to enable debouncing for validation, improving performance.
+
+#### ImageViewer
+
+- **`imageRenderMethodForWeb`**: Added to the `ImageViewer.cachedNetwork` method to specify
+  rendering options for images on the web platform.
+
+### Updates
+
+- **Utility Methods**: Moved the following methods under the new `CommonImageUtils` class:
+  - `getImageFromSvgAsset`
+  - `getImageFromWidget`
+
+- **WebAssembly (WASM) Support**: Added support for WebAssembly (WASM) in the package allowing the
+  package to compile to `WASM` in web.
+
+- **PlayxWidget**: Exported `OrientationWidget` for enhanced usability in responsive designs.
+
+- **Dependency Replacement**: Replaced **flutter_keyboard_visibility** by *
+  *flutter_keyboard_visibility_temp_fork** to address the following issues:
+  - Use the Flutter default `compileSdkVersion` as a workaround for a bug in Flutter (#63533),
+    allowing targeting of the latest `compileSdkVersion`.
+  - Added support for Flutter/WASM. Previous implementations using `dart:html` or `package:js`
+    prevented compilation for the WebAssembly (WASM) target.
+
+- **Dependency Upgrade**: Upgraded `archive` dependency to version `^3.6.1`, which is used in the
+  `lottie` package.
+
+## 0.1.9
 
 - Update packages.
 - feat: Add date time picker utility class to show date/time picker based on platform.
 - refactor: Update app version widget to allow showing version code.
 
-# 0.1.8
+## 0.1.8
 
 - Update packages.
 - export `cupertino_icons` and `font_awesome_flutter` icon packages.
 
-# 0.1.7
+## 0.1.7
 
 - Update `ImageViewer.cachedNetwork` to accept `errorBuilder` parameter.
 
-# 0.1.6
+## 0.1.6
 
 - Updated packages.
 - Add new `IconInfo` class and new `ImageViewer.icon` method to create an image viewer with an icon.
 
-# 0.1.5
+## 0.1.5
 
 - Updated packages.
 
-## 0.1.4
+#### 0.1.4
 
 - Updated packages.
 - fix breaking change with `getImageFromWidget` function.

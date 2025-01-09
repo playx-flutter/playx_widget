@@ -208,7 +208,7 @@ class _OptimizedCardState extends State<OptimizedCard> {
               BorderRadius.all(Radius.circular(8.r)),
           boxShadow: [
             BoxShadow(
-              color: widget.customShadowColor ?? Colors.grey.withOpacity(.3),
+              color: widget.customShadowColor ?? Color(0x4D9E9E9E),
               blurRadius: widget.shadowRadius,
               spreadRadius: widget.spreadRadius,
               // soften the shadow

@@ -1,13 +1,14 @@
 # This is a generated file; do not edit or check into version control.
-flutter_keyboard_visibility=E:\\flutter\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility-6.0.0\\
-flutter_keyboard_visibility_linux=E:\\flutter\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility_linux-1.0.0\\
-flutter_keyboard_visibility_macos=E:\\flutter\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility_macos-1.0.0\\
-flutter_keyboard_visibility_web=E:\\flutter\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility_web-2.0.0\\
-flutter_keyboard_visibility_windows=E:\\flutter\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility_windows-1.0.0\\
-package_info_plus=E:\\flutter\\cache\\hosted\\pub.dev\\package_info_plus-8.0.0\\
-path_provider=E:\\flutter\\cache\\hosted\\pub.dev\\path_provider-2.1.1\\
-path_provider_android=E:\\flutter\\cache\\hosted\\pub.dev\\path_provider_android-2.2.1\\
-path_provider_foundation=E:\\flutter\\cache\\hosted\\pub.dev\\path_provider_foundation-2.3.1\\
-path_provider_linux=E:\\flutter\\cache\\hosted\\pub.dev\\path_provider_linux-2.2.1\\
-path_provider_windows=E:\\flutter\\cache\\hosted\\pub.dev\\path_provider_windows-2.2.1\\
-sqflite=E:\\flutter\\cache\\hosted\\pub.dev\\sqflite-2.3.0\\
+flutter_keyboard_visibility_linux=E:\\Sdk\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility_linux-1.0.0\\
+flutter_keyboard_visibility_macos=E:\\Sdk\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility_macos-1.0.0\\
+flutter_keyboard_visibility_temp_fork=E:\\Sdk\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility_temp_fork-0.1.4\\
+flutter_keyboard_visibility_windows=E:\\Sdk\\cache\\hosted\\pub.dev\\flutter_keyboard_visibility_windows-1.0.0\\
+package_info_plus=E:\\Sdk\\cache\\hosted\\pub.dev\\package_info_plus-8.1.2\\
+path_provider=E:\\Sdk\\cache\\hosted\\pub.dev\\path_provider-2.1.5\\
+path_provider_android=E:\\Sdk\\cache\\hosted\\pub.dev\\path_provider_android-2.2.15\\
+path_provider_foundation=E:\\Sdk\\cache\\hosted\\pub.dev\\path_provider_foundation-2.4.1\\
+path_provider_linux=E:\\Sdk\\cache\\hosted\\pub.dev\\path_provider_linux-2.2.1\\
+path_provider_windows=E:\\Sdk\\cache\\hosted\\pub.dev\\path_provider_windows-2.3.0\\
+sqflite=E:\\Sdk\\cache\\hosted\\pub.dev\\sqflite-2.4.1\\
+sqflite_android=E:\\Sdk\\cache\\hosted\\pub.dev\\sqflite_android-2.4.0\\
+sqflite_darwin=E:\\Sdk\\cache\\hosted\\pub.dev\\sqflite_darwin-2.4.1+1\\
