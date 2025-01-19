@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+- Update packages.
+
 ## 0.2.0
 
 ### New Features
