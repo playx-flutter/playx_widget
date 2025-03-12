@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2
+
+- Update packages.
+- Update `ReadMoreText` to not be clickable when trimCharsCount is less than the text length.
+
 ## 0.2.1
 
 - Update packages.
