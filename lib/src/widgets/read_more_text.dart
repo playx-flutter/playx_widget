@@ -42,7 +42,7 @@ class _ReadMoreTextState extends State<ReadMoreText> {
     return AnimatedSize(
       duration: const Duration(milliseconds: 200),
       child: InkWell(
-        onTap: onTapClick,
+        onTap: shouldTrimText ? onTapClick : null,
         child: RichText(
           text: TextSpan(
             text: _showLongDescription ? widget.text : shortDescription,
