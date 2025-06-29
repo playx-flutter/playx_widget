@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.3.0
+- Update packages.
+- (Flutter version support: v3.32.0)
+  Adds all the flutter 3.32 additional properties for platform widgets
+
 ## 0.2.2
 
 - Update packages.

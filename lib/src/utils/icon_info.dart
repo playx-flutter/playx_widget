@@ -64,3 +64,11 @@ class IconInfo {
         iconDirection: textDirection);
   }
 }
+
+/// Extension to convert IconData to IconInfo
+extension IconInfoExtension on IconData {
+  IconInfo toIconInfo({Color? color, double? size}) {
+    return IconInfo.icon(this, color: color, size: size);
+  }
+
+}
