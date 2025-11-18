@@ -1,6 +1,6 @@
 name: playx_widget
 description: Playx Package that contains utility widgets as it contains common widgets and utilities that are needed in each project .
-version: 0.3.0
+version: 0.4.0
 homepage: https://sourcya.io
 repository: https://github.com/playx-flutter/playx_widget
 issue_tracker: https://github.com/playx-flutter/playx_widget/issues
@@ -20,10 +20,10 @@ dependencies:
   flutter:
     sdk: flutter
   cached_network_image: ^3.4.1
-  package_info_plus: ^8.3.0
-  flutter_svg: ^2.2.0
+  package_info_plus: ^9.0.0
+  flutter_svg: ^2.2.2
   flutter_svg_provider: ^1.0.7
-  lottie: ^3.3.1
+  lottie: ^3.3.2
   flutter_screenutil: ^5.9.3
   flutter_platform_widgets: ^9.0.0
   wolt_modal_sheet: ^0.11.0
@@ -31,7 +31,7 @@ dependencies:
   sliver_tools: ^0.2.12
   dotted_border: ^3.1.0
   cupertino_icons: ^1.0.8
-  font_awesome_flutter: ^10.8.0
+  font_awesome_flutter: ^10.12.0
   cached_network_image_platform_interface: ^4.1.1
 
 dev_dependencies:

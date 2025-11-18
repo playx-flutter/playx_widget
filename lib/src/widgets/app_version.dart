@@ -27,16 +27,20 @@ class AppVersion extends StatelessWidget {
   /// Version Text font family
   final String? fontFamily;
 
-  const AppVersion(
-      {super.key,
-      this.textStyle,
-      this.prefix = 'V',
-      this.postfix = '',
-      this.showVersionCode = false,
-      this.versionCodeSeparator = '+',
-      this.textAlign = TextAlign.center,
-      this.fontWeight,
-      this.fontFamily});
+  final double? fontSize;
+
+  const AppVersion({
+    super.key,
+    this.textStyle,
+    this.prefix = 'V',
+    this.postfix = '',
+    this.showVersionCode = false,
+    this.versionCodeSeparator = '+',
+    this.textAlign = TextAlign.center,
+    this.fontWeight,
+    this.fontFamily,
+    this.fontSize,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +50,13 @@ class AppVersion extends StatelessWidget {
         final versionName = snapshot.data ?? '';
         return Text(
           versionName,
-          style: textStyle ??
+          style:
+              textStyle ??
               TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: fontWeight,
-                  fontFamily: fontFamily),
+                fontSize: fontSize ?? 12.sp,
+                fontWeight: fontWeight,
+                fontFamily: fontFamily,
+              ),
           textAlign: TextAlign.center,
         );
       },
