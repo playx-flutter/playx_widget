@@ -8,11 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../utils/common_utils.dart';
 
-enum TextFieldType {
-  material,
-  cupertino,
-  adaptive,
-}
+enum TextFieldType { material, cupertino, adaptive }
 
 /// A customizable and feature-rich text field with auto-validation support.
 ///
@@ -244,8 +240,10 @@ class OptimizedTextField extends StatefulWidget {
     this.formKey,
     this.onValidationChanged,
     this.textInputAction = TextInputAction.done,
-    this.contentPadding =
-        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+    this.contentPadding = const EdgeInsets.symmetric(
+      vertical: 10.0,
+      horizontal: 10.0,
+    ),
     this.scrollPadding,
     this.border,
     this.focusedBorder,
@@ -261,8 +259,8 @@ class OptimizedTextField extends StatefulWidget {
     this.autoValidateMode,
     this.debounceDuration,
     this.debounceValidation = false,
-  })  : _textFieldType = TextFieldType.material,
-        boxDecoration = null;
+  }) : _textFieldType = TextFieldType.material,
+       boxDecoration = null;
 
   const OptimizedTextField.adaptive({
     super.key,
@@ -301,8 +299,10 @@ class OptimizedTextField extends StatefulWidget {
     this.formKey,
     this.onValidationChanged,
     this.textInputAction = TextInputAction.done,
-    this.contentPadding =
-        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+    this.contentPadding = const EdgeInsets.symmetric(
+      vertical: 10.0,
+      horizontal: 10.0,
+    ),
     this.scrollPadding,
     this.border,
     this.focusedBorder,
@@ -358,8 +358,10 @@ class OptimizedTextField extends StatefulWidget {
     this.formKey,
     this.onValidationChanged,
     this.textInputAction = TextInputAction.done,
-    this.contentPadding =
-        const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+    this.contentPadding = const EdgeInsets.symmetric(
+      vertical: 10.0,
+      horizontal: 10.0,
+    ),
     this.scrollPadding,
     this.border,
     this.focusedBorder,
@@ -391,7 +393,8 @@ class _CustomFieldState extends State<OptimizedTextField> {
 
   @override
   void initState() {
-    formKey = widget.formKey ??
+    formKey =
+        widget.formKey ??
         (widget.shouldAutoValidate ? GlobalKey<FormState>() : null);
     super.initState();
   }
@@ -494,19 +497,14 @@ class _CustomFieldState extends State<OptimizedTextField> {
             widget.nextFocus?.requestFocus();
             widget.onSubmitted?.call(v);
           },
-          style: widget.style ??
-              TextStyle(
-                fontSize: 16,
-                color: widget.textColor,
-              ),
+          style:
+              widget.style ?? TextStyle(fontSize: 16, color: widget.textColor),
           decoration: InputDecoration(
             fillColor: widget.fillColor,
             filled: widget.fillColor != null,
-            labelStyle: widget.labelStyle ??
-                TextStyle(
-                  color: widget.labelColor,
-                  fontSize: 14,
-                ),
+            labelStyle:
+                widget.labelStyle ??
+                TextStyle(color: widget.labelColor, fontSize: 14),
             hintText: widget.hint,
             prefixIcon: widget.prefix,
             labelText: widget.label,
@@ -514,43 +512,54 @@ class _CustomFieldState extends State<OptimizedTextField> {
             icon: widget.icon,
             suffixIcon: widget.suffix,
             hintStyle: widget.hintStyle ?? TextStyle(color: widget.hintColor),
-            enabledBorder: widget.enabledBorder ??
+            enabledBorder:
+                widget.enabledBorder ??
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.r),
                   borderSide: BorderSide(
-                    color: widget.borderColor ??
+                    color:
+                        widget.borderColor ??
                         Theme.of(context).colorScheme.onSurface,
                     width: 2,
                   ),
                 ),
-            focusedBorder: widget.focusedBorder ??
+            focusedBorder:
+                widget.focusedBorder ??
                 OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: widget.focusedBorderColor ??
+                    color:
+                        widget.focusedBorderColor ??
                         Theme.of(context).colorScheme.primary,
                     width: 2,
                   ),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
-            errorBorder: widget.errorBorder ??
+            errorBorder:
+                widget.errorBorder ??
                 OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: widget.errorBorderColor ?? Colors.red),
+                  borderSide: BorderSide(
+                    color: widget.errorBorderColor ?? Colors.red,
+                  ),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
-            focusedErrorBorder: widget.errorBorder ??
+            focusedErrorBorder:
+                widget.errorBorder ??
                 OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: widget.errorBorderColor ?? Colors.red),
+                  borderSide: BorderSide(
+                    color: widget.errorBorderColor ?? Colors.red,
+                  ),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
             errorStyle: TextStyle(color: widget.errorBorderColor ?? Colors.red),
             errorMaxLines: widget.errorMaxLines,
-            border: widget.border ??
+            border:
+                widget.border ??
                 OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: widget.borderColor ??
-                          Theme.of(context).colorScheme.onSurface),
+                    color:
+                        widget.borderColor ??
+                        Theme.of(context).colorScheme.onSurface,
+                  ),
                   borderRadius: BorderRadius.circular(8.r),
                 ),
           ),
@@ -563,56 +572,42 @@ class _CustomFieldState extends State<OptimizedTextField> {
     return Form(
       key: formKey,
       child: CupertinoTextFormFieldRow(
-          enabled: widget.enabled,
-          onTap: widget.onTap,
-          validator: widget.validator,
-          controller: widget.controller,
-          focusNode: widget.focus,
-          readOnly: widget.read,
-          maxLines: widget.maxLines,
-          minLines: widget.minLines,
-          obscureText: widget.obscureText,
-          keyboardType: widget.type,
-          autofillHints: widget.autoFillHints,
-          obscuringCharacter: widget.obscuringCharacter,
-          enableSuggestions: widget.enableSuggestions,
-          autocorrect: widget.autocorrect,
-          autovalidateMode:
-              widget.autoValidateMode ?? AutovalidateMode.disabled,
-          scrollPadding:
-              widget.scrollPadding ?? EdgeInsets.symmetric(vertical: 20.h),
-          onChanged: (String input) {
-            // ignore: prefer_null_aware_method_calls
-            if (widget.debounceDuration != null) {
+        enabled: widget.enabled,
+        onTap: widget.onTap,
+        validator: widget.validator,
+        controller: widget.controller,
+        focusNode: widget.focus,
+        readOnly: widget.read,
+        maxLines: widget.maxLines,
+        minLines: widget.minLines,
+        obscureText: widget.obscureText,
+        keyboardType: widget.type,
+        autofillHints: widget.autoFillHints,
+        obscuringCharacter: widget.obscuringCharacter,
+        enableSuggestions: widget.enableSuggestions,
+        autocorrect: widget.autocorrect,
+        autovalidateMode: widget.autoValidateMode ?? AutovalidateMode.disabled,
+        scrollPadding:
+            widget.scrollPadding ?? EdgeInsets.symmetric(vertical: 20.h),
+        onChanged: (String input) {
+          // ignore: prefer_null_aware_method_calls
+          if (widget.debounceDuration != null) {
+            if (_debounceTimer?.isActive ?? false) {
+              _debounceTimer?.cancel();
+            }
+            _debounceTimer = Timer(widget.debounceDuration!, () {
+              widget.onChanged?.call(input);
+            });
+          } else {
+            widget.onChanged?.call(input);
+          }
+
+          if (widget.shouldAutoValidate) {
+            if (widget.debounceValidation && widget.debounceDuration != null) {
               if (_debounceTimer?.isActive ?? false) {
                 _debounceTimer?.cancel();
               }
               _debounceTimer = Timer(widget.debounceDuration!, () {
-                widget.onChanged?.call(input);
-              });
-            } else {
-              widget.onChanged?.call(input);
-            }
-
-            if (widget.shouldAutoValidate) {
-              if (widget.debounceValidation &&
-                  widget.debounceDuration != null) {
-                if (_debounceTimer?.isActive ?? false) {
-                  _debounceTimer?.cancel();
-                }
-                _debounceTimer = Timer(widget.debounceDuration!, () {
-                  if (formKey != null) {
-                    final formState = formKey!.currentState;
-                    final isValid = formState != null && formState.validate();
-                    if (widget.onValidationChanged != null) {
-                      if (_isFieldValid != isValid) {
-                        widget.onValidationChanged!(isValid);
-                        _isFieldValid = isValid;
-                      }
-                    }
-                  }
-                });
-              } else {
                 if (formKey != null) {
                   final formState = formKey!.currentState;
                   final isValid = formState != null && formState.validate();
@@ -623,36 +618,49 @@ class _CustomFieldState extends State<OptimizedTextField> {
                     }
                   }
                 }
+              });
+            } else {
+              if (formKey != null) {
+                final formState = formKey!.currentState;
+                final isValid = formState != null && formState.validate();
+                if (widget.onValidationChanged != null) {
+                  if (_isFieldValid != isValid) {
+                    widget.onValidationChanged!(isValid);
+                    _isFieldValid = isValid;
+                  }
+                }
               }
             }
-          },
-          placeholder: widget.hint,
-          placeholderStyle: widget.hintStyle ??
-              TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: widget.hintColor ?? CupertinoColors.placeholderText),
-          prefix: widget.prefix,
-          autofocus: widget.autofocus,
-          textInputAction: widget.textInputAction,
-          onFieldSubmitted: (v) {
-            widget.nextFocus?.requestFocus();
-            widget.onSubmitted?.call(v);
-          },
-          style: widget.style ??
-              TextStyle(
-                fontSize: 16,
-                color: widget.textColor,
+          }
+        },
+        placeholder: widget.hint,
+        placeholderStyle:
+            widget.hintStyle ??
+            TextStyle(
+              fontWeight: FontWeight.w400,
+              color: widget.hintColor ?? CupertinoColors.placeholderText,
+            ),
+        prefix: widget.prefix,
+        autofocus: widget.autofocus,
+        textInputAction: widget.textInputAction,
+        onFieldSubmitted: (v) {
+          widget.nextFocus?.requestFocus();
+          widget.onSubmitted?.call(v);
+        },
+        style: widget.style ?? TextStyle(fontSize: 16, color: widget.textColor),
+        padding: widget.contentPadding,
+        decoration:
+            widget.boxDecoration ??
+            BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color:
+                    widget.borderColor ??
+                    Theme.of(context).colorScheme.onSurface,
+                width: 2,
               ),
-          padding: widget.contentPadding,
-          decoration: widget.boxDecoration ??
-              BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: widget.borderColor ??
-                      Theme.of(context).colorScheme.onSurface,
-                  width: 2,
-                ),
-              )),
+            ),
+      ),
     );
   }
 }

@@ -49,9 +49,9 @@ class IconViewer extends StatelessWidget {
     this.width,
     this.height,
     this.iconSize,
-  })  : svgIcon = null,
-        text = null,
-        iconImage = null;
+  }) : svgIcon = null,
+       text = null,
+       iconImage = null;
 
   const IconViewer.svg({
     this.svgIcon,
@@ -65,9 +65,9 @@ class IconViewer extends StatelessWidget {
     this.width,
     this.height,
     this.iconSize,
-  })  : icon = null,
-        text = null,
-        iconImage = null;
+  }) : icon = null,
+       text = null,
+       iconImage = null;
 
   const IconViewer.assetImage({
     this.iconImage,
@@ -81,9 +81,9 @@ class IconViewer extends StatelessWidget {
     this.width,
     this.height,
     this.iconSize,
-  })  : icon = null,
-        svgIcon = null,
-        text = null;
+  }) : icon = null,
+       svgIcon = null,
+       text = null;
 
   const IconViewer.text({
     this.text,
@@ -97,9 +97,9 @@ class IconViewer extends StatelessWidget {
     this.width,
     this.height,
     this.iconSize,
-  })  : icon = null,
-        svgIcon = null,
-        iconImage = null;
+  }) : icon = null,
+       svgIcon = null,
+       iconImage = null;
 
   @override
   Widget build(BuildContext context) {
@@ -130,12 +130,7 @@ class IconViewer extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: iconBackgroundColor,
               ),
-              child: Icon(
-                icon,
-                color: iconColor,
-                key: key,
-                size: iconSize,
-              ),
+              child: Icon(icon, color: iconColor, key: key, size: iconSize),
             );
     } else if (svgIcon != null) {
       return isSelected
@@ -153,10 +148,7 @@ class IconViewer extends StatelessWidget {
                 height: fit == BoxFit.cover ? null : size.height,
                 colorFilter: selectedIconColor == null
                     ? null
-                    : ColorFilter.mode(
-                        selectedIconColor!,
-                        BlendMode.srcIn,
-                      ),
+                    : ColorFilter.mode(selectedIconColor!, BlendMode.srcIn),
                 fit: fit,
                 key: key,
               ),
@@ -174,10 +166,7 @@ class IconViewer extends StatelessWidget {
                 height: fit == BoxFit.cover ? null : size.height,
                 colorFilter: iconColor == null
                     ? null
-                    : ColorFilter.mode(
-                        iconColor!,
-                        BlendMode.srcIn,
-                      ),
+                    : ColorFilter.mode(iconColor!, BlendMode.srcIn),
                 fit: fit,
                 key: key,
               ),
@@ -197,11 +186,7 @@ class IconViewer extends StatelessWidget {
                 key: key,
               ),
             )
-          : Image.asset(
-              iconImage!,
-              color: iconColor,
-              key: key,
-            );
+          : Image.asset(iconImage!, color: iconColor, key: key);
     } else if (text != null) {
       return isSelected
           ? Container(
@@ -215,10 +200,7 @@ class IconViewer extends StatelessWidget {
               padding: EdgeInsets.all(2.r),
               child: Text(
                 text ?? '',
-                style: TextStyle(
-                  fontSize: 8.sp,
-                  color: selectedIconColor,
-                ),
+                style: TextStyle(fontSize: 8.sp, color: selectedIconColor),
               ),
             )
           : Container(
@@ -232,10 +214,7 @@ class IconViewer extends StatelessWidget {
               padding: EdgeInsets.all(2.r),
               child: Text(
                 text ?? '',
-                style: TextStyle(
-                  fontSize: 8.sp,
-                  color: iconColor,
-                ),
+                style: TextStyle(fontSize: 8.sp, color: iconColor),
               ),
             );
     } else {

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-typedef ItemBuilder<S> = Widget Function(
-    BuildContext context, S item, int index);
+typedef ItemBuilder<S> =
+    Widget Function(BuildContext context, S item, int index);
 
 /// Widget that automatically animates list of items when inserting or deleting any item.
 class AutoAnimatedList<T> extends StatefulWidget {
@@ -22,13 +22,14 @@ class AutoAnimatedList<T> extends StatefulWidget {
   /// Footer widget that is displayed on the bottom of the list.
   final Widget? footer;
 
-  const AutoAnimatedList(
-      {super.key,
-      required this.items,
-      required this.itemBuilder,
-      this.header,
-      this.footer,
-      this.shouldAnimate = true});
+  const AutoAnimatedList({
+    super.key,
+    required this.items,
+    required this.itemBuilder,
+    this.header,
+    this.footer,
+    this.shouldAnimate = true,
+  });
 
   @override
   State<AutoAnimatedList<T>> createState() => _AutoAnimatedListState<T>();
@@ -60,7 +61,11 @@ class _AutoAnimatedListState<T> extends State<AutoAnimatedList<T>> {
           return widget.footer ?? Container();
         }
         return buildListItem(
-            context, currentItemsList[index - 1], animation, index - 1);
+          context,
+          currentItemsList[index - 1],
+          animation,
+          index - 1,
+        );
       },
     );
   }
@@ -73,15 +78,13 @@ class _AutoAnimatedListState<T> extends State<AutoAnimatedList<T>> {
   ) {
     return SizeTransition(
       key: Key(item.hashCode.toString()),
-      sizeFactor:
-          CurvedAnimation(parent: animation, curve: Curves.easeInOutCubic),
+      sizeFactor: CurvedAnimation(
+        parent: animation,
+        curve: Curves.easeInOutCubic,
+      ),
       child: FadeTransition(
         opacity: animation,
-        child: widget.itemBuilder(
-          context,
-          item,
-          index,
-        ),
+        child: widget.itemBuilder(context, item, index),
       ),
     );
   }

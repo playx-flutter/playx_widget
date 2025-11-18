@@ -7,10 +7,11 @@ class TimerRefreshWidget extends StatefulWidget {
   final Widget Function(int time) builder;
   final Duration duration;
 
-  const TimerRefreshWidget(
-      {super.key,
-      required this.builder,
-      this.duration = const Duration(minutes: 1)});
+  const TimerRefreshWidget({
+    super.key,
+    required this.builder,
+    this.duration = const Duration(minutes: 1),
+  });
 
   @override
   State<TimerRefreshWidget> createState() => _TimerRefreshWidgetState();

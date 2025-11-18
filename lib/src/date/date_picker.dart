@@ -194,10 +194,7 @@ class DateTimePicker {
         initialTime: TimeOfDay.fromDateTime(initialDate ?? DateTime.now()),
       );
       if (time != null) {
-        date = date.copyWith(
-          hour: time.hour,
-          minute: time.minute,
-        );
+        date = date.copyWith(hour: time.hour, minute: time.minute);
       }
     }
 

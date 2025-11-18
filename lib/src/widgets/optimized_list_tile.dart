@@ -13,17 +13,18 @@ class OptimizedListTile extends StatelessWidget {
   final double? horizontalSpace;
   final bool shouldShowCardShadow;
 
-  const OptimizedListTile(
-      {super.key,
-      required this.title,
-      this.subtitle,
-      this.leading,
-      this.trailing,
-      this.contentPadding,
-      this.margin,
-      this.padding,
-      this.horizontalSpace,
-      this.shouldShowCardShadow = true});
+  const OptimizedListTile({
+    super.key,
+    required this.title,
+    this.subtitle,
+    this.leading,
+    this.trailing,
+    this.contentPadding,
+    this.margin,
+    this.padding,
+    this.horizontalSpace,
+    this.shouldShowCardShadow = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,37 +36,21 @@ class OptimizedListTile extends StatelessWidget {
       child: Row(
         children: [
           if (leading != null)
-            Container(
-              padding: contentPadding,
-              child: leading,
-            ),
-          SizedBox(
-            width: horizontalSpace ?? 6.w,
-          ),
+            Container(padding: contentPadding, child: leading),
+          SizedBox(width: horizontalSpace ?? 6.w),
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  padding: contentPadding,
-                  child: title,
-                ),
+                Container(padding: contentPadding, child: title),
                 if (subtitle != null)
-                  Container(
-                    padding: contentPadding,
-                    child: subtitle,
-                  ),
+                  Container(padding: contentPadding, child: subtitle),
               ],
             ),
           ),
-          SizedBox(
-            width: horizontalSpace ?? 6.w,
-          ),
+          SizedBox(width: horizontalSpace ?? 6.w),
           if (trailing != null)
-            Container(
-              padding: contentPadding,
-              child: trailing,
-            ),
+            Container(padding: contentPadding, child: trailing),
         ],
       ),
     );

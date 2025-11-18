@@ -167,8 +167,9 @@ class _AnimSearchBarState extends State<AnimSearchBar>
             children: [
               ///Using Animated Positioned widget to expand and shrink the widget
               AnimatedPositioned(
-                duration:
-                    Duration(milliseconds: widget.animationDurationInMilli),
+                duration: Duration(
+                  milliseconds: widget.animationDurationInMilli,
+                ),
                 top: 6.0,
                 right: 7.0,
                 curve: Curves.easeOut,
@@ -231,7 +232,8 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                         },
 
                         ///suffixIcon is of type Icon
-                        child: widget.suffixIcon ??
+                        child:
+                            widget.suffixIcon ??
                             Icon(
                               Icons.close,
                               size: 20.0,
@@ -243,20 +245,22 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                 ),
               ),
               Directionality(
-                textDirection:
-                    widget.rtl ? TextDirection.rtl : TextDirection.ltr,
+                textDirection: widget.rtl
+                    ? TextDirection.rtl
+                    : TextDirection.ltr,
                 child: AnimatedPositioned(
-                  duration:
-                      Duration(milliseconds: widget.animationDurationInMilli),
+                  duration: Duration(
+                    milliseconds: widget.animationDurationInMilli,
+                  ),
                   left: widget.rtl
                       ? null
                       : (toggle == 0)
-                          ? 20.0
-                          : 40.0,
+                      ? 20.0
+                      : 40.0,
                   right: widget.rtl
                       ? (toggle == 0)
-                          ? 20.0
-                          : 40.0
+                            ? 20.0
+                            : 40.0
                       : null,
                   curve: Curves.easeOut,
                   top: widget.rtl ? 6 : 11,
@@ -299,7 +303,8 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                           },
 
                           ///style is of type TextStyle, the default is just a color black
-                          style: widget.style ??
+                          style:
+                              widget.style ??
                               const TextStyle(color: Colors.black),
                           cursorColor: widget.cursorColor,
                           decoration: InputDecoration(
@@ -307,7 +312,8 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                             isDense: true,
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             labelText: widget.helpText,
-                            labelStyle: widget.labelStyle ??
+                            labelStyle:
+                                widget.labelStyle ??
                                 TextStyle(
                                   color: const Color(0xff5B5B5B),
                                   fontSize: 14.0.sp,
@@ -340,11 +346,11 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                   ///prefixIcon is of type Icon
                   icon: widget.prefixIcon != null
                       ? toggle == 1
-                          ? Icon(
-                              Icons.arrow_back_ios,
-                              color: widget.textFieldIconColor,
-                            )
-                          : widget.prefixIcon!
+                            ? Icon(
+                                Icons.arrow_back_ios,
+                                color: widget.textFieldIconColor,
+                              )
+                            : widget.prefixIcon!
                       : Icon(
                           toggle == 1 ? Icons.arrow_back_ios : Icons.search,
                           // search icon color when closed
@@ -354,34 +360,32 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                           size: 20.0,
                         ),
                   onPressed: () {
-                    setState(
-                      () {
-                        ///if the search bar is closed
-                        if (toggle == 0) {
-                          toggle = 1;
-                          setState(() {
-                            ///if the autoFocus is true, the keyboard will pop open, automatically
-                            if (widget.autoFocus) {
-                              FocusScope.of(context).requestFocus(focusNode);
-                            }
-                          });
+                    setState(() {
+                      ///if the search bar is closed
+                      if (toggle == 0) {
+                        toggle = 1;
+                        setState(() {
+                          ///if the autoFocus is true, the keyboard will pop open, automatically
+                          if (widget.autoFocus) {
+                            FocusScope.of(context).requestFocus(focusNode);
+                          }
+                        });
 
-                          ///forward == expand
-                          _con.forward();
-                        } else {
-                          ///if the search bar is expanded
-                          toggle = 0;
+                        ///forward == expand
+                        _con.forward();
+                      } else {
+                        ///if the search bar is expanded
+                        toggle = 0;
 
-                          ///if the autoFocus is true, the keyboard will close, automatically
-                          setState(() {
-                            if (widget.autoFocus) unfocusKeyboard();
-                          });
+                        ///if the autoFocus is true, the keyboard will close, automatically
+                        setState(() {
+                          if (widget.autoFocus) unfocusKeyboard();
+                        });
 
-                          ///reverse == close
-                          _con.reverse();
-                        }
-                      },
-                    );
+                        ///reverse == close
+                        _con.reverse();
+                      }
+                    });
                     widget.searchBarOpen?.call(toggle);
                   },
                 ),

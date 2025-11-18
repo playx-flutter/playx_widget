@@ -23,7 +23,7 @@ class OptimizedScrollView extends StatelessWidget {
           hasScrollBody: hasScrollBody,
           fillOverscroll: fillOverscroll,
           child: child,
-        )
+        ),
       ],
     );
   }

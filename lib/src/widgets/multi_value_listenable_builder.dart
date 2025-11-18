@@ -1,11 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-typedef MultiValueWidgetBuilder = Widget Function(
-  BuildContext context,
-  List<dynamic> values,
-  Widget? child,
-);
+typedef MultiValueWidgetBuilder =
+    Widget Function(BuildContext context, List<dynamic> values, Widget? child);
 
 /// A widget that rebuilds whenever any of the provided [ValueListenable]s change.
 class MultiValueListenableBuilder extends StatefulWidget {

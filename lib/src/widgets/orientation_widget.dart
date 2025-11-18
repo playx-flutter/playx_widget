@@ -8,9 +8,7 @@ abstract class OrientationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MediaQuery.of(context).orientation == Orientation.landscape
         ? buildLandscape(context)
-        : buildPortrait(
-            context,
-          );
+        : buildPortrait(context);
   }
 
   /// Builds the widget for portrait orientation.
