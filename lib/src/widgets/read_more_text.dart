@@ -53,10 +53,9 @@ class _ReadMoreTextState extends State<ReadMoreText> {
                   text: _showLongDescription
                       ? widget.readMoreExpandedText
                       : widget.readMoreCollapsedText,
-                  style: widget.readMoreTextStyle ??
-                      TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
+                  style:
+                      widget.readMoreTextStyle ??
+                      TextStyle(color: Theme.of(context).primaryColor),
                 ),
             ],
           ),

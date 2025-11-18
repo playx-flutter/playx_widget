@@ -56,12 +56,14 @@ class IconInfo {
     BoxFit? fit,
     TextDirection? textDirection,
   }) {
-    return ImageViewer.icon(this,
-        color: color,
-        width: size,
-        height: size,
-        fit: fit,
-        iconDirection: textDirection);
+    return ImageViewer.icon(
+      this,
+      color: color,
+      width: size,
+      height: size,
+      fit: fit,
+      iconDirection: textDirection,
+    );
   }
 }
 
@@ -70,5 +72,4 @@ extension IconInfoExtension on IconData {
   IconInfo toIconInfo({Color? color, double? size}) {
     return IconInfo.icon(this, color: color, size: size);
   }
-
 }

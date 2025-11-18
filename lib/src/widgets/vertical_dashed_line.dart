@@ -42,10 +42,7 @@ class _VerticalDashedLineState extends State<VerticalDashedLine> {
       height: widget.height,
       child: RepaintBoundary(
         child: CustomPaint(
-          size: Size(
-            widget.width ?? 2,
-            widget.height ?? double.infinity,
-          ),
+          size: Size(widget.width ?? 2, widget.height ?? double.infinity),
           painter: DashedVerticalLinePainter(
             dashHeight: widget.dashHeight,
             dashSpace: widget.dashSpace,
@@ -72,8 +69,8 @@ class DashedVerticalLinePainter extends CustomPainter {
     this.strokeWidth = 1,
     this.color = Colors.grey,
   }) : painter = Paint()
-          ..color = color
-          ..strokeWidth = strokeWidth;
+         ..color = color
+         ..strokeWidth = strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -81,15 +78,19 @@ class DashedVerticalLinePainter extends CustomPainter {
       ..color = color
       ..strokeWidth = strokeWidth;
     while (startY < size.height) {
-      canvas.drawLine(Offset(size.width / 2, startY),
-          Offset(size.width / 2, startY + dashHeight), paint);
+      canvas.drawLine(
+        Offset(size.width / 2, startY),
+        Offset(size.width / 2, startY + dashHeight),
+        paint,
+      );
       startY += dashHeight + dashSpace;
     }
   }
 
   @override
   bool shouldRepaint(DashedVerticalLinePainter oldDelegate) {
-    final bool shouldRepaint = oldDelegate.color != color ||
+    final bool shouldRepaint =
+        oldDelegate.color != color ||
         oldDelegate.strokeWidth != strokeWidth ||
         oldDelegate.dashHeight != dashHeight ||
         oldDelegate.dashSpace != dashSpace;

@@ -132,34 +132,32 @@ class OptimizedCard extends StatefulWidget {
   //Callback on tapping on the card.
   final VoidCallback? onPressed;
 
-  const OptimizedCard(
-      {super.key,
-      this.width,
-      this.height,
-      this.padding,
-      this.color,
-      this.shadowColor,
-      this.surfaceTintColor,
-      this.elevation = 3,
-      this.shape,
-      this.borderOnForeground = true,
-      this.clipBehavior = Clip.hardEdge,
-      this.margin,
-      this.innerCardShadowMargin,
-      this.semanticContainer = true,
-      this.customShadowColor,
-      this.shadowOffset = const Offset(
-        0.0,
-        1.0,
-      ),
-      this.shadowRadius = 5.0,
-      this.spreadRadius = 1.0,
-      this.shadowBorderRadius,
-      this.shadowBlurStyle = BlurStyle.normal,
-      this.shouldShowCustomShadow = true,
-      this.child,
-      this.borderRadius,
-      this.onPressed});
+  const OptimizedCard({
+    super.key,
+    this.width,
+    this.height,
+    this.padding,
+    this.color,
+    this.shadowColor,
+    this.surfaceTintColor,
+    this.elevation = 3,
+    this.shape,
+    this.borderOnForeground = true,
+    this.clipBehavior = Clip.hardEdge,
+    this.margin,
+    this.innerCardShadowMargin,
+    this.semanticContainer = true,
+    this.customShadowColor,
+    this.shadowOffset = const Offset(0.0, 1.0),
+    this.shadowRadius = 5.0,
+    this.spreadRadius = 1.0,
+    this.shadowBorderRadius,
+    this.shadowBlurStyle = BlurStyle.normal,
+    this.shouldShowCustomShadow = true,
+    this.child,
+    this.borderRadius,
+    this.onPressed,
+  });
 
   @override
   State<OptimizedCard> createState() => _OptimizedCardState();
@@ -176,23 +174,27 @@ class _OptimizedCardState extends State<OptimizedCard> {
           onTap: widget.onPressed,
           borderRadius: widget.borderRadius ?? BorderRadius.circular(8.r),
           child: Card(
-              elevation: widget.elevation,
-              shadowColor: widget.shadowColor,
-              surfaceTintColor: widget.surfaceTintColor,
-              borderOnForeground: widget.borderOnForeground,
-              shape: widget.shape ??
-                  RoundedRectangleBorder(
-                    borderRadius: widget.borderRadius ??
-                        BorderRadius.all(Radius.circular(8.r)),
-                  ),
-              color: widget.color,
-              margin: widget.margin ??
-                  EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
-              clipBehavior: Clip.hardEdge,
-              child: Padding(
-                padding: widget.padding ?? EdgeInsets.zero,
-                child: widget.child,
-              )),
+            elevation: widget.elevation,
+            shadowColor: widget.shadowColor,
+            surfaceTintColor: widget.surfaceTintColor,
+            borderOnForeground: widget.borderOnForeground,
+            shape:
+                widget.shape ??
+                RoundedRectangleBorder(
+                  borderRadius:
+                      widget.borderRadius ??
+                      BorderRadius.all(Radius.circular(8.r)),
+                ),
+            color: widget.color,
+            margin:
+                widget.margin ??
+                EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+            clipBehavior: Clip.hardEdge,
+            child: Padding(
+              padding: widget.padding ?? EdgeInsets.zero,
+              child: widget.child,
+            ),
+          ),
         ),
       );
     }
@@ -201,10 +203,12 @@ class _OptimizedCardState extends State<OptimizedCard> {
       width: widget.width,
       height: widget.height,
       child: Container(
-        margin: widget.margin ??
+        margin:
+            widget.margin ??
             EdgeInsets.symmetric(vertical: 6.h, horizontal: 6.w),
         decoration: BoxDecoration(
-          borderRadius: widget.shadowBorderRadius ??
+          borderRadius:
+              widget.shadowBorderRadius ??
               BorderRadius.all(Radius.circular(8.r)),
           boxShadow: [
             BoxShadow(
@@ -214,31 +218,36 @@ class _OptimizedCardState extends State<OptimizedCard> {
               // soften the shadow
               offset: widget.shadowOffset,
               blurStyle: widget.shadowBlurStyle,
-            )
+            ),
           ],
         ),
         child: InkWell(
           onTap: widget.onPressed,
           borderRadius: widget.borderRadius ?? BorderRadius.circular(8.r),
           child: Card(
-              elevation: widget.elevation,
-              shadowColor: widget.shadowColor ??
-                  (isMaterial(context) ? Colors.transparent : null),
-              surfaceTintColor: widget.surfaceTintColor,
-              borderOnForeground: widget.borderOnForeground,
-              shape: widget.shape ??
-                  RoundedRectangleBorder(
-                    borderRadius: widget.borderRadius ??
-                        BorderRadius.all(Radius.circular(10.r)),
-                  ),
-              color: widget.color,
-              margin: widget.innerCardShadowMargin ??
-                  EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
-              clipBehavior: Clip.hardEdge,
-              child: Padding(
-                padding: widget.padding ?? EdgeInsets.zero,
-                child: widget.child,
-              )),
+            elevation: widget.elevation,
+            shadowColor:
+                widget.shadowColor ??
+                (isMaterial(context) ? Colors.transparent : null),
+            surfaceTintColor: widget.surfaceTintColor,
+            borderOnForeground: widget.borderOnForeground,
+            shape:
+                widget.shape ??
+                RoundedRectangleBorder(
+                  borderRadius:
+                      widget.borderRadius ??
+                      BorderRadius.all(Radius.circular(10.r)),
+                ),
+            color: widget.color,
+            margin:
+                widget.innerCardShadowMargin ??
+                EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
+            clipBehavior: Clip.hardEdge,
+            child: Padding(
+              padding: widget.padding ?? EdgeInsets.zero,
+              child: widget.child,
+            ),
+          ),
         ),
       ),
     );

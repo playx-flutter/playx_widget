@@ -11,10 +11,7 @@ import '../utils/icon_info.dart';
 
 /// Signature used by [Image.errorBuilder] to create a replacement widget to
 /// render instead of the image.
-typedef ErrorBuilder = Widget Function(
-  BuildContext context,
-  Object error,
-);
+typedef ErrorBuilder = Widget Function(BuildContext context, Object error);
 
 /// Builder function to create a placeholder widget. The function is called
 /// once while the ImageProvider is loading the image.
@@ -154,14 +151,14 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
-  })  : _type = _ImageType.assetImage,
-        bytes = null,
-        file = null,
-        clipBehavior = null,
-        iconInfo = null,
-        iconDirection = null,
-        placeholderBuilder = null,
-        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
+  }) : _type = _ImageType.assetImage,
+       bytes = null,
+       file = null,
+       clipBehavior = null,
+       iconInfo = null,
+       iconDirection = null,
+       placeholderBuilder = null,
+       imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.network(
     String src, {
@@ -174,14 +171,14 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
-  })  : _type = _ImageType.networkImage,
-        bytes = null,
-        file = null,
-        path = src,
-        iconInfo = null,
-        iconDirection = null,
-        clipBehavior = null,
-        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
+  }) : _type = _ImageType.networkImage,
+       bytes = null,
+       file = null,
+       path = src,
+       iconInfo = null,
+       iconDirection = null,
+       clipBehavior = null,
+       imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.file(
     File this.file, {
@@ -193,14 +190,14 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
-  })  : _type = _ImageType.fileImage,
-        bytes = null,
-        clipBehavior = null,
-        path = null,
-        iconInfo = null,
-        iconDirection = null,
-        placeholderBuilder = null,
-        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
+  }) : _type = _ImageType.fileImage,
+       bytes = null,
+       clipBehavior = null,
+       path = null,
+       iconInfo = null,
+       iconDirection = null,
+       placeholderBuilder = null,
+       imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.memory(
     Uint8List this.bytes, {
@@ -212,14 +209,14 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
-  })  : _type = _ImageType.memoryImage,
-        file = null,
-        clipBehavior = null,
-        path = null,
-        iconInfo = null,
-        iconDirection = null,
-        placeholderBuilder = null,
-        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
+  }) : _type = _ImageType.memoryImage,
+       file = null,
+       clipBehavior = null,
+       path = null,
+       iconInfo = null,
+       iconDirection = null,
+       placeholderBuilder = null,
+       imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.cachedNetwork(
     String src, {
@@ -233,13 +230,13 @@ class ImageViewer extends StatefulWidget {
     this.errorBuilder,
     this.placeholderBuilder,
     this.imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet,
-  })  : _type = _ImageType.cachedNetworkImage,
-        bytes = null,
-        file = null,
-        clipBehavior = null,
-        iconInfo = null,
-        iconDirection = null,
-        path = src;
+  }) : _type = _ImageType.cachedNetworkImage,
+       bytes = null,
+       file = null,
+       clipBehavior = null,
+       iconInfo = null,
+       iconDirection = null,
+       path = src;
 
   const ImageViewer.svgAsset(
     String this.path, {
@@ -252,13 +249,13 @@ class ImageViewer extends StatefulWidget {
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
-  })  : _type = _ImageType.svgAssetImage,
-        bytes = null,
-        file = null,
-        iconInfo = null,
-        iconDirection = null,
-        errorBuilder = null,
-        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
+  }) : _type = _ImageType.svgAssetImage,
+       bytes = null,
+       file = null,
+       iconInfo = null,
+       iconDirection = null,
+       errorBuilder = null,
+       imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.svgNetwork(
     String src, {
@@ -271,14 +268,14 @@ class ImageViewer extends StatefulWidget {
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
-  })  : _type = _ImageType.svgNetworkImage,
-        bytes = null,
-        file = null,
-        path = src,
-        iconInfo = null,
-        iconDirection = null,
-        errorBuilder = null,
-        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
+  }) : _type = _ImageType.svgNetworkImage,
+       bytes = null,
+       file = null,
+       path = src,
+       iconInfo = null,
+       iconDirection = null,
+       errorBuilder = null,
+       imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.svgMemory(
     Uint8List this.bytes, {
@@ -291,13 +288,13 @@ class ImageViewer extends StatefulWidget {
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
-  })  : _type = _ImageType.svgMemoryImage,
-        file = null,
-        errorBuilder = null,
-        iconInfo = null,
-        iconDirection = null,
-        path = null,
-        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
+  }) : _type = _ImageType.svgMemoryImage,
+       file = null,
+       errorBuilder = null,
+       iconInfo = null,
+       iconDirection = null,
+       path = null,
+       imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.icon(
     IconInfo this.iconInfo, {
@@ -309,14 +306,14 @@ class ImageViewer extends StatefulWidget {
     this.color,
     this.iconDirection,
     this.imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet,
-  })  : _type = null,
-        bytes = null,
-        file = null,
-        path = null,
-        colorBlendMode = null,
-        placeholderBuilder = null,
-        errorBuilder = null,
-        clipBehavior = null;
+  }) : _type = null,
+       bytes = null,
+       file = null,
+       path = null,
+       colorBlendMode = null,
+       placeholderBuilder = null,
+       errorBuilder = null,
+       clipBehavior = null;
 
   @override
   State<ImageViewer> createState() => _ImageViewerState();
@@ -350,9 +347,7 @@ class _ImageViewerState extends State<ImageViewer> {
                 const SizedBox.shrink();
           },
           loadingBuilder: (ctx, child, event) {
-            return widget.placeholderBuilder?.call(
-                  ctx,
-                ) ??
+            return widget.placeholderBuilder?.call(ctx) ??
                 const SizedBox.shrink();
           },
           color: widget.color,
@@ -417,7 +412,9 @@ class _ImageViewerState extends State<ImageViewer> {
           placeholderBuilder: widget.placeholderBuilder,
           colorFilter: widget.color != null
               ? ColorFilter.mode(
-                  widget.color!, widget.colorBlendMode ?? BlendMode.srcIn)
+                  widget.color!,
+                  widget.colorBlendMode ?? BlendMode.srcIn,
+                )
               : null,
           clipBehavior: widget.clipBehavior ?? Clip.hardEdge,
         );
@@ -431,7 +428,9 @@ class _ImageViewerState extends State<ImageViewer> {
           placeholderBuilder: widget.placeholderBuilder,
           colorFilter: widget.color != null
               ? ColorFilter.mode(
-                  widget.color!, widget.colorBlendMode ?? BlendMode.srcIn)
+                  widget.color!,
+                  widget.colorBlendMode ?? BlendMode.srcIn,
+                )
               : null,
           clipBehavior: widget.clipBehavior ?? Clip.hardEdge,
         );
@@ -445,7 +444,9 @@ class _ImageViewerState extends State<ImageViewer> {
           placeholderBuilder: widget.placeholderBuilder,
           colorFilter: widget.color != null
               ? ColorFilter.mode(
-                  widget.color!, widget.colorBlendMode ?? BlendMode.srcIn)
+                  widget.color!,
+                  widget.colorBlendMode ?? BlendMode.srcIn,
+                )
               : null,
           clipBehavior: widget.clipBehavior ?? Clip.hardEdge,
         );
@@ -466,7 +467,9 @@ class _ImageViewerState extends State<ImageViewer> {
               widget.iconInfo!.svgIcon!,
               colorFilter: color != null
                   ? ColorFilter.mode(
-                      color, widget.colorBlendMode ?? BlendMode.srcIn)
+                      color,
+                      widget.colorBlendMode ?? BlendMode.srcIn,
+                    )
                   : null,
               width: widget.iconInfo!.size ?? widget.width,
               height: widget.iconInfo!.size ?? widget.height,

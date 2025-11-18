@@ -19,9 +19,9 @@ class CenterLoading extends StatelessWidget {
     this.color,
     this.isAnimating = true,
     this.radius = 10,
-  })  : _type = CenterLoadingType.cupertino,
-        backgroundColor = null,
-        strokeWidth = null;
+  }) : _type = CenterLoadingType.cupertino,
+       backgroundColor = null,
+       strokeWidth = null;
 
   const CenterLoading.adaptive({
     super.key,
@@ -38,8 +38,8 @@ class CenterLoading extends StatelessWidget {
     this.isAnimating = true,
     this.strokeWidth = 4,
     this.backgroundColor,
-  })  : _type = CenterLoadingType.material,
-        radius = null;
+  }) : _type = CenterLoadingType.material,
+       radius = null;
 
   @override
   Widget build(BuildContext context) {

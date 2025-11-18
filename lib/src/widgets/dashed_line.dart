@@ -42,10 +42,7 @@ class _DashedLineState extends State<DashedLine> {
       height: widget.height,
       child: RepaintBoundary(
         child: CustomPaint(
-          size: Size(
-            widget.width ?? double.infinity,
-            widget.height ?? 2,
-          ),
+          size: Size(widget.width ?? double.infinity, widget.height ?? 2),
           painter: DashedLinePainter(
             dashWidth: widget.dashWidth,
             dashSpace: widget.dashSpace,
@@ -72,21 +69,25 @@ class DashedLinePainter extends CustomPainter {
     this.strokeWidth = 1,
     this.color = Colors.grey,
   }) : painter = Paint()
-          ..color = color
-          ..strokeWidth = strokeWidth;
+         ..color = color
+         ..strokeWidth = strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
     while (startX < size.width) {
-      canvas.drawLine(Offset(startX, size.height / 2),
-          Offset(startX + dashWidth, size.height / 2), painter);
+      canvas.drawLine(
+        Offset(startX, size.height / 2),
+        Offset(startX + dashWidth, size.height / 2),
+        painter,
+      );
       startX += dashWidth + dashSpace;
     }
   }
 
   @override
   bool shouldRepaint(DashedLinePainter oldDelegate) {
-    final bool shouldRepaint = oldDelegate.color != color ||
+    final bool shouldRepaint =
+        oldDelegate.color != color ||
         oldDelegate.strokeWidth != strokeWidth ||
         oldDelegate.dashWidth != dashWidth ||
         oldDelegate.dashSpace != dashSpace;

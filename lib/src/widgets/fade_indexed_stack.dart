@@ -51,9 +51,7 @@ class FadeIndexedStack extends StatefulWidget {
     super.key,
     required this.index,
     this.children = const <Widget>[],
-    this.duration = const Duration(
-      milliseconds: 250,
-    ),
+    this.duration = const Duration(milliseconds: 250),
     this.alignment = AlignmentDirectional.topStart,
     this.textDirection,
     this.clipBehavior = Clip.hardEdge,
@@ -66,8 +64,10 @@ class FadeIndexedStack extends StatefulWidget {
 
 class FadeIndexedStackState extends State<FadeIndexedStack>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller =
-      AnimationController(vsync: this, duration: widget.duration);
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: widget.duration,
+  );
 
   @override
   void didUpdateWidget(FadeIndexedStack oldWidget) {

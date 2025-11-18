@@ -28,8 +28,9 @@ Future<bool> showConfirmDialog({
       return Center(
         child: Card(
           margin: const EdgeInsets.all(16),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
           clipBehavior: Clip.hardEdge,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -45,37 +46,41 @@ Future<bool> showConfirmDialog({
                       : Lottie.asset(lottie, width: double.infinity),
                 ),
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              const SizedBox(height: 12),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10.0,
+                  horizontal: 16,
+                ),
                 width: double.infinity,
                 child: Text(
                   title,
-                  style: titleTextStyle ??
+                  style:
+                      titleTextStyle ??
                       const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.start,
-                ),
-              ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16),
-                width: double.infinity,
-                child: Text(
-                  message,
-                  style: messageTextStyle ??
-                      const TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                   textAlign: TextAlign.start,
                 ),
               ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12.0,
+                  horizontal: 16,
+                ),
+                width: double.infinity,
+                child: Text(
+                  message,
+                  style: messageTextStyle ?? const TextStyle(fontSize: 18),
+                  textAlign: TextAlign.start,
+                ),
+              ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8.0,
+                  vertical: 12,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -87,7 +92,8 @@ Future<bool> showConfirmDialog({
                             isConfirmed = true;
                             onConfirmed();
                           },
-                          style: confirmButtonStyle ??
+                          style:
+                              confirmButtonStyle ??
                               ElevatedButton.styleFrom(
                                 backgroundColor: Theme.of(context).primaryColor,
                                 shape: RoundedRectangleBorder(
@@ -100,7 +106,8 @@ Future<bool> showConfirmDialog({
                               ),
                           child: Text(
                             confirmText,
-                            style: confirmButtonTextStyle ??
+                            style:
+                                confirmButtonTextStyle ??
                                 const TextStyle(fontSize: 18),
                           ),
                         ),
@@ -114,7 +121,8 @@ Future<bool> showConfirmDialog({
                             isConfirmed = false;
                             Navigator.pop(context);
                           },
-                          style: cancelButtonStyle ??
+                          style:
+                              cancelButtonStyle ??
                               TextButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 8,
@@ -126,16 +134,19 @@ Future<bool> showConfirmDialog({
                               ),
                           child: Text(
                             cancelText,
-                            style: cancelButtonTextStyle ??
+                            style:
+                                cancelButtonTextStyle ??
                                 const TextStyle(
-                                    color: Colors.grey, fontSize: 18),
+                                  color: Colors.grey,
+                                  fontSize: 18,
+                                ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

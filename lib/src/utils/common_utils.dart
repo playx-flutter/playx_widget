@@ -9,15 +9,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CommonImageUtils {
-  static Future<Uint8List> getImageFromSvgAsset(String assetName,
-      {Size size = const Size(48, 48),
-      BuildContext? context,
-      ColorMapper? colorMapper}) async {
+  static Future<Uint8List> getImageFromSvgAsset(
+    String assetName, {
+    Size size = const Size(48, 48),
+    BuildContext? context,
+    ColorMapper? colorMapper,
+  }) async {
     final pictureInfo = await vg.loadPicture(
-      SvgAssetLoader(
-        assetName,
-        colorMapper: colorMapper,
-      ),
+      SvgAssetLoader(assetName, colorMapper: colorMapper),
       null,
     );
 
@@ -68,7 +67,9 @@ class CommonImageUtils {
     final renderView = RenderView(
       view: view,
       child: RenderPositionedBox(
-          alignment: Alignment.center, child: repaintBoundary),
+        alignment: Alignment.center,
+        child: repaintBoundary,
+      ),
       configuration: ViewConfiguration(
         physicalConstraints:
             BoxConstraints.tight(logicalSize) * view.devicePixelRatio,
