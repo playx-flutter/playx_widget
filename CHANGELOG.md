@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.0
+- Add `MultiValueListenableBuilder` to rebuild a widget from multiple `ValueListenable`s.
+- Add `BlurBox` widget for applying a blur effect to its child with animation.
+- Add `CustomInkWell` widget for a standardized ink well effect.
+- Add `StrokeText` widget to render text with an outline.
+- Add `Box` and `SliverSizedBox` for creating spaced boxes with predefined sizes.
+- Add `SpacingExtensions` on `num` for creating `SizedBox` and `SliverSizedBox` easily.
+- Update `package_info_plus`, `flutter_svg`, `lottie`, and `font_awesome_flutter` dependencies.
+
 ### 0.3.0
 - Update packages.
 - (Flutter version support: v3.32.0)

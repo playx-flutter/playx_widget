@@ -53,7 +53,7 @@ Which comes prepackaged with this package and more features and is easy to use.
 in `pubspec.yaml` add these lines to `dependencies`
 
 ```yaml  
-playx_widget: ^0.1.9
+playx_widget: ^0.4.0
 ```  
 
 ## See Also:
