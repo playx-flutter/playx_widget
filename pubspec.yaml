@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   cached_network_image: ^3.4.1
-  package_info_plus: ^9.0.0
+  package_info_plus: ^9.0.1
   flutter_svg: ^2.2.4
   flutter_svg_provider: ^1.0.7
   lottie: ^3.3.2
@@ -32,7 +32,7 @@ dependencies:
   dotted_border: ^3.1.0
   cupertino_icons: ^1.0.9
   font_awesome_flutter: ^11.0.0
-  lucide_icons_flutter: ^3.1.11
+  lucide_icons_flutter: ^3.1.12
   cached_network_image_platform_interface: ^4.1.1
 
 dev_dependencies:
