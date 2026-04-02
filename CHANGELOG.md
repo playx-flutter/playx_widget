@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.5.0
+- Add `lucide_icons_flutter` package.
+- Update `flutter_platform_widgets` to `^10.0.1` and `font_awesome_flutter` to `^11.0.0`.
+- Update `flutter_svg` and `cupertino_icons` dependencies.
+- Update Flutter environment requirement to `>=3.38.0`.
+- Remove `cupertino_icons` export from `playx_widget.dart`.
+
+
 ### 0.4.0
 - Add `MultiValueListenableBuilder` to rebuild a widget from multiple `ValueListenable`s.
 - Add `BlurBox` widget for applying a blur effect to its child with animation.
