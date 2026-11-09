@@ -1,9 +1,9 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:playx_widget/playx_widget.dart';
 
 /// Widget to display current App Version.
 ///
-/// The version is read through [AppVersionNotifier], so it is loaded once and
+/// The version is read through [AppInfoNotifier], so it is loaded once and
 /// shared across the app.
 class AppVersion extends StatefulWidget {
   /// Version text style.
@@ -32,9 +32,19 @@ class AppVersion extends StatefulWidget {
 
   final double? fontSize;
 
+  /// Version text color. Defaults to the ambient text color (or white when
+  /// [showStroke] is true).
+  final Color? color;
+
+  /// Draws an outline around the text (useful over images).
+  final bool showStroke;
+
+  /// Outline color when [showStroke] is true.
+  final Color strokeColor;
+
   /// Notifier to read the version from. Defaults to
-  /// [AppVersionNotifier.instance].
-  final AppVersionNotifier? notifier;
+  /// [AppInfoNotifier.instance].
+  final AppInfoNotifier? notifier;
 
   const AppVersion({
     super.key,
@@ -47,6 +57,9 @@ class AppVersion extends StatefulWidget {
     this.fontWeight,
     this.fontFamily,
     this.fontSize,
+    this.color,
+    this.showStroke = false,
+    this.strokeColor = Colors.black,
     this.notifier,
   });
 
@@ -55,8 +68,7 @@ class AppVersion extends StatefulWidget {
 }
 
 class _AppVersionState extends State<AppVersion> {
-  AppVersionNotifier get _notifier =>
-      widget.notifier ?? AppVersionNotifier.instance;
+  AppInfoNotifier get _notifier => widget.notifier ?? AppInfoNotifier.instance;
 
   @override
   void initState() {
@@ -77,7 +89,7 @@ class _AppVersionState extends State<AppVersion> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<AppVersionInfo?>(
+    return ValueListenableBuilder<AppInfo?>(
       valueListenable: _notifier,
       builder: (context, info, _) {
         final text =
@@ -88,15 +100,26 @@ class _AppVersionState extends State<AppVersion> {
               versionCodeSeparator: widget.versionCodeSeparator,
             ) ??
             '';
+        final style =
+            widget.textStyle ??
+            TextStyle(
+              fontSize: widget.fontSize ?? 12.sp,
+              fontWeight: widget.fontWeight,
+              fontFamily: widget.fontFamily,
+            );
+        if (widget.showStroke) {
+          return StrokeText(
+            text: text,
+            strokeColor: widget.strokeColor,
+            textStyle: style.copyWith(color: widget.color ?? Colors.white),
+            textAlign: widget.textAlign,
+          );
+        }
         return Text(
           text,
-          style:
-              widget.textStyle ??
-              TextStyle(
-                fontSize: widget.fontSize ?? 12.sp,
-                fontWeight: widget.fontWeight,
-                fontFamily: widget.fontFamily,
-              ),
+          style: widget.color == null
+              ? style
+              : style.copyWith(color: widget.color),
           textAlign: widget.textAlign,
         );
       },

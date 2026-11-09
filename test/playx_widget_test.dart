@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:playx_widget/playx_widget.dart';
 
 void main() {
@@ -14,9 +13,9 @@ void main() {
     );
   });
 
-  group('AppVersionNotifier', () {
+  group('AppInfoNotifier', () {
     test('loads once, caches and notifies', () async {
-      final notifier = AppVersionNotifier();
+      final notifier = AppInfoNotifier();
       var calls = 0;
       notifier.addListener(() => calls++);
 
@@ -25,6 +24,8 @@ void main() {
       await notifier.load();
 
       expect(info.version, '1.2.3');
+      expect(info.packageName, 'io.test');
+      expect(info.appName, 'app');
       expect(info.buildNumber, '42');
       expect(calls, 1);
       expect(info.format(showVersionCode: true), 'V1.2.3+42');
@@ -34,7 +35,7 @@ void main() {
   testWidgets('AppVersion shows version and respects textAlign', (
     tester,
   ) async {
-    final notifier = AppVersionNotifier();
+    final notifier = AppInfoNotifier();
     await tester.pumpWidget(
       MaterialApp(
         home: AppVersion(

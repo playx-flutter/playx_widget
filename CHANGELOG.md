@@ -5,7 +5,8 @@
 - **Breaking:** Update `cached_network_image` to `^4.0.6` and `cached_network_image_platform_interface` to `^5.0.3` (now depend on `material_ui`).
 - **Breaking:** Update `lucide_icons_flutter` to `^4.0.2`. Weighted icons moved to separate libraries (e.g. `LucideIcons.activity300` is now `LucideIcons300.activity`, imported from `package:lucide_icons_flutter/lucide_icons_300.dart`). Regular icons are unchanged.
 - Update `package_info_plus` to `^10.2.2` (requires iOS 13 / macOS 10.15 and Dart 3.11+).
-- Add `AppVersionNotifier` (`ValueNotifier<AppVersionInfo?>` with a shared `instance`) to load and share the app version across the app. `AppVersion` now uses it, so `PackageInfo` is read once instead of on every rebuild.
+- Add `AppInfoNotifier` (`ValueNotifier<AppInfo?>` with a shared `instance`) exposing app name, package name, version, build number, build signature and installer store, loaded once and shareable across the app. `AppVersion` now uses it, so `PackageInfo` is read once instead of on every rebuild.
+- Add `color`, `showStroke` and `strokeColor` to `AppVersion`.
 - Fix `AppVersion` ignoring `textAlign`.
 - Fix `FavoriteButton` not updating when `isInFavorite` changes from the parent; `onFavoriteChanged` is now a `ValueChanged<bool>`.
 - `ReadMoreText` now trims at word boundaries, never splits emoji, appends a configurable `ellipsis`, and uses `Text.rich`.
