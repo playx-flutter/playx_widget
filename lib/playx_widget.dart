@@ -18,6 +18,7 @@ export 'src/alerts/confirmation_dialog.dart';
 export 'src/date/date_picker.dart';
 export 'src/extensions/spacing_extensions.dart';
 export 'src/provider/svg_provider.dart';
+export 'src/utils/app_version_notifier.dart';
 export 'src/widgets/anim_search_bar.dart';
 export 'src/widgets/animated_visibility.dart';
 export 'src/widgets/app_version.dart';

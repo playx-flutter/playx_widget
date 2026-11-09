@@ -17,7 +17,7 @@ class FavoriteButton extends StatefulWidget {
   final Duration duration;
 
   /// Callback for changes in favorite state.
-  final Function(bool)? onFavoriteChanged;
+  final ValueChanged<bool>? onFavoriteChanged;
 
   ///Size for the icon.
   final double? iconSize;
@@ -43,6 +43,15 @@ class _FavoriteButtonState extends State<FavoriteButton> {
   void initState() {
     super.initState();
     isInFavorite = widget.isInFavorite;
+  }
+
+  @override
+  void didUpdateWidget(FavoriteButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Keep in sync when the parent changes the value (e.g. rollback).
+    if (oldWidget.isInFavorite != widget.isInFavorite) {
+      isInFavorite = widget.isInFavorite;
+    }
   }
 
   @override

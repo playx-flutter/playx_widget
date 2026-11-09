@@ -2,7 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:playx_widget/playx_widget.dart';
 
 /// Widget to display current App Version.
-class AppVersion extends StatelessWidget {
+///
+/// The version is read through [AppVersionNotifier], so it is loaded once and
+/// shared across the app.
+class AppVersion extends StatefulWidget {
   /// Version text style.
   final TextStyle? textStyle;
 
@@ -21,13 +24,17 @@ class AppVersion extends StatelessWidget {
   /// Version Text alignment
   final TextAlign textAlign;
 
-  /// Version Text color
+  /// Version Text font weight
   final FontWeight? fontWeight;
 
   /// Version Text font family
   final String? fontFamily;
 
   final double? fontSize;
+
+  /// Notifier to read the version from. Defaults to
+  /// [AppVersionNotifier.instance].
+  final AppVersionNotifier? notifier;
 
   const AppVersion({
     super.key,
@@ -40,36 +47,59 @@ class AppVersion extends StatelessWidget {
     this.fontWeight,
     this.fontFamily,
     this.fontSize,
+    this.notifier,
   });
 
   @override
+  State<AppVersion> createState() => _AppVersionState();
+}
+
+class _AppVersionState extends State<AppVersion> {
+  AppVersionNotifier get _notifier =>
+      widget.notifier ?? AppVersionNotifier.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  @override
+  void didUpdateWidget(AppVersion oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.notifier != widget.notifier) _load();
+  }
+
+  void _load() {
+    // Errors leave the text empty; the notifier allows retrying later.
+    _notifier.load().then((_) {}, onError: (_) {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getVersionName(),
-      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-        final versionName = snapshot.data ?? '';
+    return ValueListenableBuilder<AppVersionInfo?>(
+      valueListenable: _notifier,
+      builder: (context, info, _) {
+        final text =
+            info?.format(
+              prefix: widget.prefix,
+              postfix: widget.postfix,
+              showVersionCode: widget.showVersionCode,
+              versionCodeSeparator: widget.versionCodeSeparator,
+            ) ??
+            '';
         return Text(
-          versionName,
+          text,
           style:
-              textStyle ??
+              widget.textStyle ??
               TextStyle(
-                fontSize: fontSize ?? 12.sp,
-                fontWeight: fontWeight,
-                fontFamily: fontFamily,
+                fontSize: widget.fontSize ?? 12.sp,
+                fontWeight: widget.fontWeight,
+                fontFamily: widget.fontFamily,
               ),
-          textAlign: TextAlign.center,
+          textAlign: widget.textAlign,
         );
       },
     );
-  }
-
-  Future<String> getVersionName() async {
-    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final String version = packageInfo.version;
-    final String buildNumber = packageInfo.buildNumber;
-    if (showVersionCode) {
-      return "$prefix$version$versionCodeSeparator$buildNumber$postfix";
-    }
-    return "$prefix$version$postfix";
   }
 }

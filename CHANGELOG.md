@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.6.0
+- **Breaking:** Update Flutter environment requirement to `>=3.44.0`.
+- **Breaking:** Update `cached_network_image` to `^4.0.6` and `cached_network_image_platform_interface` to `^5.0.3` (now depend on `material_ui`).
+- **Breaking:** Update `lucide_icons_flutter` to `^4.0.2`. Weighted icons moved to separate libraries (e.g. `LucideIcons.activity300` is now `LucideIcons300.activity`, imported from `package:lucide_icons_flutter/lucide_icons_300.dart`). Regular icons are unchanged.
+- Update `package_info_plus` to `^10.2.2` (requires iOS 13 / macOS 10.15 and Dart 3.11+).
+- Add `AppVersionNotifier` (`ValueNotifier<AppVersionInfo?>` with a shared `instance`) to load and share the app version across the app. `AppVersion` now uses it, so `PackageInfo` is read once instead of on every rebuild.
+- Fix `AppVersion` ignoring `textAlign`.
+- Fix `FavoriteButton` not updating when `isInFavorite` changes from the parent; `onFavoriteChanged` is now a `ValueChanged<bool>`.
+- `ReadMoreText` now trims at word boundaries, never splits emoji, appends a configurable `ellipsis`, and uses `Text.rich`.
+- Add widget tests.
+- Keep `wolt_modal_sheet` at `^0.11.0`, as 0.12.0 migrates to `material_ui`.
+
 ### 0.5.0
 - Add `lucide_icons_flutter` package.
 - Update `flutter_platform_widgets` to `^10.0.1` and `font_awesome_flutter` to `^11.0.0`.
