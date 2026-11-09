@@ -48,8 +48,14 @@ class _AutoAnimatedListState<T> extends State<AutoAnimatedList<T>> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didUpdateWidget(AutoAnimatedList<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Diff outside build() so inserts/removals never run during a build.
     updateCurrentList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return AnimatedList(
       key: key,
       initialItemCount: currentItemsList.length + 2,
@@ -76,8 +82,8 @@ class _AutoAnimatedListState<T> extends State<AutoAnimatedList<T>> {
     Animation<double> animation,
     int index,
   ) {
+    // No hashCode key: duplicate items would produce duplicate keys.
     return SizeTransition(
-      key: Key(item.hashCode.toString()),
       sizeFactor: CurvedAnimation(
         parent: animation,
         curve: Curves.easeInOutCubic,

@@ -390,13 +390,68 @@ class _CustomFieldState extends State<OptimizedTextField> {
   GlobalKey<FormState>? formKey;
   bool? _isFieldValid;
   Timer? _debounceTimer;
+  Timer? _validationTimer;
+  final GlobalKey<FormState> _ownFormKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    formKey =
-        widget.formKey ??
-        (widget.shouldAutoValidate ? GlobalKey<FormState>() : null);
     super.initState();
+    _syncFormKey();
+  }
+
+  @override
+  void didUpdateWidget(OptimizedTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.formKey != widget.formKey ||
+        oldWidget.shouldAutoValidate != widget.shouldAutoValidate) {
+      _syncFormKey();
+    }
+  }
+
+  void _syncFormKey() {
+    formKey =
+        widget.formKey ?? (widget.shouldAutoValidate ? _ownFormKey : null);
+  }
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    _validationTimer?.cancel();
+    super.dispose();
+  }
+
+  /// Delivers `onChanged` and runs auto validation. Uses separate timers so
+  /// debounced validation no longer cancels the debounced `onChanged`.
+  void _handleChanged(String input) {
+    final debounce = widget.debounceDuration;
+    if (debounce != null) {
+      _debounceTimer?.cancel();
+      _debounceTimer = Timer(debounce, () {
+        if (mounted) widget.onChanged?.call(input);
+      });
+    } else {
+      widget.onChanged?.call(input);
+    }
+
+    if (!widget.shouldAutoValidate) return;
+    if (widget.debounceValidation && debounce != null) {
+      _validationTimer?.cancel();
+      _validationTimer = Timer(debounce, () {
+        if (mounted) _validate();
+      });
+    } else {
+      _validate();
+    }
+  }
+
+  void _validate() {
+    final formState = formKey?.currentState;
+    if (formKey == null) return;
+    final isValid = formState != null && formState.validate();
+    if (_isFieldValid != isValid) {
+      _isFieldValid = isValid;
+      widget.onValidationChanged?.call(isValid);
+    }
   }
 
   @override
@@ -446,51 +501,7 @@ class _CustomFieldState extends State<OptimizedTextField> {
           autovalidateMode: widget.autoValidateMode,
           scrollPadding:
               widget.scrollPadding ?? EdgeInsets.symmetric(vertical: 20.h),
-          onChanged: (String input) {
-            // ignore: prefer_null_aware_method_calls
-            if (widget.debounceDuration != null) {
-              if (_debounceTimer?.isActive ?? false) {
-                _debounceTimer?.cancel();
-              }
-              _debounceTimer = Timer(widget.debounceDuration!, () {
-                widget.onChanged?.call(input);
-              });
-            } else {
-              widget.onChanged?.call(input);
-            }
-
-            if (widget.shouldAutoValidate) {
-              if (widget.debounceValidation &&
-                  widget.debounceDuration != null) {
-                if (_debounceTimer?.isActive ?? false) {
-                  _debounceTimer?.cancel();
-                }
-                _debounceTimer = Timer(widget.debounceDuration!, () {
-                  if (formKey != null) {
-                    final formState = formKey!.currentState;
-                    final isValid = formState != null && formState.validate();
-                    if (widget.onValidationChanged != null) {
-                      if (_isFieldValid != isValid) {
-                        widget.onValidationChanged!(isValid);
-                        _isFieldValid = isValid;
-                      }
-                    }
-                  }
-                });
-              } else {
-                if (formKey != null) {
-                  final formState = formKey!.currentState;
-                  final isValid = formState != null && formState.validate();
-                  if (widget.onValidationChanged != null) {
-                    if (_isFieldValid != isValid) {
-                      widget.onValidationChanged!(isValid);
-                      _isFieldValid = isValid;
-                    }
-                  }
-                }
-              }
-            }
-          },
+          onChanged: _handleChanged,
           autofocus: widget.autofocus,
           textInputAction: widget.textInputAction,
           onFieldSubmitted: (v) {
@@ -589,50 +600,7 @@ class _CustomFieldState extends State<OptimizedTextField> {
         autovalidateMode: widget.autoValidateMode ?? AutovalidateMode.disabled,
         scrollPadding:
             widget.scrollPadding ?? EdgeInsets.symmetric(vertical: 20.h),
-        onChanged: (String input) {
-          // ignore: prefer_null_aware_method_calls
-          if (widget.debounceDuration != null) {
-            if (_debounceTimer?.isActive ?? false) {
-              _debounceTimer?.cancel();
-            }
-            _debounceTimer = Timer(widget.debounceDuration!, () {
-              widget.onChanged?.call(input);
-            });
-          } else {
-            widget.onChanged?.call(input);
-          }
-
-          if (widget.shouldAutoValidate) {
-            if (widget.debounceValidation && widget.debounceDuration != null) {
-              if (_debounceTimer?.isActive ?? false) {
-                _debounceTimer?.cancel();
-              }
-              _debounceTimer = Timer(widget.debounceDuration!, () {
-                if (formKey != null) {
-                  final formState = formKey!.currentState;
-                  final isValid = formState != null && formState.validate();
-                  if (widget.onValidationChanged != null) {
-                    if (_isFieldValid != isValid) {
-                      widget.onValidationChanged!(isValid);
-                      _isFieldValid = isValid;
-                    }
-                  }
-                }
-              });
-            } else {
-              if (formKey != null) {
-                final formState = formKey!.currentState;
-                final isValid = formState != null && formState.validate();
-                if (widget.onValidationChanged != null) {
-                  if (_isFieldValid != isValid) {
-                    widget.onValidationChanged!(isValid);
-                    _isFieldValid = isValid;
-                  }
-                }
-              }
-            }
-          }
-        },
+        onChanged: _handleChanged,
         placeholder: widget.hint,
         placeholderStyle:
             widget.hintStyle ??

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:playx_widget/playx_widget.dart';
+import '../widgets/image_viewer.dart';
 
 class IconInfo {
   final IconData? icon;
@@ -37,6 +37,7 @@ class IconInfo {
   IconInfo copyWith({
     IconData? icon,
     String? svgIcon,
+    String? assetIcon,
     String? url,
     Color? color,
     double? size,
@@ -44,6 +45,7 @@ class IconInfo {
     return IconInfo(
       icon: icon ?? this.icon,
       svgIcon: svgIcon ?? this.svgIcon,
+      assetIcon: assetIcon ?? this.assetIcon,
       url: url ?? this.url,
       color: color ?? this.color,
       size: size ?? this.size,
