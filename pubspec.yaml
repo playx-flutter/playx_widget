@@ -26,7 +26,7 @@ dependencies:
   lottie: ^3.8.2
   flutter_screenutil: ^5.9.3
   flutter_platform_widgets: ^10.0.1
-  wolt_modal_sheet: ^0.11.0
+  wolt_modal_sheet: ">=0.11.0 <0.13.0"
   flutter_keyboard_visibility_temp_fork: ^0.1.6
   sliver_tools: ^0.2.12
   dotted_border: ^3.1.0
