@@ -7,7 +7,7 @@
 Utility widgets for the PlayX ecosystem that make everyday Flutter development faster.
 
 - **Documentation:** <https://playx-flutter.github.io/playx_widget/>
-- **Guides:** [Getting started](docs/getting-started.md) · [Widgets](docs/widgets.md) · [App info](docs/app-info.md) · [Contributing](CONTRIBUTING.md)
+- **Guides:** [Getting started](docs/getting-started.md) · [Widgets](docs/widgets.md) · [App info](docs/app-info.md) · [Known issues](docs/known-issues.md) · [Contributing](CONTRIBUTING.md)
 - **Changelog:** [CHANGELOG.md](CHANGELOG.md)
 
 ## Requirements
