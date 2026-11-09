@@ -7,7 +7,7 @@
 Utility widgets for the PlayX ecosystem that make everyday Flutter development faster.
 
 - **Documentation:** <https://playx-flutter.github.io/playx_widget/>
-- **Guides:** [Getting started](docs/getting-started.md) · [Widgets](docs/widgets.md) · [App info](docs/app-info.md) · [Known issues](docs/known-issues.md) · [Contributing](CONTRIBUTING.md)
+- **Guides:** [Getting started](doc/getting-started.md) · [Widgets](doc/widgets.md) · [App info](doc/app-info.md) · [Contributing](CONTRIBUTING.md)
 - **Changelog:** [CHANGELOG.md](CHANGELOG.md)
 
 ## Requirements
@@ -61,7 +61,7 @@ FavoriteButton(
 
 ## Widgets
 
-See [docs/widgets.md](docs/widgets.md) for the full list with descriptions. Highlights:
+See [doc/widgets.md](doc/widgets.md) for the full list with descriptions. Highlights:
 
 | Widget | Purpose |
 |---|---|

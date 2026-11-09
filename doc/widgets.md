@@ -41,7 +41,6 @@ Full API reference: <https://playx-flutter.github.io/playx_widget/>
 - `MultiValueListenableBuilder`: rebuilds from several `ValueListenable`s.
 - `AppInfoNotifier`: shared app info.
 
-See [Known issues](known-issues.md) for current limitations and planned fixes.
 
 ## Images on web
 
