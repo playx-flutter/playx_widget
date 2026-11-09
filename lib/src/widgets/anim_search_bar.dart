@@ -121,6 +121,23 @@ class _AnimSearchBarState extends State<AnimSearchBar>
       /// animationDurationInMilli is optional, the default value is 375
       duration: Duration(milliseconds: widget.animationDurationInMilli),
     );
+    // Keep the suffix icon in sync when the bar starts opened.
+    if (widget.isOpened) _con.value = 1;
+  }
+
+  @override
+  void didUpdateWidget(AnimSearchBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.animationDurationInMilli != widget.animationDurationInMilli) {
+      _con.duration = Duration(milliseconds: widget.animationDurationInMilli);
+    }
+  }
+
+  @override
+  void dispose() {
+    _con.dispose();
+    focusNode.dispose();
+    super.dispose();
   }
 
   void unfocusKeyboard() {
@@ -222,6 +239,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                                 toggle = 0;
                               });
                               widget.searchBarOpen?.call(toggle);
+                              _con.reverse();
                             }
                           } catch (e) {
                             ///print the error if the try block fails

@@ -22,6 +22,7 @@ enum _ImageType {
   networkImage,
   memoryImage,
   fileImage,
+  filePathImage,
   cachedNetworkImage,
   svgAssetImage,
   svgNetworkImage,
@@ -141,6 +142,12 @@ class ImageViewer extends StatefulWidget {
   /// Render options for images on the web platform for [ImageViewer.cachedNetwork].
   final ImageRenderMethodForWeb imageRenderMethodForWeb;
 
+  /// How [ImageViewer.network] falls back to an HTML `<img>` element on web
+  /// when the image can't be fetched (typically missing CORS headers).
+  ///
+  /// Defaults to [WebHtmlElementStrategy.fallback] so such images still show.
+  final WebHtmlElementStrategy webHtmlElementStrategy;
+
   const ImageViewer.asset(
     String this.path, {
     super.key,
@@ -152,6 +159,7 @@ class ImageViewer extends StatefulWidget {
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
   }) : _type = _ImageType.assetImage,
+       webHtmlElementStrategy = WebHtmlElementStrategy.never,
        bytes = null,
        file = null,
        clipBehavior = null,
@@ -171,6 +179,7 @@ class ImageViewer extends StatefulWidget {
     this.colorBlendMode,
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
+    this.webHtmlElementStrategy = WebHtmlElementStrategy.fallback,
   }) : _type = _ImageType.networkImage,
        bytes = null,
        file = null,
@@ -191,12 +200,38 @@ class ImageViewer extends StatefulWidget {
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
   }) : _type = _ImageType.fileImage,
+       webHtmlElementStrategy = WebHtmlElementStrategy.never,
        bytes = null,
        clipBehavior = null,
        path = null,
        iconInfo = null,
        iconDirection = null,
        placeholderBuilder = null,
+       imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
+
+  /// Shows a picked image from its [path] on any platform, without needing a
+  /// `File` (and without `dart:io` checks at the call site).
+  ///
+  /// - Mobile / desktop: loaded as a local file.
+  /// - Web: [path] is the blob/object URL from a picker and is loaded as a URL.
+  const ImageViewer.filePath(
+    String this.path, {
+    super.key,
+    this.errorBuilder,
+    this.placeholderBuilder,
+    this.width,
+    this.height,
+    this.color,
+    this.colorBlendMode,
+    this.fit = BoxFit.cover,
+    this.alignment = Alignment.center,
+  }) : _type = _ImageType.filePathImage,
+       webHtmlElementStrategy = WebHtmlElementStrategy.fallback,
+       bytes = null,
+       file = null,
+       clipBehavior = null,
+       iconInfo = null,
+       iconDirection = null,
        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.memory(
@@ -210,6 +245,7 @@ class ImageViewer extends StatefulWidget {
     this.fit = BoxFit.cover,
     this.alignment = Alignment.center,
   }) : _type = _ImageType.memoryImage,
+       webHtmlElementStrategy = WebHtmlElementStrategy.never,
        file = null,
        clipBehavior = null,
        path = null,
@@ -231,6 +267,7 @@ class ImageViewer extends StatefulWidget {
     this.placeholderBuilder,
     this.imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet,
   }) : _type = _ImageType.cachedNetworkImage,
+       webHtmlElementStrategy = WebHtmlElementStrategy.never,
        bytes = null,
        file = null,
        clipBehavior = null,
@@ -246,15 +283,16 @@ class ImageViewer extends StatefulWidget {
     this.fit = BoxFit.contain,
     this.alignment = Alignment.center,
     this.placeholderBuilder,
+    this.errorBuilder,
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
   }) : _type = _ImageType.svgAssetImage,
+       webHtmlElementStrategy = WebHtmlElementStrategy.never,
        bytes = null,
        file = null,
        iconInfo = null,
        iconDirection = null,
-       errorBuilder = null,
        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.svgNetwork(
@@ -265,16 +303,17 @@ class ImageViewer extends StatefulWidget {
     this.fit = BoxFit.contain,
     this.alignment = Alignment.center,
     this.placeholderBuilder,
+    this.errorBuilder,
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
   }) : _type = _ImageType.svgNetworkImage,
+       webHtmlElementStrategy = WebHtmlElementStrategy.never,
        bytes = null,
        file = null,
        path = src,
        iconInfo = null,
        iconDirection = null,
-       errorBuilder = null,
        imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet;
 
   const ImageViewer.svgMemory(
@@ -285,12 +324,13 @@ class ImageViewer extends StatefulWidget {
     this.fit = BoxFit.contain,
     this.alignment = Alignment.center,
     this.placeholderBuilder,
+    this.errorBuilder,
     this.clipBehavior = Clip.hardEdge,
     this.color,
     this.colorBlendMode,
   }) : _type = _ImageType.svgMemoryImage,
+       webHtmlElementStrategy = WebHtmlElementStrategy.never,
        file = null,
-       errorBuilder = null,
        iconInfo = null,
        iconDirection = null,
        path = null,
@@ -304,13 +344,14 @@ class ImageViewer extends StatefulWidget {
     this.fit = BoxFit.contain,
     this.alignment = Alignment.center,
     this.color,
+    this.colorBlendMode,
     this.iconDirection,
     this.imageRenderMethodForWeb = ImageRenderMethodForWeb.HttpGet,
-  }) : _type = null,
+  }) : _type = _ImageType.icon,
+       webHtmlElementStrategy = WebHtmlElementStrategy.never,
        bytes = null,
        file = null,
        path = null,
-       colorBlendMode = null,
        placeholderBuilder = null,
        errorBuilder = null,
        clipBehavior = null;
@@ -320,6 +361,41 @@ class ImageViewer extends StatefulWidget {
 }
 
 class _ImageViewerState extends State<ImageViewer> {
+  Widget _buildFile(String path) {
+    Widget error(BuildContext ctx, Object err, StackTrace? _) =>
+        widget.errorBuilder?.call(ctx, err) ?? const SizedBox.shrink();
+
+    if (kIsWeb) {
+      // No file system on web: the picked path is a blob/object URL.
+      return Image.network(
+        path,
+        width: widget.width,
+        height: widget.height,
+        color: widget.color,
+        colorBlendMode: widget.colorBlendMode,
+        fit: widget.fit,
+        alignment: widget.alignment,
+        errorBuilder: error,
+        webHtmlElementStrategy: WebHtmlElementStrategy.fallback,
+        loadingBuilder: (ctx, child, event) {
+          if (event == null) return child;
+          return widget.placeholderBuilder?.call(ctx) ??
+              const SizedBox.shrink();
+        },
+      );
+    }
+    return Image.file(
+      File(path),
+      width: widget.width,
+      height: widget.height,
+      color: widget.color,
+      colorBlendMode: widget.colorBlendMode,
+      fit: widget.fit,
+      alignment: widget.alignment,
+      errorBuilder: error,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     switch (widget._type) {
@@ -347,9 +423,13 @@ class _ImageViewerState extends State<ImageViewer> {
                 const SizedBox.shrink();
           },
           loadingBuilder: (ctx, child, event) {
+            // `event == null` means loading finished: show the image.
+            if (event == null) return child;
             return widget.placeholderBuilder?.call(ctx) ??
                 const SizedBox.shrink();
           },
+          // Lets images without CORS headers still render on web.
+          webHtmlElementStrategy: widget.webHtmlElementStrategy,
           color: widget.color,
           colorBlendMode: widget.colorBlendMode,
           fit: widget.fit,
@@ -370,19 +450,9 @@ class _ImageViewerState extends State<ImageViewer> {
           alignment: widget.alignment,
         );
       case _ImageType.fileImage:
-        return Image.file(
-          widget.file!,
-          width: widget.width,
-          height: widget.height,
-          color: widget.color,
-          errorBuilder: (ctx, err, _) {
-            return widget.errorBuilder?.call(ctx, err) ??
-                const SizedBox.shrink();
-          },
-          colorBlendMode: widget.colorBlendMode,
-          fit: widget.fit,
-          alignment: widget.alignment,
-        );
+        return _buildFile(widget.file!.path);
+      case _ImageType.filePathImage:
+        return _buildFile(widget.path!);
       case _ImageType.cachedNetworkImage:
         return CachedNetworkImage(
           imageUrl: widget.path!,
@@ -400,7 +470,7 @@ class _ImageViewerState extends State<ImageViewer> {
                 const SizedBox.shrink();
           },
           imageRenderMethodForWeb: widget.imageRenderMethodForWeb,
-          alignment: widget.alignment.resolve(TextDirection.ltr),
+          alignment: widget.alignment.resolve(Directionality.of(context)),
         );
       case _ImageType.svgAssetImage:
         return SvgPicture.asset(
@@ -410,6 +480,9 @@ class _ImageViewerState extends State<ImageViewer> {
           fit: widget.fit ?? BoxFit.contain,
           alignment: widget.alignment,
           placeholderBuilder: widget.placeholderBuilder,
+          errorBuilder: widget.errorBuilder == null
+              ? null
+              : (ctx, err, _) => widget.errorBuilder!(ctx, err),
           colorFilter: widget.color != null
               ? ColorFilter.mode(
                   widget.color!,
@@ -426,6 +499,9 @@ class _ImageViewerState extends State<ImageViewer> {
           fit: widget.fit ?? BoxFit.contain,
           alignment: widget.alignment,
           placeholderBuilder: widget.placeholderBuilder,
+          errorBuilder: widget.errorBuilder == null
+              ? null
+              : (ctx, err, _) => widget.errorBuilder!(ctx, err),
           colorFilter: widget.color != null
               ? ColorFilter.mode(
                   widget.color!,
@@ -442,6 +518,9 @@ class _ImageViewerState extends State<ImageViewer> {
           fit: widget.fit ?? BoxFit.contain,
           alignment: widget.alignment,
           placeholderBuilder: widget.placeholderBuilder,
+          errorBuilder: widget.errorBuilder == null
+              ? null
+              : (ctx, err, _) => widget.errorBuilder!(ctx, err),
           colorFilter: widget.color != null
               ? ColorFilter.mode(
                   widget.color!,

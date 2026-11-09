@@ -11,6 +11,11 @@
 - Fix `FavoriteButton` not updating when `isInFavorite` changes from the parent; `onFavoriteChanged` is now a `ValueChanged<bool>`.
 - `ReadMoreText` now trims at word boundaries, never splits emoji, appends a configurable `ellipsis`, and uses `Text.rich`.
 - Add widget tests.
+- Fix `ImageViewer.network` never showing the loaded image and `ImageViewer.icon` rendering nothing. Export `IconInfo`; `IconInfo.copyWith` keeps `assetIcon`.
+- Web: `ImageViewer.file` loads picked paths as URLs on web, add `ImageViewer.filePath(String)` that works on every platform, network images fall back to an HTML element (`webHtmlElementStrategy`), SVG constructors accept `errorBuilder`.
+- `showConfirmDialog` closes on confirm and returns `true`; `onConfirmed` and `lottie` are optional.
+- `DateTimePicker`: Cupertino pickers return the picked value, clamp `initialDate`, respect `initialTime`, support `label`/`use24hFormat`; add `pickDateRange` and `endOfToday`. Cancelling the time step of `pickDateTime` now returns `null`.
+- Fix dashed lines disappearing on repaint / hanging in unbounded parents, `AnimatedVisibility` fade-in, `AutoAnimatedList` diffing and duplicate items, `OptimizedTextField` timers and form key, `AnimSearchBar` disposal and animation state, `OptimizedCard` ripple, `Marquee` idle spinning.
 - Keep `wolt_modal_sheet` at `^0.11.0`, as 0.12.0 migrates to `material_ui`.
 
 ### 0.5.0

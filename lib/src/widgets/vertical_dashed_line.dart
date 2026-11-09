@@ -28,7 +28,7 @@ class VerticalDashedLine extends StatefulWidget {
     this.dashSpace = 5,
     this.strokeWidth = 1,
     this.color = Colors.grey,
-  });
+  }) : assert(dashHeight + dashSpace > 0, 'dashHeight + dashSpace must be > 0');
 
   @override
   State<VerticalDashedLine> createState() => _VerticalDashedLineState();
@@ -60,7 +60,6 @@ class DashedVerticalLinePainter extends CustomPainter {
   final double dashSpace;
   final Color color;
   final double strokeWidth;
-  double startY = 0;
   final Paint painter;
 
   DashedVerticalLinePainter({
@@ -77,13 +76,18 @@ class DashedVerticalLinePainter extends CustomPainter {
     final paint = Paint()
       ..color = color
       ..strokeWidth = strokeWidth;
+    final step = dashHeight + dashSpace;
+    // Guard against unbounded height and non-positive steps (infinite loops).
+    if (!size.height.isFinite || step <= 0) return;
+    var startY = 0.0; // local: painters must not keep state between paints.
     while (startY < size.height) {
+      final endY = (startY + dashHeight).clamp(0.0, size.height);
       canvas.drawLine(
         Offset(size.width / 2, startY),
-        Offset(size.width / 2, startY + dashHeight),
+        Offset(size.width / 2, endY),
         paint,
       );
-      startY += dashHeight + dashSpace;
+      startY += step;
     }
   }
 

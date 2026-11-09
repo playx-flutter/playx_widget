@@ -28,7 +28,7 @@ class DashedLine extends StatefulWidget {
     this.dashSpace = 5,
     this.strokeWidth = 1,
     this.color = Colors.grey,
-  });
+  }) : assert(dashWidth + dashSpace > 0, 'dashWidth + dashSpace must be > 0');
 
   @override
   State<DashedLine> createState() => _DashedLineState();
@@ -60,7 +60,6 @@ class DashedLinePainter extends CustomPainter {
   final double dashSpace;
   final Color color;
   final double strokeWidth;
-  double startX = 0;
   final Paint painter;
 
   DashedLinePainter({
@@ -74,13 +73,17 @@ class DashedLinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    final step = dashWidth + dashSpace;
+    if (!size.width.isFinite || step <= 0) return;
+    var startX = 0.0; // local: painters must not keep state between paints.
     while (startX < size.width) {
+      final endX = (startX + dashWidth).clamp(0.0, size.width);
       canvas.drawLine(
         Offset(startX, size.height / 2),
-        Offset(startX + dashWidth, size.height / 2),
+        Offset(endX, size.height / 2),
         painter,
       );
-      startX += dashWidth + dashSpace;
+      startX += step;
     }
   }
 

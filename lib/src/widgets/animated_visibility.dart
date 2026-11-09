@@ -31,11 +31,19 @@ class _AnimatedVisibilityState extends State<AnimatedVisibility> {
   }
 
   @override
+  void didUpdateWidget(AnimatedVisibility oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Show the child immediately when becoming visible so the fade-in is seen.
+    if (widget.isVisible && !oldWidget.isVisible) _visible = true;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       opacity: widget.isVisible ? 1 : widget.opacityBeforeBeingInvisible,
       duration: widget.duration,
       onEnd: () {
+        if (!mounted || _visible == widget.isVisible) return;
         setState(() {
           _visible = widget.isVisible;
         });

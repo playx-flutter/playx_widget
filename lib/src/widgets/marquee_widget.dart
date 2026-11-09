@@ -26,9 +26,9 @@ class _MarqueeState extends State<Marquee> {
 
   @override
   void initState() {
+    super.initState();
     _scrollController = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback(scroll);
-    super.initState();
   }
 
   @override
@@ -41,29 +41,43 @@ class _MarqueeState extends State<Marquee> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: widget.direction,
+      physics: const NeverScrollableScrollPhysics(),
       controller: _scrollController,
       child: widget.child,
     );
   }
 
+  /// Minimum wait between cycles so zero durations can't spin the event loop.
+  static const _minDelay = Duration(milliseconds: 16);
+
   Future<void> scroll(_) async {
-    while (_scrollController.hasClients) {
-      await Future.delayed(widget.pauseDuration);
-      if (_scrollController.hasClients) {
-        await _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: widget.animationDuration,
-          curve: Curves.linear,
-        );
-      }
-      await Future.delayed(widget.pauseDuration);
-      if (_scrollController.hasClients) {
-        await _scrollController.animateTo(
-          0.0,
-          duration: widget.backDuration,
-          curve: Curves.linear,
-        );
-      }
+    while (mounted && _scrollController.hasClients) {
+      await Future.delayed(
+        widget.pauseDuration < _minDelay ? _minDelay : widget.pauseDuration,
+      );
+      if (!mounted || !_scrollController.hasClients) return;
+
+      final max = _scrollController.position.maxScrollExtent;
+      // Content fits: nothing to scroll, just wait and re-check later.
+      if (max <= 0) continue;
+
+      await _scrollController.animateTo(
+        max,
+        duration: widget.animationDuration,
+        curve: Curves.linear,
+      );
+      if (!mounted || !_scrollController.hasClients) return;
+
+      await Future.delayed(
+        widget.pauseDuration < _minDelay ? _minDelay : widget.pauseDuration,
+      );
+      if (!mounted || !_scrollController.hasClients) return;
+
+      await _scrollController.animateTo(
+        0.0,
+        duration: widget.backDuration,
+        curve: Curves.linear,
+      );
     }
   }
 }

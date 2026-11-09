@@ -4,46 +4,45 @@ Findings from a code review of every widget and utility in `lib/src/`. Items mar
 confirmed by reading the exact code path; the rest come from review notes and should be reproduced
 before fixing. Nothing here has been fixed yet unless the [changelog](../CHANGELOG.md) says so.
 
-Already fixed in 0.6.0: `AppVersion` ignoring `textAlign` and refetching `PackageInfo` on rebuild,
-`FavoriteButton` not syncing with its parent, `ReadMoreText` splitting words and emoji.
+## Fixed in 0.6.0
 
-## Bugs
+- `AppVersion` ignoring `textAlign` and refetching `PackageInfo` on rebuild; `FavoriteButton` not syncing with
+  its parent; `ReadMoreText` splitting words and emoji.
+- `ImageViewer.network` never showing the loaded image; `ImageViewer.icon` / `IconInfo.buildIconWidget`
+  rendering nothing; `IconInfo` was not exported; `IconInfo.copyWith` dropping `assetIcon`.
+- `ImageViewer` on web: `.file` now loads the picked path as a URL on web, new `ImageViewer.filePath`, network
+  images fall back to an HTML element (CORS), SVG constructors accept `errorBuilder`, RTL alignment for
+  `cachedNetwork`.
+- `showConfirmDialog` now closes on confirm and returns `true` (a callback that pops itself is still safe);
+  `onConfirmed` and `lottie` are optional; width is capped on large screens.
+- `DateTimePicker`: Cupertino pickers now return the selected value (with Cancel/Done), `initialDate` is clamped
+  into range, `initialTime` is respected on iOS, `use24hFormat` and `label` work everywhere, new `pickDateRange`
+  and `endOfToday`.
+- `DashedLine` / `VerticalDashedLine` vanishing on repaint and hanging in unbounded parents.
+- `AnimatedVisibility` fade-in; `AutoAnimatedList` diffing during build and duplicate-item keys.
+- `OptimizedTextField` timers (cancelled on dispose, separate change/validation timers, form key kept in sync).
+- `AnimSearchBar` disposal, initial open state and close-on-suffix-tap animation.
+- `OptimizedCard` ripple now visible; `Marquee` no longer spins when content fits and is not user-draggable.
+
+## Remaining bugs
 
 ### High
 
 | Widget | Issue |
 |---|---|
-| `ImageViewer.network` | **Verified.** `loadingBuilder` always returns the placeholder (or an empty box), even when `event == null`, which means loading finished, so the loaded image is never shown. Return `child` when `event == null`. |
-| `ImageViewer.icon`, `IconInfo.buildIconWidget` | **Verified.** The `.icon` constructor sets `_type = null`, but `build` switches on `_ImageType.icon`, so it falls into the default and renders an empty box. |
-| `showConfirmDialog` | **Verified.** The confirm button calls `onConfirmed` but never closes the dialog, so the dialog stays open unless the callback pops it itself. Tapping outside returns `false`. It should `Navigator.pop(context, true)`. |
-| `DateTimePicker.pickDate` / `pickDateTime` with `DatePickerPlatform.cupertino` | **Verified.** `onDateTimeChanged` is empty and the popup is never popped with a value, so the future always completes with `null`. |
-| `DashedLine`, `VerticalDashedLine` | **Verified.** The painter mutates `startX` / `startY` while painting and never resets it. When Flutter repaints with the same painter (a repaint without a rebuild), nothing is drawn and the line vanishes. |
-| `VerticalDashedLine` | In an unbounded-height parent (`Column`, `ListView`) without `height`, the painter gets an infinite height and the draw loop never ends, which freezes the UI. A zero `dashHeight + dashSpace` loops forever. |
-| `AutoAnimatedList` | `updateCurrentList()` runs inside `build()` and calls `AnimatedListState.insertItem` / `removeItem`, which can trigger "setState called during build". Items are keyed by `hashCode`, so duplicate items collide. Reordering is not animated. |
-| `OptimizedTextField` | `_debounceTimer` is never cancelled (no `dispose`), so after the field is removed the timer can still fire `onChanged` / `onValidationChanged`. |
-| `AnimSearchBar` | The text controller and focus node are never disposed, and there is no `dispose` override. |
 
 ### Medium
 
 | Widget | Issue |
 |---|---|
-| `AnimatedVisibility` | **Verified.** When `isVisible` flips to `true`, `_visible` stays `false` until the animation ends, so the placeholder shows during the fade-in and the child pops in at the end. Set `_visible = true` in `didUpdateWidget`. |
-| `OptimizedTextField` | With `debounceDuration`, auto-validation and `debounceValidation` all set, the validation timer cancels the `onChanged` timer, so `onChanged` is never delivered while typing. Use two timers. |
-| `OptimizedTextField` | `formKey` is computed once in `initState` and never re-synced; there is no `didUpdateWidget`. |
 | `OptimizedTextField` | `focusedErrorBorder` reuses `errorBorder`. `eIcon` and `edit` are declared but never used. |
 | `OptimizedTextField.cupertino` / `.adaptive` | The Cupertino path silently ignores `label`, `suffix`, `icon`, `fillColor`, label and border styling. A password-visibility `suffix` disappears on iOS. |
 | `AnimSearchBar` | `closeSearchOnSuffixTap` never reverses the animation controller, so the rotation stays out of sync. `isOpened`, `width` and the duration are only read once (no `didUpdateWidget`). It forces LTR, hard-codes colors (white field, black text, so text is unreadable in dark mode), and has no tooltips or semantics. |
-| `OptimizedCard` | In the non-custom-shadow path the `InkWell` wraps the `Card`, so the ripple is drawn behind the card color and is invisible. `clipBehavior` is hard-coded, and the splash and card radii (8 vs 10) differ. |
 | `CustomInkWell` | It creates its own transparent `Material` above the child, so a child with a background color hides the ripple. There is no clipping, and the radius is not RTL-aware. |
-| `Marquee` | When the content fits, it animates to `0` forever (wasted work). With zero durations it becomes a tight loop. The user can drag it, and changing durations later has no effect. |
 | `BlurBox` | `addBlur` is only read in `initState`, so toggling it later does nothing, and the blur can never be removed. The 500 ms delay is hard-coded. `Positioned.fill` makes it size to its parent, so it fails in unbounded parents. |
 | `StrokeText` | Single line only, with a fixed height of `fontSize * 1.5`. Width is infinite, so it throws in an unbounded `Row`. It ignores ambient text direction (RTL breaks) and the user's text scale, and has no semantics. |
 | `FadeIndexedStack` | Fades only the incoming child (no cross-fade), runs a fade on first build, and ignores later `duration` changes. |
-| `ImageViewer` (RTL) | Alignment is resolved with a fixed `TextDirection.ltr`. `flipX` for icons flips whenever the caller passes `rtl`, not based on the ambient direction. |
-| `ImageViewer` (SVG) | SVG constructors force `errorBuilder = null`, so a bad SVG has no fallback. |
-| `ImageViewer` (web) | It imports `dart:io` and takes a `File`; `Image.file` throws on web. |
 | `IconViewer` | It forwards its own `key` to child widgets, which can trigger "Multiple widgets used the same GlobalKey". `iconColor` defaults to white (invisible on light backgrounds), and selected colors have no defaults. |
-| `IconInfo` | `copyWith` drops `assetIcon`, so `IconInfo.asset(...).copyWith(color: x)` renders nothing. |
 | `OptimizedListTile` | No `onTap`, and the title/subtitle column is centered (no `crossAxisAlignment.start`). Side spacers are added even when `leading` / `trailing` are null. |
 | `SliverSizedBox` | The `h4` / `w4`-style statics are `static final`, so they are computed once with `.r` and go stale on rotation or after a later `ScreenUtil.init`. Width variants do nothing in a vertical `CustomScrollView`. |
 | `CommonImageUtils` | `getImageFromSvgAsset` does not dispose the `PictureInfo` or the image. `getImageFromWidget` never unmounts its element tree and wraps content in a fixed LTR `Directionality` with no theme or `MediaQuery`. |
